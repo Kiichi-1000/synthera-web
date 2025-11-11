@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Configuration
 const NOTION_CONFIG = {
-  databaseId: '9a2605fa-5234-4e50-b486-13b79bf33984', // Synthera Blog Posts database ID
+  databaseId: 'd05ba52d-48de-4a27-8642-408dbacf4798', // 📝 Note記事管理 database ID
   apiVersion: '2022-06-28',
   maxResults: 20
 };
@@ -114,7 +114,36 @@ function loadArticles() {
   isLoading = true;
   showLoadingState();
   
-  // Simulate API call delay
+  // Try to load from Notion first
+  if (typeof window !== 'undefined' && window.NotionAPI) {
+    try {
+      const notionPages = await window.NotionAPI.fetchNotionDatabase('note', {
+        query: '',
+        filters: currentFilter !== 'all' ? { category: currentFilter } : {}
+      });
+
+      // Filter by published and transform
+      const articles = notionPages
+        .filter(page => {
+          const props = page.properties || {};
+          const pubProp = props.Published || props.Featured;
+          return pubProp?.type === 'checkbox' ? pubProp.checkbox === true : false;
+        })
+        .map(page => window.NotionAPI.transformNotionPageToArticle(page, 'note'))
+        .filter(Boolean);
+
+      if (articles.length > 0) {
+        renderArticles(articles);
+        hideLoadingState();
+        isLoading = false;
+        return;
+      }
+    } catch (error) {
+      console.error('Error loading from Notion, using fallback:', error);
+    }
+  }
+
+  // Fallback to mock data
   setTimeout(() => {
     const articles = generateMockArticles();
     renderArticles(articles);

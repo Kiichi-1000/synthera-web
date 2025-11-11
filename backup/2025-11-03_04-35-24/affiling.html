@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note - Synthera</title>
-    <meta name="description" content="Syntheraの最新記事とインサイト。テクノロジー、ビジネス、クリエイティブに関する価値あるコンテンツをお届けします。">
+    <title>Affiling - 商品比較・レビュー | Synthera</title>
+    <meta name="description" content="Affilingは、商品比較やランキング、レビュー記事を提供するWebサイトです。実際に使用した製品を誠実に紹介しています。">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/note.css">
+    <link rel="stylesheet" href="css/affiling.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
@@ -47,10 +47,10 @@
                         <a href="projects.html" class="nav-link">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a href="note.html" class="nav-link active">Note</a>
+                        <a href="note.html" class="nav-link">Note</a>
                     </li>
                     <li class="nav-item">
-                        <a href="affiling.html" class="nav-link">Affiling</a>
+                        <a href="affiling.html" class="nav-link active">Affiling</a>
                     </li>
                 </ul>
             </div>
@@ -66,17 +66,28 @@
     <!-- Main Content -->
     <main>
         <!-- Page Header -->
-        <section class="page-header">
+        <section class="affiling-header">
             <div class="container">
                 <div class="header-content">
+                    <div class="header-badge">
+                        <span class="badge-text">商品比較・レビューサイト</span>
+                    </div>
                     <h1 class="page-title">
                         <span class="title-line">
-                            <span class="title-word" data-word="NOTE">NOTE</span>
+                            <span class="title-word" data-word="AFFILING">AFFILING</span>
                         </span>
                     </h1>
                     <p class="page-subtitle">
-                        価値あるインサイトと最新情報
+                        実際に使用した製品を誠実に紹介。商品比較やランキングで、最適な選択をサポートします。
                     </p>
+                    <div class="affiliate-disclosure">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="disclosure-icon">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                        <p class="disclosure-text">
+                            本サイトはアフィリエイトプログラムを利用しています。商品リンクから購入した場合、当サイトに報酬が発生する場合があります。
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -89,28 +100,48 @@
                         <button class="filter-button active" data-filter="all">
                             <span class="filter-text">すべて</span>
                         </button>
-                        <button class="filter-button" data-filter="technology">
-                            <span class="filter-text">テクノロジー</span>
+                        <button class="filter-button" data-filter="comparison">
+                            <span class="filter-text">商品比較</span>
                         </button>
-                        <button class="filter-button" data-filter="business">
-                            <span class="filter-text">ビジネス</span>
+                        <button class="filter-button" data-filter="ranking">
+                            <span class="filter-text">ランキング</span>
                         </button>
-                        <button class="filter-button" data-filter="creative">
-                            <span class="filter-text">クリエイティブ</span>
+                        <button class="filter-button" data-filter="review">
+                            <span class="filter-text">レビュー</span>
                         </button>
-                        <button class="filter-button" data-filter="lifestyle">
-                            <span class="filter-text">ライフスタイル</span>
+                        <button class="filter-button" data-filter="guide">
+                            <span class="filter-text">ガイド</span>
                         </button>
                     </div>
                     
                     <div class="search-box">
                         <input type="text" id="search-input" placeholder="記事を検索..." class="search-input">
-                        <button class="search-button">
+                        <button class="search-button" id="search-button">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                             </svg>
                         </button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison View Toggle -->
+        <section class="view-toggle-section">
+            <div class="container">
+                <div class="view-toggle">
+                    <button class="view-button active" data-view="grid" id="grid-view-button">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/>
+                        </svg>
+                        <span>グリッド表示</span>
+                    </button>
+                    <button class="view-button" data-view="comparison" id="comparison-view-button">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 3L5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"/>
+                        </svg>
+                        <span>比較表示</span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -156,6 +187,61 @@
                     <!-- Articles will be dynamically loaded here -->
                 </div>
 
+                <!-- Comparison Table -->
+                <div class="comparison-container" id="comparison-container" style="display: none;">
+                    <div class="comparison-header">
+                        <h2 class="comparison-title">商品比較</h2>
+                        <div class="comparison-controls">
+                            <button class="comparison-select-all" id="select-all-button">
+                                すべて選択
+                            </button>
+                            <button class="comparison-clear" id="clear-selection-button">
+                                選択解除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="comparison-table-wrapper">
+                        <table class="comparison-table" id="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="comparison-fixed-col">
+                                        <div class="comparison-checkbox-header">
+                                            <input type="checkbox" id="select-all-checkbox">
+                                            <label for="select-all-checkbox">商品</label>
+                                        </div>
+                                    </th>
+                                    <th class="comparison-product-col" data-product-id="template" style="display: none;">
+                                        <div class="comparison-product-header">
+                                            <div class="comparison-product-image-placeholder"></div>
+                                            <div class="comparison-product-name"></div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="comparison-row-price">
+                                    <td class="comparison-fixed-col">価格</td>
+                                </tr>
+                                <tr class="comparison-row-rating">
+                                    <td class="comparison-fixed-col">評価</td>
+                                </tr>
+                                <tr class="comparison-row-spec">
+                                    <td class="comparison-fixed-col">主要スペック</td>
+                                </tr>
+                                <tr class="comparison-row-link">
+                                    <td class="comparison-fixed-col">購入リンク</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="comparison-empty" id="comparison-empty">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="comparison-empty-icon">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <p>比較したい商品を選択してください</p>
+                    </div>
+                </div>
+
                 <!-- No Results -->
                 <div class="no-results" id="no-results" style="display: none;">
                     <div class="no-results-icon">
@@ -199,17 +285,18 @@
                             <li><a href="about.html" class="footer-link">About</a></li>
                             <li><a href="projects.html" class="footer-link">Projects</a></li>
                             <li><a href="note.html" class="footer-link">Note</a></li>
+                            <li><a href="affiling.html" class="footer-link">Affiling</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-column">
                         <h4 class="footer-title">Business</h4>
                         <ul class="footer-list">
-                            <li><a href="#" class="footer-link">SNS</a></li>
-                            <li><a href="#" class="footer-link">Brand</a></li>
-                            <li><a href="#" class="footer-link">Development</a></li>
-                            <li><a href="#" class="footer-link">Writing</a></li>
-                            <li><a href="#" class="footer-link">Affiliate</a></li>
+                            <li><a href="projects.html#sns-content" class="footer-link">SNS</a></li>
+                            <li><a href="projects.html#brand-content" class="footer-link">Brand</a></li>
+                            <li><a href="projects.html#development-content" class="footer-link">Development</a></li>
+                            <li><a href="projects.html#writing-content" class="footer-link">Writing</a></li>
+                            <li><a href="projects.html#affiliate-content" class="footer-link">Affiliate</a></li>
                             <li><a href="japanese-quality.html" class="footer-link">Japanese Quality</a></li>
                         </ul>
                     </div>
@@ -228,5 +315,13 @@
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/notion-api.js"></script>
+    <script src="js/notion-site-config.js"></script>
+    <script src="js/notion-content-renderer.js"></script>
+    <script src="js/affiling.js"></script>
+    <script src="js/notion-affiling.js"></script>
+    <script src="js/notion-site-content.js"></script>
+    <script src="js/notion-site-content-v2.js"></script>
 </body>
 </html>
+

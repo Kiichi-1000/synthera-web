@@ -170,6 +170,25 @@
   color: var(--color-text-primary);
 }
 
+.profile-info {
+  margin-bottom: var(--spacing-6);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.profile-birthdate {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
 .profile-description {
   font-size: var(--font-size-lg);
   line-height: 1.8;
@@ -177,8 +196,67 @@
   margin-bottom: var(--spacing-8);
 }
 
+.profile-closing {
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
 .profile-description p {
   margin-bottom: var(--spacing-4);
+}
+
+.profile-contact {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.contact-email {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  transition: all 0.3s ease;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-email:hover {
+  color: var(--color-primary);
+  background: rgba(0, 212, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.contact-email span {
+  word-break: break-all;
 }
 
 .profile-skills {

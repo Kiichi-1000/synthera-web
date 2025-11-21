@@ -1,0 +1,18 @@
+[
+  {
+    "project_name": "Etsyショップ",
+    "description": "海外に向けて日本の製品を販売しています。日本人らしいものを世界に届ける活動です。",
+    "cta_label": "ショップを見る",
+    "cta_link": "https://syntherastore.etsy.com",
+    "status": "Published",
+    "project_image": []
+  },
+  {
+    "project_name": "アパレルブランド",
+    "description": "オリジナルブランドの構築に取り組んでいます。プロトタイプ開発と市場検証を進行中です。",
+    "cta_label": "",
+    "cta_link": "",
+    "status": "Published",
+    "project_image": []
+  }
+]

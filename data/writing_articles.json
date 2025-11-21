@@ -1,0 +1,18 @@
+[
+  {
+    "article_title": "EraCast動画台本",
+    "category": "Note記事",
+    "description": "EraCastチャンネルで制作した動画の台本を記事として発信しています。世界のトレンド分析の視点を共有しています。",
+    "cta_label": "記事を読む",
+    "cta_link": "https://note.com/eracast/scripts",
+    "status": "Published"
+  },
+  {
+    "article_title": "学びの共有",
+    "category": "Note記事",
+    "description": "ビジネス活動を通じて学んだことを記事として発信しています。経験を通じた気づきや知見を共有しています。",
+    "cta_label": "記事を読む",
+    "cta_link": "https://note.com/eracast/lessons",
+    "status": "Published"
+  }
+]

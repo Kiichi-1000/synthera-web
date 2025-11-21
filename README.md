@@ -36,7 +36,15 @@ synthera.website/
 │   ├── main.js            # メイン機能
 │   ├── navigation.js      # ナビゲーション機能
 │   ├── animations.js      # アニメーション機能
-│   └── notion-integration.js # Notion連携機能
+│   ├── projects-data.js   # SNSタブ用グリッドデータ読み込み
+│   └── development-data.js # アプリ開発タブ用データ読み込み
+├── scripts/                # 補助スクリプト
+│   ├── sync_notion_grids.py   # Notion同期ユーティリティ（push/pull）
+│   ├── sync_app_development.py # アプリ開発データ同期ユーティリティ
+│   └── notion_grid_admin.py   # 管理者UI用ローカルサーバー
+├── data/
+│   └── sns_grids.json         # NotionからエクスポートしたSNSグリッドデータ
+│   └── dev_projects.json      # Notionからエクスポートしたアプリ開発データ
 ├── assets/                 # アセットファイル
 │   ├── images/            # 画像ファイル
 │   └── icons/             # アイコンファイル
@@ -65,11 +73,62 @@ cd synthera.website
 
 ### 2. Notion API設定
 
-1. [Notion Developers](https://developers.notion.com/)でAPIキーを取得
-2. `.unity-mcp/config.json`の`NOTION_API_KEY`を更新
-3. データベースIDを`js/notion-integration.js`の`NOTION_CONFIG.databaseId`に設定
+1. [Notion Developers](https://developers.notion.com/)でインテグレーションを作成し、シークレット（トークン）を取得してください。
+2. `NOTION_API_TOKEN` をシェルでエクスポートするか、`.env` などから読み込ませてください。
+3. インテグレーションを対象ワークスペースに招待し、`synthera database` ページ（もしくは該当データベース）へ編集権限で共有してください。
 
-### 3. ローカルサーバーの起動
+### 3. Notion同期ユーティリティ
+
+```bash
+# 例: 環境変数を設定してから実行
+export NOTION_API_TOKEN="your_notion_token"
+
+# SNSタブ: Notion ←→ JSON
+python3 scripts/sync_notion_grids.py pull         # Notion → data/sns_grids.json
+python3 scripts/sync_notion_grids.py push         # 静的データ → Notion
+python3 scripts/sync_notion_grids.py push --reset # 既存レコードをアーカイブしてから同期
+
+# Noteページ: Notion ←→ JSON
+python3 scripts/sync_note_articles.py pull
+python3 scripts/sync_note_articles.py push
+python3 scripts/sync_note_articles.py push --reset
+
+# 個人ライティングタブ: Notion ←→ JSON
+python3 scripts/sync_writing_articles.py pull
+python3 scripts/sync_writing_articles.py push
+python3 scripts/sync_writing_articles.py push --reset
+
+# ECタブ: Notion ←→ JSON
+python3 scripts/sync_ec_projects.py pull
+python3 scripts/sync_ec_projects.py push
+python3 scripts/sync_ec_projects.py push --reset
+
+# アプリ開発タブ: Notion ←→ JSON
+python3 scripts/sync_app_development.py pull
+python3 scripts/sync_app_development.py push
+python3 scripts/sync_app_development.py push --reset
+
+# pull コマンドは `--output` オプションで任意パスへ出力可能
+python3 scripts/sync_app_development.py pull --output tmp/dev.json
+python3 scripts/sync_writing_articles.py pull --output tmp/writing.json
+python3 scripts/sync_note_articles.py pull --output tmp/note.json
+python3 scripts/sync_ec_projects.py pull --output tmp/ec.json
+```
+
+### 4. 管理者UI（ローカル管理ページ）
+
+```bash
+export NOTION_API_TOKEN="your_notion_token"
+python3 scripts/notion_grid_admin.py
+```
+
+ブラウザで `http://127.0.0.1:8765/` を開くと、以下が利用できます。
+
+- SNS / Note / 個人ライティング / アプリ開発 / EC の各データセット件数確認
+- データセットごとに `pull`（Notion → JSON）・`push`（静的データ → Notion、リセット付き）をボタン操作
+- 全データセットの `pull` / `push` を一括実行
+
+### 5. ローカルサーバーの起動
 
 ```bash
 # Python 3の場合
@@ -102,9 +161,15 @@ php -S localhost:8000
 - 4つの事業領域の詳細
 - タブ切り替えインターフェース
 - プロジェクトカードの3Dホバー効果
+- SNSタブは `data/sns_grids.json` を読み込み、Notionの内容を反映
+- Noteページは `data/note_articles.json` を読み込み、Notionの内容を反映
+- 個人ライティングタブは `data/writing_articles.json` を読み込み、Notionの内容を反映
+- ECタブは `data/ec_projects.json` を読み込み、Notionの内容を反映
+- アプリ開発タブは `data/dev_projects.json` を読み込み、Notionの内容を反映
+- EC タブの画像は Notion の `Project Image` プロパティにアップロード／外部URLを指定すると反映されます。
 
 ### ノートページ
-- Notionデータベースからの記事取得
+- Notionデータベースからの記事取得（`data/note_articles.json`）
 - カテゴリ別フィルタリング
 - 検索機能
 - 無限スクロール（ページネーション）

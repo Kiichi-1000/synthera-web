@@ -1,0 +1,30 @@
+[
+  {
+    "article_title": "テクノロジーで描く未来都市",
+    "category": "technology",
+    "summary": "最新のスマートシティ事例を分析し、都市体験をどのように変革しているかを紹介します。",
+    "publish_date": "2024-11-01",
+    "read_time": 8.0,
+    "tags": [
+      "トレンド",
+      "分析"
+    ],
+    "cta_label": "記事を読む",
+    "cta_link": "https://note.com/synthera/futuristic-city",
+    "status": "Published",
+    "cover_image": []
+  },
+  {
+    "article_title": "クリエイティブ思考でブランド価値を高める方法",
+    "category": "creative",
+    "summary": "ブランドストーリーテリングとデザイン戦略を組み合わせた実践的なアプローチを解説します。",
+    "publish_date": "2024-10-15",
+    "read_time": 6.0,
+    "tags": [
+      "ノウハウ"
+    ],
+    "cta_label": "記事を読む",
+    "cta_link": "https://note.com/synthera/creative-branding",
+    "status": "Published",
+    "cover_image": []
+  }

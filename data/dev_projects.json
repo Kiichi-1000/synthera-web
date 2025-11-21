@@ -1,0 +1,34 @@
+[
+  {
+    "project_name": "Calendar App",
+    "stage": "Development",
+    "status": "Active",
+    "platform": "Mobile",
+    "description": "日々の予定管理をシンプルにするカレンダーアプリを開発中です。部分的な予定共有を可能にすることでより現代的に便利なカレンダーアプリに仕上げます。",
+    "highlights": "・シンプルなUXで予定が見やすい\n・通知機能で抜け漏れを防止\n・共有機能でチームコラボをサポート",
+    "cta_label": "",
+    "cta_link": "",
+    "project_image": []
+  },
+  {
+    "project_name": "ToDoアプリ",
+    "stage": "Development",
+    "status": "Active",
+    "platform": "Multi-platform",
+    "description": "4分割ポストイット、ホワイトボード、ノート機能を統合したタスク管理アプリを開発しています。スケジューリング機能や目標設定機能、分析機能も搭載予定です。",
+    "highlights": "・4分割ポストイットで日々のタスクを直感的に整理\n・ホワイトボードでアイデアを俯瞰\n・目標設定と分析で継続的な改善をサポート",
+    "cta_label": "",
+    "cta_link": "",
+    "project_image": []
+  },
+  {
+    "project_name": "アプリ開発案 A",
+    "stage": "Planning",
+    "status": "Draft",
+    "platform": "Multi-platform",
+    "description": "複数のアプリアイデアを検討中。市場調査とプロトタイピングを進行予定です。",
+    "highlights": "・機能要件の整理中\n・ターゲットユーザーの調査を実施予定\n・デザインコンセプトを検討中",
+    "cta_label": "",
+    "cta_link": "",
+    "project_image": []
+  }

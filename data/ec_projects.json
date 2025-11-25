@@ -5,7 +5,12 @@
     "cta_label": "ショップを見る",
     "cta_link": "https://syntherastore.etsy.com",
     "status": "Published",
-    "project_image": []
+    "project_image": [
+      {
+        "name": "Etsy_logo.svg.png",
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/8f668f75-4f1c-474d-aa22-b8b39e040cc9/Etsy_logo.svg.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4663VMRNJOS%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015228Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIH7KRww97sWPT3U4rzCoEwjvOFeAt3FOPX7SllW%2FTh31AiB4%2Fd9naPtxko8oachcvwgr6X%2BSFrIFcy3R45cKTPT8RCr%2FAwhhEAAaDDYzNzQyMzE4MzgwNSIMK291jVljhdPQzWRqKtwDAmdYlLNXX84zBLxuCLHzvT4x5BaalfA5L7d9oSeffBGrmucjuYCOlkp2E16pWqfM6Q8bZ%2FTpavyvF1vQ7O8G7VyYf%2BQeYFWmJaowduJn31NiwFWmbtsmwnTmIDX9bnrBjX2oXT5C7ubyiERT9U%2FLS0CsUbNlvgzN%2BM8uWjM9FDZSyny1NRppwHpxAw3sVYlomIs9FqaBe%2BOJPskLVnbjR0OX%2B16wDBaWw4y3glOFVAmWMOfzPUhQxP3WJ9Tz3yUVDnrrqZJwDKj0LPjFY4yl9yvzSqgu1y6gVzOuFMdRQ7bmUMzDMrI5mCc74BBZ2OJXafrKbGCKBc5A6gXIdCRtwn6so8BzyV7FXyZmAdMkzBk9Ej3Qq59X%2F7zynpoqXrHMqzfIS55Cyv%2BzhiRW8%2FxtTA3eufyPgqiJ9nA9V3iYvJFhcVkgtALh1joB8s9Xr6Nc522ILtM4oWTIyQYQwRr2fg77hjVjhIDs7yzr1eNlR6OeOFEYcVzUiXverFWl6gugKPE%2BVMkxjcbAkwkAA40vD4OuuWNbyIkAF5xNtltryhs2gkFudttAGkhiPIy55TYHCF4os3BVmNLqRdnmuznDWf%2F0qmy2amsT0PHbOB%2B5yjbfq2%2BvU2vKyRwQfcEwueKTyQY6pgHkPZMAonK67SCmiJLM4yzizhEgMEbMuwJfP%2BKxX%2B2VRki%2FiASdz18T13OPAX81Bxh0iokhoz%2FoHWwUDw5qJj2r21hCiesiWjr2%2B1c3yXbOcMbcZIE3QSUEZZzAHtA%2F98oAv%2F1P4xrG6UckopBadoO9H91LF5FqQTJtyn4j%2Fql7lSfvTjtjD1aDGkpki8mqogUW%2FtcfeXHoQBF%2FCzKevRO9qPSK1B5i&X-Amz-Signature=b383b9775dfaabdaaa3e6b71e004efb0b090caec02e9c97558fb65572ddd294e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+      }
+    ]
   },
   {
     "project_name": "アパレルブランド",

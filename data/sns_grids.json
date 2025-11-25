@@ -3,28 +3,47 @@
     "grid_name": "AI小人",
     "project": "AI小人",
     "platform": "YouTube",
-    "detail_text": "AI 動画生成技術を活用し、小人が人間の生活空間で様々な活動（パルクール、鬼ごっこ、ドッヂボールなど）をする様子を動画化しています。",
+    "detail_text": "AI 動画生成技術を活用し、小人が人間の生活空間で様々な活動をする様子を動画化しています。",
     "cta_link": "",
     "status": "Published",
-    "grid_image": []
+    "grid_image": [
+      {
+        "name": "AI小人.jpeg",
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/a5c12570-85fe-4036-a6f2-59640b00d8bb/AI%E5%B0%8F%E4%BA%BA.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015225Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=6ed5414631bb698e515317fa63aa9bd040a05229a897d656eff7cae1f45d1bae&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+      },
+      {
+        "name": "AI小人.png",
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/38640c6c-6ff7-4ad6-93be-b3e3847369ea/AI%E5%B0%8F%E4%BA%BA.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015225Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=73570a2705645b590d54872f51493abebb23a1741e66972d7e1c1d1926483e3f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+      }
+    ]
   },
   {
     "grid_name": "Affiling",
     "project": "Affiling",
     "platform": "Web",
-    "detail_text": "商品比較やランキングなどの記事を作成するWebサイトを運営。実際に使用した製品を誠実に紹介しています。",
+    "detail_text": "商品比較やランキングなどの記事を作成するWebサイトを運営。",
     "cta_link": "https://synthera.jp/affiling",
     "status": "Published",
-    "grid_image": []
+    "grid_image": [
+      {
+        "name": "affiling.jpg",
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/dff5b79f-b788-485b-b274-3f7e8849f75b/affiling.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015225Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=7d4ff8f92c81c3acac1a457d7354c05c7eee4ab418a63d58e6e2a7f8592c10e2&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+      }
+    ]
   },
   {
     "grid_name": "EraCast",
     "project": "EraCast",
     "platform": "YouTube",
-    "detail_text": "世界のトレンド（Fortnite、MBTI など）を分析し、現実や未来を読み解く動画コンテンツを制作・投稿しています。",
+    "detail_text": "世界のトレンドを分析し、現実や未来を読み解く動画コンテンツを制作・投稿しています。",
     "cta_link": "https://synthera.jp/eracast",
     "status": "Published",
-    "grid_image": []
+    "grid_image": [
+      {
+        "name": "era.cast.jpg",
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/6ab827e5-f631-4ac3-ad24-b6e6a8fc2c15/era.cast.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015225Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=cae89ef000d6c1b89370c653c2b6ade5fd0bc2907bbcd9d2baa00c5f1d90b139&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+      }
+    ]
   },
   {
     "grid_name": "This is Japanese Quality",
@@ -36,7 +55,8 @@
     "grid_image": [
       {
         "name": "IMG_8832.GIF",
-        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/7b23905a-5b0e-4767-96b3-94684c18db92/IMG_8832.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466SUGRN4YX%2F20251113%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251113T091215Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEID%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGHC7Jbzxb7KIYbfcldN72MjVkwuWqbUnLKS0t6eMMxKAiEAivABtcmOrHk2Ms2quUJym%2BsGbjRMBiViVcPApjM%2BM1Qq%2FwMISRAAGgw2Mzc0MjMxODM4MDUiDDq%2FNDZcaFSDwyHnyircAxBvX80OQguX4zysDsp4fO5MEvbW%2FrQn4ndnKWlRFoUFqiScOoE9kPveMr7Xck75hITtjqQgGQpgvc8qpmS0t25cZ5w10FCP14jrZdGR1zFfrpI%2BSTa6IrPH9OhlG6jPr9ou%2F9jnnTLZwvcPbTSu8zp1M2kO6anpIglbqCp7t3XMG%2BhHCxGrZFhDNeaV2e64CpIZ1w21s4jlnMRn%2BuWKATFnHTMT8bOBdB7akjkUHioBD39QmX3OexkMU5jfjrg9PauDfWsYXln3R%2BTfRMQq%2FOJnm5jcC83EkZ%2Bt%2FjyfErmGXnhjAeAq9w4hUnsyjMEpKhqHsWPH7jz%2BKMtq20QZZBMR8Kr2Q3LR1R7uWN4By2LZQ5kPi0poTXTuNKGPTJYajgnniNwE8I3eUXACORm8wTrdgxlST40Y1lTeYhqaUAyC3F%2FNbdIo%2BAJfu2%2BCXTbWbQUqBJ8jSIRI1vjv4w2f18xmiAJRbOkAbvZOlteoZTGIljvJ0yAhuobLtyl0r4qEKFUTf63xzblcPNREEZ9bij11yfqfYitZCoW83q4xzrC2mbd%2FPIuMCccfcVr0tT6SJLVQZwLLiNaLEk6HPdIrKjnSJZOzqVs4axrt3QHJ5eaAjNXDZ13KUzc5vLdqMNCP1sgGOqUBrkuNlwdWgw%2Fakv7Zks04kJrxZAK3u0a5FURByAtRTtbPAJn6SX0F28yJQOn%2Fp8R%2FzKZQhv9uFvHbq5rvRvx8zw3isSqKrzWw80THjxekXyeDND82IkgSjnvEOkDeE1UhpgjJK6rhEVb2o3jsBdPNiuuI%2BMtz%2FpvH0UxY9%2FfFMcVBlyl1q3qfQOrFgYi%2BTjd5%2B3h6smetjW9farhwtqcnBHhdk3Pa&X-Amz-Signature=92984db1e93f82d24107eb4edd259fc78d0be94b9dcb114ad222ffa92c72fc00&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/7b23905a-5b0e-4767-96b3-94684c18db92/IMG_8832.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015225Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=1a8af8512cbf83668ae1ebce153e5aa810c06dc5359dd2ea673f16ef941bf210&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
       }
     ]
   }
+]

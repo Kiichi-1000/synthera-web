@@ -126,3 +126,11 @@ async function renderDevelopmentGrid() {
 
 document.addEventListener('DOMContentLoaded', renderDevelopmentGrid);
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    renderDevelopmentGrid();
+  }
+});
+

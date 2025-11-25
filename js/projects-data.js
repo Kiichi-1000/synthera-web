@@ -94,3 +94,11 @@ async function renderSNSGrid() {
 
 document.addEventListener('DOMContentLoaded', renderSNSGrid);
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    renderSNSGrid();
+  }
+});
+

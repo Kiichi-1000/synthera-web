@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initAffiling();
 });
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initAffiling();
+  }
+});
+
 // Global state
 let currentFilter = 'all';
 let currentSearchQuery = '';
@@ -691,6 +699,13 @@ function showArticleError() {
 // Initialize article detail page
 document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.article-content')) {
+    initArticleDetail();
+  }
+});
+
+// Handle browser back/forward button for article detail page
+window.addEventListener('pageshow', function(event) {
+  if (event.persisted && document.querySelector('.article-content')) {
     initArticleDetail();
   }
 });

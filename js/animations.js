@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initAnimations();
 });
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initAnimations();
+  }
+});
+
 function initAnimations() {
   initTextAnimations();
   initCardAnimations();
@@ -294,6 +302,15 @@ function animateElement(element, animation, duration = 1000) {
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initPageTransitions();
+});
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
 });
 
 // Export animation functions

@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initNavigation();
 });
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initNavigation();
+  }
+});
+
 function initNavigation() {
   const navbar = document.getElementById('navbar');
   const navToggle = document.getElementById('nav-toggle');

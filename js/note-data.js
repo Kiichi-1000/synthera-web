@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initNotePage();
 });
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initNotePage();
+  }
+});
+
 function initNotePage() {
   if (!document.getElementById('articles-grid')) return;
 

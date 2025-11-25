@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initArticleRenderer();
 });
 
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initArticleRenderer();
+  }
+});
+
 // Initialize article renderer
 function initArticleRenderer() {
   // Only initialize on article detail page

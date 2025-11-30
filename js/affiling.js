@@ -1209,46 +1209,61 @@ function getArticleTags(article) {
 function insertInlineAdBanners(bodyEl) {
   if (!bodyEl) return;
   
-  // A8ネット広告コード（250x250）
+  // A8ネット広告コード（100x60）
   const adBannerHTML = `
     <div class="inline-ad-banner">
-      <div class="ad-banner">
-        <a href="https://px.a8.net/svt/ejp?a8mat=45IJ0Y-F6JYVU-3M28-BZVU9" rel="nofollow">
-          <img border="0" width="250" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=251127250918&wid=002&eno=01&mid=s00000016856002015000&mc=1">
-        </a>
-        <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=45IJ0Y-F6JYVU-3M28-BZVU9" alt="">
-      </div>
+      <a href="https://px.a8.net/svt/ejp?a8mat=45IJ0Y+DT4ZOA+5QIG+5ZMCH" rel="nofollow">
+        <img border="0" width="100" height="60" alt="" src="https://www26.a8.net/svt/bgt?aid=251127250835&wid=002&eno=01&mid=s00000026764001006000&mc=1">
+      </a>
+      <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=45IJ0Y+DT4ZOA+5QIG+5ZMCH" alt="">
     </div>
   `;
   
-  // h2見出しの後にバナーを挿入（最初のh2と2番目のh2の後）
+  // より自然な位置にバナーを挿入
   const headings = bodyEl.querySelectorAll('h2');
   let insertedCount = 0;
-  const maxBanners = 2; // 最大2つのバナーを挿入
+  const maxBanners = 1; // 1つのバナーのみ挿入（主張を抑える）
   
+  // h2見出しの後の最初の段落の後にバナーを挿入（より自然な配置）
   headings.forEach((heading, index) => {
-    // 最初のh2と2番目のh2の後にバナーを挿入
-    if (index < maxBanners && insertedCount < maxBanners) {
-      // h2の次の要素を探す
-      let nextSibling = heading.nextElementSibling;
+    if (insertedCount >= maxBanners) return;
+    
+    // h2の後の要素を順に確認
+    let current = heading.nextElementSibling;
+    let paragraphCount = 0;
+    
+    // h2の後の最初の段落を見つける
+    while (current) {
+      if (current.tagName === 'P' && current.textContent.trim().length > 50) {
+        paragraphCount++;
+        // 最初の段落の後にバナーを挿入
+        if (paragraphCount === 1) {
+          const bannerDiv = document.createElement('div');
+          bannerDiv.innerHTML = adBannerHTML;
+          current.parentNode.insertBefore(bannerDiv, current.nextSibling);
+          insertedCount++;
+          return; // 1つだけ挿入して終了
+        }
+      }
+      current = current.nextElementSibling;
       
-      // h2の直後にバナーを挿入
-      const bannerDiv = document.createElement('div');
-      bannerDiv.innerHTML = adBannerHTML;
-      heading.parentNode.insertBefore(bannerDiv, nextSibling);
-      insertedCount++;
+      // 次のh2に到達したら終了
+      if (current && current.tagName === 'H2') break;
     }
   });
   
-  // h2が少ない場合は、段落の間にバナーを挿入
+  // h2が少ない、または段落が見つからない場合は、記事の中間位置に挿入
   if (insertedCount === 0) {
     const paragraphs = bodyEl.querySelectorAll('p');
-    if (paragraphs.length >= 3) {
-      // 3段落目の後にバナーを挿入
-      const thirdParagraph = paragraphs[2];
-      const bannerDiv = document.createElement('div');
-      bannerDiv.innerHTML = adBannerHTML;
-      thirdParagraph.parentNode.insertBefore(bannerDiv, thirdParagraph.nextSibling);
+    if (paragraphs.length >= 4) {
+      // 記事の中間あたり（段落数の40%の位置）にバナーを挿入
+      const insertIndex = Math.floor(paragraphs.length * 0.4);
+      const targetParagraph = paragraphs[insertIndex];
+      if (targetParagraph && targetParagraph.textContent.trim().length > 50) {
+        const bannerDiv = document.createElement('div');
+        bannerDiv.innerHTML = adBannerHTML;
+        targetParagraph.parentNode.insertBefore(bannerDiv, targetParagraph.nextSibling);
+      }
     }
   }
 }

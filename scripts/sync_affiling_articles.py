@@ -190,6 +190,56 @@ def fetch_page_blocks(page_id: str, token: str) -> List[Dict]:
     return blocks
 
 
+def rich_text_to_html(rich_text: List[Dict]) -> str:
+    """Notion rich_textをHTMLに変換（リンク、スタイルなどを処理）"""
+    html_parts = []
+    for item in rich_text:
+        text = item.get("plain_text", "")
+        if not text:
+            continue
+        
+        annotations = item.get("annotations", {})
+        # リンク情報を取得（複数の場所をチェック）
+        link = None
+        if item.get("type") == "text":
+            link = item.get("text", {}).get("link")
+        if not link:
+            link = item.get("href")  # hrefプロパティにもリンクがある場合
+        
+        # テキストをエスケープ
+        import html
+        escaped_text = html.escape(text)
+        
+        # スタイルを適用（ネストできるように順序を調整）
+        styled_text = escaped_text
+        if annotations.get("bold"):
+            styled_text = f"<strong>{styled_text}</strong>"
+        if annotations.get("italic"):
+            styled_text = f"<em>{styled_text}</em>"
+        if annotations.get("code"):
+            styled_text = f"<code>{escaped_text}</code>"
+        if annotations.get("underline"):
+            styled_text = f"<u>{styled_text}</u>"
+        if annotations.get("strikethrough"):
+            styled_text = f"<s>{styled_text}</s>"
+        
+        # リンクを処理（最後に適用）
+        if link:
+            url = None
+            if isinstance(link, dict) and link.get("url"):
+                url = link.get("url")
+            elif isinstance(link, str):
+                url = link
+            if url:
+                styled_text = f'<a href="{html.escape(url)}" target="_blank" rel="nofollow noopener">{styled_text}</a>'
+        
+        text = styled_text
+        
+        html_parts.append(text)
+    
+    return "".join(html_parts)
+
+
 def blocks_to_html(blocks: List[Dict], token: str) -> str:
     """NotionブロックをHTMLに変換"""
     html_parts = []
@@ -202,25 +252,25 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
         
         if block_type == "paragraph":
             rich_text = block_data.get("rich_text", [])
-            text = "".join(item.get("plain_text", "") for item in rich_text)
+            text = rich_text_to_html(rich_text)
             if text.strip():
                 html_parts.append(f"<p>{text}</p>")
         
         elif block_type == "heading_1":
             rich_text = block_data.get("rich_text", [])
-            text = "".join(item.get("plain_text", "") for item in rich_text)
+            text = rich_text_to_html(rich_text)
             if text.strip():
                 html_parts.append(f"<h1>{text}</h1>")
         
         elif block_type == "heading_2":
             rich_text = block_data.get("rich_text", [])
-            text = "".join(item.get("plain_text", "") for item in rich_text)
+            text = rich_text_to_html(rich_text)
             if text.strip():
                 html_parts.append(f"<h2>{text}</h2>")
         
         elif block_type == "heading_3":
             rich_text = block_data.get("rich_text", [])
-            text = "".join(item.get("plain_text", "") for item in rich_text)
+            text = rich_text_to_html(rich_text)
             if text.strip():
                 html_parts.append(f"<h3>{text}</h3>")
         
@@ -231,7 +281,7 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
             while j < len(blocks) and blocks[j].get("type") == "bulleted_list_item":
                 item_data = blocks[j].get("bulleted_list_item", {})
                 rich_text = item_data.get("rich_text", [])
-                text = "".join(item.get("plain_text", "") for item in rich_text)
+                text = rich_text_to_html(rich_text)
                 if text.strip():
                     list_items.append(f"<li>{text}</li>")
                 j += 1
@@ -246,7 +296,7 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
             while j < len(blocks) and blocks[j].get("type") == "numbered_list_item":
                 item_data = blocks[j].get("numbered_list_item", {})
                 rich_text = item_data.get("rich_text", [])
-                text = "".join(item.get("plain_text", "") for item in rich_text)
+                text = rich_text_to_html(rich_text)
                 if text.strip():
                     list_items.append(f"<li>{text}</li>")
                 j += 1
@@ -263,9 +313,30 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
                 if url:
                     html_parts.append(f'<img src="{url}" alt="{caption_text}">')
         
+        elif block_type == "code":
+            # コードブロックを処理（HTMLコードブロックの場合はそのまま出力）
+            rich_text = block_data.get("rich_text", [])
+            code_text = "".join(item.get("plain_text", "") for item in rich_text)
+            if code_text.strip():
+                language = block_data.get("language", "")
+                # HTML/XMLコードブロックの場合はエスケープしない（そのまま出力）
+                if language in ["html", "xml"]:
+                    if language:
+                        html_parts.append(f'<pre><code class="language-{language}">{code_text}</code></pre>')
+                    else:
+                        html_parts.append(f'<pre><code>{code_text}</code></pre>')
+                else:
+                    # その他の言語はエスケープ
+                    import html
+                    escaped_code = html.escape(code_text)
+                    if language:
+                        html_parts.append(f'<pre><code class="language-{language}">{escaped_code}</code></pre>')
+                    else:
+                        html_parts.append(f'<pre><code>{escaped_code}</code></pre>')
+        
         elif block_type == "callout":
             rich_text = block_data.get("rich_text", [])
-            text = "".join(item.get("plain_text", "") for item in rich_text)
+            text = rich_text_to_html(rich_text)
             if text.strip():
                 html_parts.append(f"<div class='callout'><p>{text}</p></div>")
         

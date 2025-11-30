@@ -162,6 +162,31 @@ def fetch_existing_pages(database_id: str, token: str) -> Dict[str, Dict]:
     return existing_pages
 
 
+def update_content_property(page_id: str, plain_text: str, token: str) -> None:
+    """ページのContentプロパティを更新（プレーンテキストのみ）"""
+    # Notion APIでページのプロパティを更新
+    payload = {
+        "properties": {
+            "Content": {
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": plain_text
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    
+    try:
+        notion_request("PATCH", f"/pages/{page_id}", token, payload)
+    except Exception as e:
+        # 更新に失敗してもエラーを出さない（オプション機能）
+        pass
+
+
 def extract_rich_text(rich_text_prop: Dict) -> str:
     text_items = rich_text_prop.get("rich_text", [])
     return "".join(item.get("plain_text", "") for item in text_items)
@@ -511,6 +536,17 @@ def pull_from_notion(database_id: str, token: str, output_path: Path):
                     content = blocks_to_html(page_blocks, token)
                     if content:
                         print(f"[INFO] ページ本文から記事内容を取得しました: {title[:50]}...", file=sys.stderr)
+                        # 取得した記事内容をContentプロパティにも保存（プレーンテキスト版）
+                        # 注: Notionのrich_textプロパティはHTMLを保持できないため、プレーンテキストのみ
+                        try:
+                            import re
+                            plain_text_content = re.sub(r"<[^>]+>", "", content)
+                            plain_text_content = plain_text_content.strip()[:2000]  # 長すぎる場合は切り詰め
+                            if plain_text_content:
+                                update_content_property(page["id"], plain_text_content, token)
+                                print(f"[INFO] Contentプロパティにプレーンテキスト版を保存しました: {title[:50]}...", file=sys.stderr)
+                        except Exception as e:
+                            print(f"[WARNING] Contentプロパティへの保存に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
                 except Exception as e:
                     print(f"[WARNING] ページ本文の取得に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
             

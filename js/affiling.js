@@ -518,6 +518,10 @@ function loadArticleDetail(article) {
     // Check if content exists and is not empty
     if (article.content && article.content.trim().length > 0) {
       bodyEl.innerHTML = article.content;
+      
+      // 記事本文内にバナーを挿入
+      insertInlineAdBanners(bodyEl);
+      
       // Generate TOC after content is loaded
       generateTOC();
       // Add anchor links to headings
@@ -1199,6 +1203,54 @@ function getArticleTags(article) {
   // Generate tags from title and category
   const titleWords = article.title.split(/[【】\s\-・]/).filter(w => w.length > 2);
   return [article.category, ...titleWords.slice(0, 3)].filter(Boolean);
+}
+
+// Insert inline ad banners into article content
+function insertInlineAdBanners(bodyEl) {
+  if (!bodyEl) return;
+  
+  // A8ネット広告コード（250x250）
+  const adBannerHTML = `
+    <div class="inline-ad-banner">
+      <div class="ad-banner">
+        <a href="https://px.a8.net/svt/ejp?a8mat=45IJ0Y-F6JYVU-3M28-BZVU9" rel="nofollow">
+          <img border="0" width="250" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=251127250918&wid=002&eno=01&mid=s00000016856002015000&mc=1">
+        </a>
+        <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=45IJ0Y-F6JYVU-3M28-BZVU9" alt="">
+      </div>
+    </div>
+  `;
+  
+  // h2見出しの後にバナーを挿入（最初のh2と2番目のh2の後）
+  const headings = bodyEl.querySelectorAll('h2');
+  let insertedCount = 0;
+  const maxBanners = 2; // 最大2つのバナーを挿入
+  
+  headings.forEach((heading, index) => {
+    // 最初のh2と2番目のh2の後にバナーを挿入
+    if (index < maxBanners && insertedCount < maxBanners) {
+      // h2の次の要素を探す
+      let nextSibling = heading.nextElementSibling;
+      
+      // h2の直後にバナーを挿入
+      const bannerDiv = document.createElement('div');
+      bannerDiv.innerHTML = adBannerHTML;
+      heading.parentNode.insertBefore(bannerDiv, nextSibling);
+      insertedCount++;
+    }
+  });
+  
+  // h2が少ない場合は、段落の間にバナーを挿入
+  if (insertedCount === 0) {
+    const paragraphs = bodyEl.querySelectorAll('p');
+    if (paragraphs.length >= 3) {
+      // 3段落目の後にバナーを挿入
+      const thirdParagraph = paragraphs[2];
+      const bannerDiv = document.createElement('div');
+      bannerDiv.innerHTML = adBannerHTML;
+      thirdParagraph.parentNode.insertBefore(bannerDiv, thirdParagraph.nextSibling);
+    }
+  }
 }
 
 // Utility Functions

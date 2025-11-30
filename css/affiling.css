@@ -893,68 +893,42 @@ body {
 }
 
 .article-layout {
-  display: grid;
-  grid-template-columns: 250px 1fr 250px;
-  gap: var(--affiling-spacing-xl);
-  align-items: start;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.article-main {
-  min-width: 0;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.article-ad-left,
-.article-ad-right {
-  position: sticky;
-  top: 100px;
-  height: fit-content;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-}
-
-@media (max-width: 1200px) {
-  .article-layout {
-    grid-template-columns: 1fr;
-    max-width: 800px;
-  }
-
-  .article-ad-left,
-  .article-ad-right {
-    display: none;
-  }
-}
-
-/* Ad Banner Widget */
-.ad-banner-widget {
-  background: var(--affiling-bg);
-  border: 1px solid var(--affiling-border);
-  border-radius: var(--affiling-radius-lg);
-  padding: var(--affiling-spacing);
-  margin-bottom: var(--affiling-spacing-lg);
-}
-
-.ad-banner {
+.article-main {
   width: 100%;
-  text-align: center;
 }
 
-.ad-banner img {
+/* Inline Ad Banner (記事本文内に表示) */
+.article-body .inline-ad-banner {
+  margin: var(--affiling-spacing-xl) auto;
+  padding: var(--affiling-spacing);
+  text-align: center;
+  background: var(--affiling-bg-secondary);
+  border: 1px solid var(--affiling-border);
+  border-radius: var(--affiling-radius);
+  max-width: 300px;
+}
+
+.article-body .inline-ad-banner .ad-banner {
+  display: inline-block;
+}
+
+.article-body .inline-ad-banner img {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
 }
 
-.ad-banner a {
+.article-body .inline-ad-banner a {
   display: block;
   transition: opacity 0.2s;
 }
 
-.ad-banner a:hover {
+.article-body .inline-ad-banner a:hover {
   opacity: 0.9;
 }
 

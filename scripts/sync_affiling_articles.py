@@ -344,8 +344,30 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
             code_text = "".join(item.get("plain_text", "") for item in rich_text)
             if code_text.strip():
                 language = block_data.get("language", "")
-                # HTML/XMLコードブロックの場合はエスケープしない（そのまま出力）
+                # HTML/XMLコードブロックの場合は、不要なトラッキング画像を削除
                 if language in ["html", "xml"]:
+                    # 1x1ピクセルのトラッキング画像を削除
+                    import re
+                    # パターン1: width="1" height="1" または width='1' height='1' の画像タグ
+                    # パターン2: 0.gifというファイル名のトラッキング画像
+                    # パターン3: width="1"とheight="1"が別々の属性として存在する場合
+                    code_text = re.sub(
+                        r'<img[^>]*(?:width\s*=\s*["\']?\s*1\s*["\']?[^>]*height\s*=\s*["\']?\s*1\s*["\']?|height\s*=\s*["\']?\s*1\s*["\']?[^>]*width\s*=\s*["\']?\s*1\s*["\']?)[^>]*>',
+                        '',
+                        code_text,
+                        flags=re.IGNORECASE | re.DOTALL
+                    )
+                    # 0.gifというファイル名のトラッキング画像も削除
+                    code_text = re.sub(
+                        r'<img[^>]*src=["\'][^"\']*0\.gif[^"\']*["\'][^>]*>',
+                        '',
+                        code_text,
+                        flags=re.IGNORECASE | re.DOTALL
+                    )
+                    # 空行を削除（連続する改行を整理）
+                    code_text = re.sub(r'\n\s*\n\s*\n+', '\n\n', code_text)
+                    code_text = code_text.strip()
+                    
                     if language:
                         html_parts.append(f'<pre><code class="language-{language}">{code_text}</code></pre>')
                     else:

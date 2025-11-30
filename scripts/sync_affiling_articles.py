@@ -218,6 +218,71 @@ def extract_rich_text(rich_text_prop: Dict) -> str:
     return "".join(item.get("plain_text", "") for item in text_items)
 
 
+def optimize_article_content(html_content: str) -> str:
+    """記事コンテンツを最適化する（不要な要素の削除、HTMLの整理など）"""
+    import re
+    
+    if not html_content:
+        return html_content
+    
+    # 1. トラッキング画像（1x1透明画像）を削除
+    # width="1" height="1" のimgタグを削除
+    html_content = re.sub(
+        r'<img[^>]+width=["\']1["\'][^>]+height=["\']1["\'][^>]*>',
+        '',
+        html_content,
+        flags=re.IGNORECASE
+    )
+    # srcに0.gifを含むimgタグを削除
+    html_content = re.sub(
+        r'<img[^>]+src=["\'][^"\']*0\.gif[^"\']*["\'][^>]*>',
+        '',
+        html_content,
+        flags=re.IGNORECASE
+    )
+    
+    # 2. 重複する<hr>タグを1つにまとめる（連続する<hr>を1つに）
+    html_content = re.sub(r'(<hr>\s*)+', '<hr>\n', html_content)
+    
+    # 3. 連続する空行を1つにまとめる
+    html_content = re.sub(r'\n\s*\n\s*\n+', '\n\n', html_content)
+    
+    # 4. コードブロックを一時的に保護
+    code_blocks = []
+    def replace_code(match):
+        code_blocks.append(match.group(0))
+        return f"__CODE_BLOCK_{len(code_blocks)-1}__"
+    
+    html_content = re.sub(
+        r'<pre><code[^>]*>.*?</code></pre>',
+        replace_code,
+        html_content,
+        flags=re.DOTALL
+    )
+    
+    # 5. <p>タグ内の不要な空白を削除
+    html_content = re.sub(r'<p>\s+', '<p>', html_content)
+    html_content = re.sub(r'\s+</p>', '</p>', html_content)
+    
+    # 6. 画像に遅延読み込み属性を追加（既にない場合）
+    def add_loading_attr(match):
+        img_tag = match.group(0)
+        if 'loading=' not in img_tag.lower():
+            return img_tag.replace('>', ' loading="lazy">')
+        return img_tag
+    
+    html_content = re.sub(r'<img[^>]+>', add_loading_attr, html_content, flags=re.IGNORECASE)
+    
+    # 7. コードブロックを復元
+    for i, code_block in enumerate(code_blocks):
+        html_content = html_content.replace(f"__CODE_BLOCK_{i}__", code_block)
+    
+    # 8. 先頭・末尾の不要な空白を削除
+    html_content = html_content.strip()
+    
+    return html_content
+
+
 def fetch_page_blocks(page_id: str, token: str) -> List[Dict]:
     """Notionページのブロックを再帰的に取得"""
     blocks = []
@@ -615,6 +680,10 @@ def pull_from_notion(database_id: str, token: str, output_path: Path):
                             print(f"[WARNING] Commentプロパティへの保存に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
                 except Exception as e:
                     print(f"[WARNING] ページ本文の取得に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
+            
+            # HTMLコンテンツから不要なトラッキング画像を削除し、最適化
+            if content:
+                content = optimize_article_content(content)
             
             tags = extract_multi_select(properties.get("Tags", {}))
 

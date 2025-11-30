@@ -116,6 +116,7 @@ def ensure_database(token: str) -> Tuple[str, bool]:
             "Read Time": {"number": {}},
             "Product Count": {"number": {}},
             "Content": {"rich_text": {}},
+            "Comment": {"rich_text": {}},  # 記事内容を保存するためのコメントプロパティ（HTML対応）
             "Status": {
                 "select": {
                     "options": [
@@ -168,6 +169,31 @@ def update_content_property(page_id: str, plain_text: str, token: str) -> None:
     payload = {
         "properties": {
             "Content": {
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": plain_text
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    
+    try:
+        notion_request("PATCH", f"/pages/{page_id}", token, payload)
+    except Exception as e:
+        # 更新に失敗してもエラーを出さない（オプション機能）
+        pass
+
+
+def update_comment_property(page_id: str, plain_text: str, token: str) -> None:
+    """ページのCommentプロパティを更新（プレーンテキストのみ）"""
+    # Notion APIでページのプロパティを更新
+    payload = {
+        "properties": {
+            "Comment": {
                 "rich_text": [
                     {
                         "type": "text",
@@ -549,26 +575,44 @@ def pull_from_notion(database_id: str, token: str, output_path: Path):
             
             read_time = extract_number(properties.get("Read Time", {}))
             product_count = extract_number(properties.get("Product Count", {}))
-            content = extract_rich_text(properties.get("Content", {}))
             
-            # Contentプロパティが空の場合は、ページの本文（ブロック）から取得
+            # 記事内容の取得優先順位：
+            # 1. Commentプロパティ（HTMLコンテンツ対応）
+            # 2. Contentプロパティ
+            # 3. ページの本文（ブロック）
+            content = None
+            
+            # まずCommentプロパティを確認
+            comment_content = extract_rich_text(properties.get("Comment", {}))
+            if comment_content and comment_content.strip():
+                content = comment_content
+                print(f"[INFO] Commentプロパティから記事内容を取得しました: {title[:50]}...", file=sys.stderr)
+            
+            # Commentプロパティが空の場合は、Contentプロパティを確認
+            if not content or not content.strip():
+                content = extract_rich_text(properties.get("Content", {}))
+            
+            # Contentプロパティも空の場合は、ページの本文（ブロック）から取得
             if not content or not content.strip():
                 try:
                     page_blocks = fetch_page_blocks(page["id"], token)
                     content = blocks_to_html(page_blocks, token)
                     if content:
                         print(f"[INFO] ページ本文から記事内容を取得しました: {title[:50]}...", file=sys.stderr)
-                        # 取得した記事内容をContentプロパティにも保存（プレーンテキスト版）
-                        # 注: Notionのrich_textプロパティはHTMLを保持できないため、プレーンテキストのみ
+                        # 取得した記事内容をCommentプロパティに保存（HTML版）
                         try:
+                            # HTMLをそのまま保存するために、Commentプロパティに書き込む
+                            # ただし、Notionのrich_textはHTMLを直接保存できないため、
+                            # プレーンテキスト版を保存
                             import re
                             plain_text_content = re.sub(r"<[^>]+>", "", content)
-                            plain_text_content = plain_text_content.strip()[:2000]  # 長すぎる場合は切り詰め
+                            plain_text_content = plain_text_content.strip()[:2000]
                             if plain_text_content:
-                                update_content_property(page["id"], plain_text_content, token)
-                                print(f"[INFO] Contentプロパティにプレーンテキスト版を保存しました: {title[:50]}...", file=sys.stderr)
+                                # Commentプロパティにプレーンテキスト版を保存
+                                update_comment_property(page["id"], plain_text_content, token)
+                                print(f"[INFO] Commentプロパティにプレーンテキスト版を保存しました: {title[:50]}...", file=sys.stderr)
                         except Exception as e:
-                            print(f"[WARNING] Contentプロパティへの保存に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
+                            print(f"[WARNING] Commentプロパティへの保存に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
                 except Exception as e:
                     print(f"[WARNING] ページ本文の取得に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
             

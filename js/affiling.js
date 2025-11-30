@@ -245,7 +245,12 @@ function loadSampleArticles() {
 
 function renderArticles(articlesToRender) {
   const articlesGrid = document.getElementById('articles-grid');
-  if (!articlesGrid) return;
+  if (!articlesGrid) {
+    console.error('[Affiling] articles-grid要素が見つかりません');
+    return;
+  }
+  
+  console.log(`[Affiling] ${articlesToRender.length}件の記事をレンダリングします`);
   
   // Clear existing articles if it's the first page
   if (currentPage === 1) {
@@ -257,6 +262,7 @@ function renderArticles(articlesToRender) {
   
   if (currentFilter !== 'all') {
     filteredArticles = articlesToRender.filter(article => article.category === currentFilter);
+    console.log(`[Affiling] フィルタ後: ${filteredArticles.length}件（フィルタ: ${currentFilter}）`);
   }
   
   if (currentSearchQuery) {
@@ -268,12 +274,24 @@ function renderArticles(articlesToRender) {
       );
       return titleMatch || excerptMatch || tagsMatch;
     });
+    console.log(`[Affiling] 検索後: ${filteredArticles.length}件（検索: ${currentSearchQuery}）`);
   }
   
   // Render articles
-  filteredArticles.forEach(article => {
-    const articleElement = createArticleElement(article);
-    articlesGrid.appendChild(articleElement);
+  if (filteredArticles.length === 0) {
+    console.warn('[Affiling] 表示する記事がありません');
+  } else {
+    console.log(`[Affiling] ${filteredArticles.length}件の記事を表示します`);
+  }
+  
+  filteredArticles.forEach((article, index) => {
+    try {
+      const articleElement = createArticleElement(article);
+      articlesGrid.appendChild(articleElement);
+      console.log(`[Affiling] 記事 ${index + 1}/${filteredArticles.length} を追加: ${article.title}`);
+    } catch (error) {
+      console.error(`[Affiling] 記事のレンダリングに失敗しました (${article.title}):`, error);
+    }
   });
   
   // Show/hide no results message
@@ -427,22 +445,35 @@ async function initArticleDetail() {
   
   // Try to load from JSON first
   try {
+    console.log('[Affiling] 記事を読み込み中... ID:', articleId);
     const response = await fetch('data/affiling_articles.json');
     if (response.ok) {
       const articlesList = await response.json();
+      console.log('[Affiling] JSONファイルから', articlesList.length, '件の記事を読み込みました');
       const article = articlesList.find(a => a.id === articleId);
       
       if (article) {
+        console.log('[Affiling] 記事が見つかりました:', {
+          id: article.id,
+          title: article.title,
+          contentLength: article.content ? article.content.length : 0,
+          hasContent: !!article.content
+        });
         // Convert date string to Date object
         if (article.date) {
           article.date = new Date(article.date);
         }
         loadArticleDetail(article);
         return;
+      } else {
+        console.warn('[Affiling] 記事が見つかりませんでした。検索したID:', articleId);
+        console.log('[Affiling] 利用可能な記事ID:', articlesList.map(a => a.id));
       }
+    } else {
+      console.error('[Affiling] JSONファイルの読み込みに失敗:', response.status, response.statusText);
     }
   } catch (error) {
-    console.error('Error loading article:', error);
+    console.error('[Affiling] 記事の読み込みエラー:', error);
   }
   
   // Fallback to static database
@@ -484,7 +515,8 @@ function loadArticleDetail(article) {
   // Update body
   const bodyEl = document.getElementById('article-body');
   if (bodyEl) {
-    if (article.content) {
+    // Check if content exists and is not empty
+    if (article.content && article.content.trim().length > 0) {
       bodyEl.innerHTML = article.content;
       // Generate TOC after content is loaded
       generateTOC();
@@ -495,6 +527,11 @@ function loadArticleDetail(article) {
       // Enhance ratings in content
       enhanceRatingsInContent();
     } else {
+      console.warn('[Affiling] 記事内容が空です:', {
+        id: article.id,
+        title: article.title,
+        contentLength: article.content ? article.content.length : 0
+      });
       bodyEl.innerHTML = '<p>記事の内容を読み込めませんでした。</p>';
     }
   }
@@ -1162,51 +1199,6 @@ function getArticleTags(article) {
   // Generate tags from title and category
   const titleWords = article.title.split(/[【】\s\-・]/).filter(w => w.length > 2);
   return [article.category, ...titleWords.slice(0, 3)].filter(Boolean);
-}
-
-// Utility Functions
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-}
-
-// Utility Functions
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-}
-
-// Utility Functions
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
 }
 
 // Utility Functions

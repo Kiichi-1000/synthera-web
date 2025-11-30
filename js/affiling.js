@@ -148,15 +148,19 @@ async function loadArticles() {
       
       // Convert array to object for compatibility with existing code
       loadedArticleDatabase = {};
-      articlesList.forEach(article => {
-        // Convert date string to Date object
-        if (article.date) {
-          article.date = new Date(article.date);
-        }
-        // Use article.id as key, fallback to array index
-        const key = article.id || articlesList.indexOf(article).toString();
-        loadedArticleDatabase[key] = article;
-      });
+      if (Array.isArray(articlesList)) {
+        articlesList.forEach((article, index) => {
+          // Convert date string to Date object
+          if (article.date) {
+            article.date = new Date(article.date);
+          }
+          // Use article.id as key, fallback to array index
+          const key = article.id || index.toString();
+          loadedArticleDatabase[key] = article;
+        });
+      }
+      
+      console.log(`[Affiling] ${Object.keys(loadedArticleDatabase).length}件の記事を読み込みました`);
       
       // Merge with static database (for backward compatibility)
       const mergedDatabase = { ...articleDatabase, ...loadedArticleDatabase };
@@ -164,11 +168,12 @@ async function loadArticles() {
       // Load articles from merged database
       loadArticlesFromDatabase(mergedDatabase);
     } else {
+      console.warn('[Affiling] JSONファイルの読み込みに失敗しました。ステータス:', response.status);
       // Fallback to static database if JSON doesn't exist
       loadArticlesFromDatabase(articleDatabase);
     }
   } catch (error) {
-    console.error('Error loading articles:', error);
+    console.error('[Affiling] 記事の読み込み中にエラーが発生しました:', error);
     // Fallback to static database
     loadArticlesFromDatabase(articleDatabase);
   } finally {
@@ -182,7 +187,12 @@ function loadArticlesFromDatabase(database) {
   initTagSystem();
   
   // Get all articles from database
-  const allArticles = Object.values(database);
+  const allArticles = Object.values(database).filter(article => {
+    // 必須フィールドがあることを確認
+    return article && article.id && article.title;
+  });
+  
+  console.log(`[Affiling] データベースから ${allArticles.length}件の記事を取得しました`);
   
   // Sort by date (newest first)
   allArticles.sort((a, b) => {
@@ -197,6 +207,7 @@ function loadArticlesFromDatabase(database) {
     articles = [...articles, ...allArticles];
   }
   
+  console.log(`[Affiling] ${articles.length}件の記事を表示します`);
   renderArticles(articles);
   hasMorePages = false;
   
@@ -249,10 +260,14 @@ function renderArticles(articlesToRender) {
   }
   
   if (currentSearchQuery) {
-    filteredArticles = filteredArticles.filter(article => 
-      article.title.toLowerCase().includes(currentSearchQuery) ||
-      article.excerpt.toLowerCase().includes(currentSearchQuery)
-    );
+    filteredArticles = filteredArticles.filter(article => {
+      const titleMatch = article.title && article.title.toLowerCase().includes(currentSearchQuery);
+      const excerptMatch = article.excerpt && article.excerpt.toLowerCase().includes(currentSearchQuery);
+      const tagsMatch = article.tags && article.tags.some(tag => 
+        tag && tag.toLowerCase().includes(currentSearchQuery)
+      );
+      return titleMatch || excerptMatch || tagsMatch;
+    });
   }
   
   // Render articles
@@ -301,8 +316,8 @@ function createArticleElement(article) {
         <span class="article-category">${getCategoryLabel(article.category)}</span>
         <span class="article-date">${formattedDate}</span>
       </div>
-      <h3 class="article-title">${article.title}</h3>
-      <p class="article-excerpt">${article.excerpt}</p>
+      <h3 class="article-title">${article.title || 'タイトルなし'}</h3>
+      <p class="article-excerpt">${article.excerpt || ''}</p>
       ${tagsHTML ? `<div class="article-tags">${tagsHTML}</div>` : ''}
       <div class="article-stats">
         <span class="article-stat">読了時間: ${article.readTime}分</span>
@@ -1147,6 +1162,51 @@ function getArticleTags(article) {
   // Generate tags from title and category
   const titleWords = article.title.split(/[【】\s\-・]/).filter(w => w.length > 2);
   return [article.category, ...titleWords.slice(0, 3)].filter(Boolean);
+}
+
+// Utility Functions
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+}
+
+// Utility Functions
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+}
+
+// Utility Functions
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 }
 
 // Utility Functions

@@ -7,6 +7,10 @@ import urllib.request
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+# Cloudflare Images統合
+sys.path.insert(0, str(Path(__file__).parent))
+from utils.cloudflare_images import upload_image_from_url
+
 
 NOTION_API_BASE = "https://api.notion.com/v1"
 NOTION_VERSION = "2022-06-28"
@@ -163,6 +167,129 @@ def extract_rich_text(rich_text_prop: Dict) -> str:
     return "".join(item.get("plain_text", "") for item in text_items)
 
 
+def fetch_page_blocks(page_id: str, token: str) -> List[Dict]:
+    """Notionページのブロックを再帰的に取得"""
+    blocks = []
+    cursor = None
+    
+    while True:
+        # GETリクエストなので、パラメータをURLに含める
+        path = f"/blocks/{page_id}/children"
+        if cursor:
+            path += f"?start_cursor={cursor}"
+        
+        response = notion_request("GET", path, token, None)
+        results = response.get("results", [])
+        blocks.extend(results)
+        
+        next_cursor = response.get("next_cursor")
+        if not next_cursor:
+            break
+        cursor = next_cursor
+    
+    return blocks
+
+
+def blocks_to_html(blocks: List[Dict], token: str) -> str:
+    """NotionブロックをHTMLに変換"""
+    html_parts = []
+    i = 0
+    
+    while i < len(blocks):
+        block = blocks[i]
+        block_type = block.get("type", "")
+        block_data = block.get(block_type, {})
+        
+        if block_type == "paragraph":
+            rich_text = block_data.get("rich_text", [])
+            text = "".join(item.get("plain_text", "") for item in rich_text)
+            if text.strip():
+                html_parts.append(f"<p>{text}</p>")
+        
+        elif block_type == "heading_1":
+            rich_text = block_data.get("rich_text", [])
+            text = "".join(item.get("plain_text", "") for item in rich_text)
+            if text.strip():
+                html_parts.append(f"<h1>{text}</h1>")
+        
+        elif block_type == "heading_2":
+            rich_text = block_data.get("rich_text", [])
+            text = "".join(item.get("plain_text", "") for item in rich_text)
+            if text.strip():
+                html_parts.append(f"<h2>{text}</h2>")
+        
+        elif block_type == "heading_3":
+            rich_text = block_data.get("rich_text", [])
+            text = "".join(item.get("plain_text", "") for item in rich_text)
+            if text.strip():
+                html_parts.append(f"<h3>{text}</h3>")
+        
+        elif block_type == "bulleted_list_item":
+            # 連続するbulleted_list_itemを1つの<ul>にまとめる
+            list_items = []
+            j = i
+            while j < len(blocks) and blocks[j].get("type") == "bulleted_list_item":
+                item_data = blocks[j].get("bulleted_list_item", {})
+                rich_text = item_data.get("rich_text", [])
+                text = "".join(item.get("plain_text", "") for item in rich_text)
+                if text.strip():
+                    list_items.append(f"<li>{text}</li>")
+                j += 1
+            if list_items:
+                html_parts.append(f"<ul>{''.join(list_items)}</ul>")
+            i = j - 1  # ループでiがインクリメントされるので-1
+        
+        elif block_type == "numbered_list_item":
+            # 連続するnumbered_list_itemを1つの<ol>にまとめる
+            list_items = []
+            j = i
+            while j < len(blocks) and blocks[j].get("type") == "numbered_list_item":
+                item_data = blocks[j].get("numbered_list_item", {})
+                rich_text = item_data.get("rich_text", [])
+                text = "".join(item.get("plain_text", "") for item in rich_text)
+                if text.strip():
+                    list_items.append(f"<li>{text}</li>")
+                j += 1
+            if list_items:
+                html_parts.append(f"<ol>{''.join(list_items)}</ol>")
+            i = j - 1  # ループでiがインクリメントされるので-1
+        
+        elif block_type == "image":
+            image_data = block_data.get("file") or block_data.get("external")
+            if image_data:
+                url = image_data.get("url", "")
+                caption = block_data.get("caption", [])
+                caption_text = "".join(item.get("plain_text", "") for item in caption)
+                if url:
+                    html_parts.append(f'<img src="{url}" alt="{caption_text}">')
+        
+        elif block_type == "callout":
+            rich_text = block_data.get("rich_text", [])
+            text = "".join(item.get("plain_text", "") for item in rich_text)
+            if text.strip():
+                html_parts.append(f"<div class='callout'><p>{text}</p></div>")
+        
+        elif block_type == "divider":
+            html_parts.append("<hr>")
+        
+        elif block_type == "table_of_contents":
+            # 目次はスキップ
+            pass
+        
+        # 子ブロックを再帰的に処理
+        has_children = block.get("has_children", False)
+        if has_children:
+            child_block_id = block.get("id", "")
+            child_blocks = fetch_page_blocks(child_block_id, token)
+            child_html = blocks_to_html(child_blocks, token)
+            if child_html:
+                html_parts.append(child_html)
+        
+        i += 1
+    
+    return "\n".join(html_parts)
+
+
 def extract_date(date_prop: Dict) -> Optional[str]:
     date_obj = date_prop.get("date")
     if not date_obj:
@@ -290,9 +417,32 @@ def pull_from_notion(database_id: str, token: str, output_path: Path):
             category = extract_select(properties.get("Category", {}))
             date = extract_date(properties.get("Date", {}))
             image = extract_files(properties.get("Image", {}))
+            
+            # 画像をCloudflare Imagesにアップロード（一時URLの場合は永続URLに変換）
+            if image:
+                try:
+                    permanent_image_url = upload_image_from_url(image, image_id=f"affiling-{page_id}")
+                    if permanent_image_url:
+                        image = permanent_image_url
+                except Exception as e:
+                    # 画像アップロードに失敗しても処理を継続
+                    print(f"[WARNING] 画像アップロードに失敗しました（記事: {title}）: {e}", file=sys.stderr)
+                    # 元のURLを使用して継続
+            
             read_time = extract_number(properties.get("Read Time", {}))
             product_count = extract_number(properties.get("Product Count", {}))
             content = extract_rich_text(properties.get("Content", {}))
+            
+            # Contentプロパティが空の場合は、ページの本文（ブロック）から取得
+            if not content or not content.strip():
+                try:
+                    page_blocks = fetch_page_blocks(page["id"], token)
+                    content = blocks_to_html(page_blocks, token)
+                    if content:
+                        print(f"[INFO] ページ本文から記事内容を取得しました: {title[:50]}...", file=sys.stderr)
+                except Exception as e:
+                    print(f"[WARNING] ページ本文の取得に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
+            
             tags = extract_multi_select(properties.get("Tags", {}))
 
             article = {
@@ -374,15 +524,21 @@ def push_to_notion(database_id: str, token: str, archive_existing: bool):
 # 統一インターフェース関数（管理者ページ用）
 def export_notion_to_json(token: str, output_path: Path) -> Dict[str, int]:
     """管理者ページ用の統一インターフェース関数"""
-    database_id, _ = ensure_database(token)
-    pull_from_notion(database_id, token, output_path)
-    # ファイルから件数を取得
-    if output_path.exists():
-        with output_path.open("r", encoding="utf-8") as fp:
-            data = json.load(fp)
-            count = len(data) if isinstance(data, list) else 0
-            return {"notion_count": count, "file": str(output_path)}
-    return {"notion_count": 0, "file": str(output_path)}
+    try:
+        database_id, _ = ensure_database(token)
+        pull_from_notion(database_id, token, output_path)
+        # ファイルから件数を取得
+        if output_path.exists():
+            with output_path.open("r", encoding="utf-8") as fp:
+                data = json.load(fp)
+                count = len(data) if isinstance(data, list) else 0
+                return {"notion_count": count, "file": str(output_path)}
+        return {"notion_count": 0, "file": str(output_path)}
+    except Exception as e:
+        print(f"[ERROR] Affiling記事のエクスポートに失敗しました: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        raise
 
 
 def sync_to_notion(token: str, reset: bool = False) -> None:

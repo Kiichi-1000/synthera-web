@@ -4,14 +4,14 @@
     "stage": "Development",
     "status": "Active",
     "platform": "Mobile",
-    "description": "日々の予定管理をシンプルにするカレンダーアプリを開発中です。部分的な予定共有を可能にすることでより現代的に便利なカレンダーアプリに仕上げます。",
+    "description": "日々の予定管理をシンプルにするカレンダーアプリを開発中です。",
     "highlights": "・シンプルなUXで予定が見やすい\n・通知機能で抜け漏れを防止\n・共有機能でチームコラボをサポート",
     "cta_label": "",
     "cta_link": "",
     "project_image": [
       {
         "name": "calender.jpg",
-        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/61312973-2016-49f3-83c0-c073aab97b92/calender.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015228Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=bbf5bcf26e0999ca5c4ef9b5c79806feb2826e2110ff8d12e9e2b4dce8295f13&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/61312973-2016-49f3-83c0-c073aab97b92/calender.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665DRQDEFC%2F20251204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251204T233845Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDp56SCv8%2BWKD%2F41ZA52TOKnuK1fCnREZPwl4y606CDIgIgYIDu6CT3tFkkmPe8f70Za7qrPWx%2FhsKp%2B%2B5FBYXMRC4q%2FwMITxAAGgw2Mzc0MjMxODM4MDUiDBMz7E0FFWZwWKMOLyrcAyTKqEzIDdda67%2Fb79LHWbLI7qVnWBwtCEeLe7hxa1LoGLscd8KO4lHcNRVAQADxBshF%2BcNkTowHyNJa6ZzYeL3izfJm690BzjJp10219z25iVHteviHFPbGmUjCyY2UMpdKTsJ1FYU2K3jhqLsww0g8%2BMWcyD61eOQn268c3%2BYFqsNroW3sViNLdbct1y64oALIuX%2BAv5ZlXCWn5OEERZfFqc6b0KWsEgTPARQI93sICfIN6%2FH2HK3vULZ046mlcdOZPUSYPGxCVGWvOmgQnKUt1aDkC4hL4WlegBkJwB4OCsBe3BozcM0MT8RF%2BRKTRo3FZ4HCGggXrj3BZWg0O1vwdEFulak8SmqLYzOCyUOdYUo58hNKJxrXPs8W%2BNNh1Welut0eVtZM7YQMl1C%2Fcxr9FVqpV62tiA0mZ%2BwxB41MSIVOutm4oFxOFoDcgw9UnGHPV6rTW%2FJKcZ0QvodG3FJkrpJpmMSLi8DK7X8KupEcE73OMZ2nsqS9IIEJKC0uUF1%2F1SuaAhOyEFYTsXUqUTbBXowoBJVOyWi3yaxvC5KaPZ23OBIk6HgtF07wRdzT%2BiFKhiXLB1m3N8RAt7hVGhNznwTN4oGJShtkhos4EecK2juuXHyGrsmQWYCFMLWNyMkGOqUB0FfKohBHoJ2Fv%2FWKeR1ydXuH87K4hIg99uQ8UDqP%2F46k4qL73hXLrXXkwaa899Mw3XGiNEa1PDt62KF50vHnlHMDUQBM66NXMxOdnrUF5xH5%2FBAARq1njVthVgHWUXa1MOpok7XCNEus7YGh%2B%2BG9NJpQbeJpO2G2h%2BIcJC76MlEbjZD%2F3rl6gHv8HdQUnT2fZWe2zsrQ77eVCcxwu6ZLN7zrGSbf&X-Amz-Signature=33ae879e01dafd157b9e804d9d47f589b2e81f11d3a7a211316207f92a003336&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
       }
     ]
   },
@@ -27,7 +27,7 @@
     "project_image": [
       {
         "name": "todo.jpg",
-        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/416a3fdd-050d-453b-b16e-5f4bb2c02385/todo.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QZ2AUDAJ%2F20251125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251125T015228Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGFaIEONEKc6zOa7EPZajmtpYLgSDtujcd6bt9P03NUxAiEA1%2FSjIwoVglZoBH5aGZbd77C0QmRfkk1Cmr5oOA%2FFMkYq%2FwMIYRAAGgw2Mzc0MjMxODM4MDUiDOq%2B%2F3ZiyM2ww25V4SrcA8Kq9oiZ9nznClhurqRRRvTZZ5OVgxuoPgK%2FgXL4lrcRdol2jfoDLs8q2S8TZrnhK90DFSJNIZoHRy8ii0%2FpsnXaReJFXW4s6dQL2TfzDt6J%2BwV7QnPRV5lGk5bxWlmDfrMLtAcJQHFrZ33KNb%2BGgBqK90fW%2Fnyiqcpwg7jdwGYkRtq2ho5%2BIb8G0T%2BxPDi1lYeRrRdijCKV%2BP0k6EumXbvcVr5qGlV31UgKGcuQkq%2FgS86B4R1cTI5aFVsTP2bPYUjyBG8IS8fRlz9Lom9YaWWdMLiQL1z2fp4WpLIFMROP8BIqm7nNS7vP1Kau38PCrO3dYaJhWK6zBQ6jLgxLxrejulw6V9ZJJz2q3pMKAAc0lgDcueOZOU0bUcYhFQSLFCHfJHDarCZLw5l90RPGIXcuwR7LqIXJTyMoW6pXubHwdrJNfJSrYu7ZW4BO%2FAxzEdsJ3xp2hma2Pc1hDBs0EXS%2FWng3rvfSxL1WNN8Cb9rLBgDMpp02Iy83xi6n1b4OgOGPAfkP09UKAOtPeIjgOLS7UOeI%2FcHAXhGCOpYOKPipqDJGoQ2uk7KNJssTIk02evmb1KSDIxOMu0IG9cEgclKPq429F7vOAvs6skrS33adzP6Hynsuy8tjCdNOMLnik8kGOqUBylJ3flSPWhSI2LwyaB5HtRchd4d0qUK8uDmDFdZwcylnrkt8203OamtMDSfQDaobvtnuYLAVPzBNjxa9Rr7JxtXqsG%2BSNbXQ2Smct%2B018C6dC3xW%2BXmNfijX5ilDNgHeMNLHTs9q72HVnmKuPBe6W%2F9lYvpGwysBaV7JQCAusHAg7PnrSXTre%2FFR1YOWPXxvpyw0Pv1IZB7CpCuDjLv0lBlfUrgU&X-Amz-Signature=e6b8628ff7ee8e977f4261d2d8763df42511af54db010764185e0b7a47abf3c1&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/416a3fdd-050d-453b-b16e-5f4bb2c02385/todo.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665DRQDEFC%2F20251204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251204T233845Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDp56SCv8%2BWKD%2F41ZA52TOKnuK1fCnREZPwl4y606CDIgIgYIDu6CT3tFkkmPe8f70Za7qrPWx%2FhsKp%2B%2B5FBYXMRC4q%2FwMITxAAGgw2Mzc0MjMxODM4MDUiDBMz7E0FFWZwWKMOLyrcAyTKqEzIDdda67%2Fb79LHWbLI7qVnWBwtCEeLe7hxa1LoGLscd8KO4lHcNRVAQADxBshF%2BcNkTowHyNJa6ZzYeL3izfJm690BzjJp10219z25iVHteviHFPbGmUjCyY2UMpdKTsJ1FYU2K3jhqLsww0g8%2BMWcyD61eOQn268c3%2BYFqsNroW3sViNLdbct1y64oALIuX%2BAv5ZlXCWn5OEERZfFqc6b0KWsEgTPARQI93sICfIN6%2FH2HK3vULZ046mlcdOZPUSYPGxCVGWvOmgQnKUt1aDkC4hL4WlegBkJwB4OCsBe3BozcM0MT8RF%2BRKTRo3FZ4HCGggXrj3BZWg0O1vwdEFulak8SmqLYzOCyUOdYUo58hNKJxrXPs8W%2BNNh1Welut0eVtZM7YQMl1C%2Fcxr9FVqpV62tiA0mZ%2BwxB41MSIVOutm4oFxOFoDcgw9UnGHPV6rTW%2FJKcZ0QvodG3FJkrpJpmMSLi8DK7X8KupEcE73OMZ2nsqS9IIEJKC0uUF1%2F1SuaAhOyEFYTsXUqUTbBXowoBJVOyWi3yaxvC5KaPZ23OBIk6HgtF07wRdzT%2BiFKhiXLB1m3N8RAt7hVGhNznwTN4oGJShtkhos4EecK2juuXHyGrsmQWYCFMLWNyMkGOqUB0FfKohBHoJ2Fv%2FWKeR1ydXuH87K4hIg99uQ8UDqP%2F46k4qL73hXLrXXkwaa899Mw3XGiNEa1PDt62KF50vHnlHMDUQBM66NXMxOdnrUF5xH5%2FBAARq1njVthVgHWUXa1MOpok7XCNEus7YGh%2B%2BG9NJpQbeJpO2G2h%2BIcJC76MlEbjZD%2F3rl6gHv8HdQUnT2fZWe2zsrQ77eVCcxwu6ZLN7zrGSbf&X-Amz-Signature=4401a5ebe2bbde44ec3b2269b3dd5878255d68d9bc68fcf35dd0417a59209987&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
       }
     ]
   },
@@ -38,6 +38,17 @@
     "platform": "Multi-platform",
     "description": "複数のアプリアイデアを検討中。市場調査とプロトタイピングを進行予定です。",
     "highlights": "・機能要件の整理中\n・ターゲットユーザーの調査を実施予定\n・デザインコンセプトを検討中",
+    "cta_label": "",
+    "cta_link": "",
+    "project_image": []
+  },
+  {
+    "project_name": "アプリ開発案 B",
+    "stage": "Planning",
+    "status": "Draft",
+    "platform": "Multi-platform",
+    "description": "新たな体験価値を提供するプロダクト案を検討中。技術検証を行いロードマップを策定予定です。",
+    "highlights": "・課題ヒアリングを実施予定\n・技術スタックの検討中\n・PoC の準備を進行",
     "cta_label": "",
     "cta_link": "",
     "project_image": []

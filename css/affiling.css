@@ -901,40 +901,6 @@ body {
   width: 100%;
 }
 
-/* Inline Ad Banner (記事本文内に表示) - 控えめなスタイル */
-.article-body .inline-ad-banner {
-  margin: var(--affiling-spacing-lg) auto;
-  padding: var(--affiling-spacing-sm) 0;
-  text-align: center;
-  background: transparent;
-  border: none;
-  max-width: 120px;
-  opacity: 0.85;
-  transition: opacity 0.2s;
-}
-
-.article-body .inline-ad-banner:hover {
-  opacity: 1;
-}
-
-.article-body .inline-ad-banner img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 4px;
-}
-
-.article-body .inline-ad-banner a {
-  display: inline-block;
-  transition: opacity 0.2s;
-  text-decoration: none;
-}
-
-.article-body .inline-ad-banner a:hover {
-  opacity: 1;
-}
-
 .disclosure-box {
   padding: var(--affiling-spacing-lg);
   background: #fef3c7;

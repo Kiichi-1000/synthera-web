@@ -94,12 +94,3 @@ async function renderEcGrid() {
 }
 
 document.addEventListener('DOMContentLoaded', renderEcGrid);
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    renderEcGrid();
-  }
-});
-

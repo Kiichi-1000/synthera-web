@@ -83,12 +83,3 @@ async function renderWritingGrid() {
 }
 
 document.addEventListener('DOMContentLoaded', renderWritingGrid);
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    renderWritingGrid();
-  }
-});
-

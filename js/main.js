@@ -358,3 +358,11 @@ window.SyntheraUtils = {
   truncateText,
   generateId
 };
+
+  throttle,
+  smoothScrollTo,
+  isInViewport,
+  formatDate,
+  truncateText,
+  generateId
+};

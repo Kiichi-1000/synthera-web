@@ -7,6 +7,10 @@ import urllib.request
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
+# Cloudflare Images統合
+sys.path.insert(0, str(Path(__file__).parent))
+from utils.cloudflare_images import upload_image_from_url
+
 
 NOTION_API_BASE = "https://api.notion.com/v1"
 NOTION_VERSION = "2022-06-28"
@@ -294,17 +298,23 @@ def notion_page_to_dict(page: Dict) -> Dict[str, object]:
         normalized: List[Dict[str, str]] = []
         for file_obj in files:
             if file_obj.get("type") == "external":
+                original_url = file_obj.get("external", {}).get("url", "")
+                # Cloudflare Imagesにアップロード（一時URLの場合は永続URLに変換）
+                permanent_url = upload_image_from_url(original_url, image_id=f"note-{file_obj.get('name', '')}")
                 normalized.append(
                     {
                         "name": file_obj.get("name", ""),
-                        "url": file_obj.get("external", {}).get("url", ""),
+                        "url": permanent_url if permanent_url else original_url,
                     }
                 )
             elif file_obj.get("type") == "file":
+                original_url = file_obj.get("file", {}).get("url", "")
+                # Cloudflare Imagesにアップロード（一時URLの場合は永続URLに変換）
+                permanent_url = upload_image_from_url(original_url, image_id=f"note-{file_obj.get('name', '')}")
                 normalized.append(
                     {
                         "name": file_obj.get("name", ""),
-                        "url": file_obj.get("file", {}).get("url", ""),
+                        "url": permanent_url if permanent_url else original_url,
                     }
                 )
         return normalized

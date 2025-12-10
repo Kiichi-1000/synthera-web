@@ -320,3 +320,121 @@ window.SyntheraAnimations = {
   addAnimationClass,
   animateElement
 };
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};
+
+// Handle browser back/forward button (restore from cache)
+window.addEventListener('pageshow', function(event) {
+  // If page was restored from cache, reinitialize
+  if (event.persisted) {
+    initScrollAnimations();
+    initPageTransitions();
+  }
+});
+
+// Export animation functions
+window.SyntheraAnimations = {
+  showLoadingAnimation,
+  hideLoadingAnimation,
+  addAnimationClass,
+  animateElement
+};

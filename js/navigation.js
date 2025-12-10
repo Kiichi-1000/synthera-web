@@ -277,3 +277,11 @@ function throttle(func, limit) {
     }
   };
 }
+
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}

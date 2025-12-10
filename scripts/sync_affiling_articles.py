@@ -115,8 +115,6 @@ def ensure_database(token: str) -> Tuple[str, bool]:
             "Image": {"files": {}},
             "Read Time": {"number": {}},
             "Product Count": {"number": {}},
-            "Content": {"rich_text": {}},
-            "Comment": {"rich_text": {}},  # 記事内容を保存するためのコメントプロパティ（HTML対応）
             "Status": {
                 "select": {
                     "options": [
@@ -163,59 +161,142 @@ def fetch_existing_pages(database_id: str, token: str) -> Dict[str, Dict]:
     return existing_pages
 
 
-def update_content_property(page_id: str, plain_text: str, token: str) -> None:
-    """ページのContentプロパティを更新（プレーンテキストのみ）"""
-    # Notion APIでページのプロパティを更新
-    payload = {
-        "properties": {
-            "Content": {
-                "rich_text": [
-                    {
-                        "type": "text",
-                        "text": {
-                            "content": plain_text
-                        }
-                    }
-                ]
-            }
-        }
-    }
-    
-    try:
-        notion_request("PATCH", f"/pages/{page_id}", token, payload)
-    except Exception as e:
-        # 更新に失敗してもエラーを出さない（オプション機能）
-        pass
-
-
-def update_comment_property(page_id: str, plain_text: str, token: str) -> None:
-    """ページのCommentプロパティを更新（プレーンテキストのみ）"""
-    # Notion APIでページのプロパティを更新
-    payload = {
-        "properties": {
-            "Comment": {
-                "rich_text": [
-                    {
-                        "type": "text",
-                        "text": {
-                            "content": plain_text
-                        }
-                    }
-                ]
-            }
-        }
-    }
-    
-    try:
-        notion_request("PATCH", f"/pages/{page_id}", token, payload)
-    except Exception as e:
-        # 更新に失敗してもエラーを出さない（オプション機能）
-        pass
+# ContentとCommentプロパティは使用しません。記事内容はページ本文（ブロック）に保存されます。
 
 
 def extract_rich_text(rich_text_prop: Dict) -> str:
     text_items = rich_text_prop.get("rich_text", [])
     return "".join(item.get("plain_text", "") for item in text_items)
+
+
+def comment_content_to_html(plain_text_content: str) -> str:
+    """
+    プレーンテキストのコメント内容をHTMLに変換します。
+    改行や段落を認識して適切なHTMLタグに変換します。
+    """
+    if not plain_text_content:
+        return ""
+    
+    import re
+    
+    # HTMLタグが既に含まれている場合はそのまま返す
+    if "<" in plain_text_content and ">" in plain_text_content:
+        return plain_text_content.strip()
+    
+    # 連続する空行で段落を分割
+    paragraphs = re.split(r'\n\s*\n+', plain_text_content)
+    
+    html_parts = []
+    for para in paragraphs:
+        para = para.strip()
+        if not para:
+            continue
+        
+        # 見出しパターンを検出（# で始まる行）
+        if para.startswith('# '):
+            html_parts.append(f"<h1>{para[2:].strip()}</h1>")
+        elif para.startswith('## '):
+            html_parts.append(f"<h2>{para[3:].strip()}</h2>")
+        elif para.startswith('### '):
+            html_parts.append(f"<h3>{para[4:].strip()}</h3>")
+        elif para.startswith('#### '):
+            html_parts.append(f"<h4>{para[5:].strip()}</h4>")
+        # リスト項目（- または * で始まる）
+        elif para.startswith('- ') or para.startswith('* '):
+            list_items = []
+            for line in para.split('\n'):
+                line = line.strip()
+                if line.startswith('- ') or line.startswith('* '):
+                    list_items.append(f"<li>{line[2:].strip()}</li>")
+                elif line.startswith('  ') or line.startswith('\t'):  # インデントされた行
+                    if list_items:
+                        list_items[-1] = list_items[-1].replace('</li>', f' {line.strip()}</li>')
+            
+            if list_items:
+                html_parts.append(f"<ul>{''.join(list_items)}</ul>")
+        # 番号付きリスト（数字. で始まる）
+        elif re.match(r'^\d+\.\s', para):
+            list_items = []
+            for line in para.split('\n'):
+                line = line.strip()
+                match = re.match(r'^(\d+)\.\s(.+)', line)
+                if match:
+                    list_items.append(f"<li>{match.group(2)}</li>")
+            
+            if list_items:
+                html_parts.append(f"<ol>{''.join(list_items)}</ol>")
+        # 水平線（--- または ***）
+        elif para.strip() in ('---', '***', '___'):
+            html_parts.append("<hr>")
+        # 通常の段落
+        else:
+            # 改行を<br>に変換
+            para_html = para.replace('\n', '<br>')
+            # URLを自動リンク化
+            url_pattern = r'(https?://[^\s<>"{}|\\^`\[\]]+)'
+            para_html = re.sub(url_pattern, r'<a href="\1" target="_blank" rel="nofollow noopener">\1</a>', para_html)
+            html_parts.append(f"<p>{para_html}</p>")
+    
+    return "\n".join(html_parts)
+
+
+def extract_comment_content(comment_prop: Dict) -> str:
+    """
+    Commentプロパティから記事内容を取得し、HTMLに変換します。
+    Notionのrich_textからスタイル（太字、リンクなど）を保持しながらHTMLに変換し、
+    改行や段落を適切に処理します。
+    """
+    import re
+    
+    text_items = comment_prop.get("rich_text", [])
+    if not text_items:
+        return ""
+    
+    # まず、すべてのplain_textを結合して、HTMLタグが含まれているか確認
+    plain_text_content = "".join(item.get("plain_text", "") for item in text_items)
+    
+    if not plain_text_content.strip():
+        return ""
+    
+    # HTMLタグが既に含まれている場合は、そのまま返す
+    if "<" in plain_text_content and ">" in plain_text_content:
+        # ただし、<strong>や<em>などのインラインタグのみの場合は、段落処理が必要
+        if not re.search(r'<(p|div|h[1-6]|ul|ol|li|hr)', plain_text_content, re.IGNORECASE):
+            # 段落タグがない場合は、改行や段落を処理
+            return comment_content_to_html(plain_text_content).strip()
+        return plain_text_content.strip()
+    
+    # rich_textをHTMLに変換（スタイルとリンクを保持）
+    html_content = rich_text_to_html(text_items)
+    
+    if not html_content:
+        return ""
+    
+    # HTMLタグが含まれていない場合は、プレーンテキストとして処理
+    if "<" not in html_content or ">" not in html_content:
+        return comment_content_to_html(html_content).strip()
+    
+    # rich_textから生成されたHTMLがある場合は、段落構造を追加
+    # 改行を<br>に変換し、連続する改行で段落を区切る
+    # ただし、すでに段落タグがある場合はそのまま返す
+    if re.search(r'<(p|div|h[1-6]|ul|ol|li|hr)', html_content, re.IGNORECASE):
+        return html_content.strip()
+    
+    # 段落タグがない場合は、改行を処理して段落構造を追加
+    # 連続する改行で段落を分割
+    paragraphs = re.split(r'\n\s*\n+', html_content)
+    
+    html_parts = []
+    for para in paragraphs:
+        para = para.strip()
+        if not para:
+            continue
+        
+        # 改行を<br>に変換
+        para = para.replace('\n', '<br>')
+        html_parts.append(f"<p>{para}</p>")
+    
+    return "\n".join(html_parts) if html_parts else html_content
 
 
 def optimize_article_content(html_content: str) -> str:
@@ -224,6 +305,26 @@ def optimize_article_content(html_content: str) -> str:
     
     if not html_content:
         return html_content
+    
+    # 0. UlikeAirのランキング部分にバナーコードを追加
+    # 「5位 Ulike Air10」の下にバナーを挿入
+    # 既にバナーが存在しない場合のみ追加
+    if 'data-aid="251127250835"' not in html_content:
+        ulike_banner = '<amp-ad width="100" height="60" type="a8" data-aid="251127250835" data-wid="002" data-eno="01" data-mid="s00000026764001003000" data-mat="45IJ0Y-DT4ZOA-5QIG-5YZ75" data-type="static"></amp-ad>\n'
+        
+        # パターン: 「5位 Ulike Air10」を含む段落の直後に「（最新価格...）」がある場合
+        # <strong>タグなどが含まれる場合も対応
+        ulike_air_pattern = r'(<p>5位 Ulike Air10.*?</p>\s*)(<p>（最新価格は各販売ページでご確認ください）</p>)'
+        
+        if re.search(ulike_air_pattern, html_content, re.DOTALL):
+            html_content = re.sub(
+                ulike_air_pattern,
+                r'\1' + ulike_banner + r'\2',
+                html_content,
+                count=1,
+                flags=re.DOTALL
+            )
+            print(f"[INFO] UlikeAirランキング部分にバナーコードを追加しました", file=sys.stderr)
     
     # 1. トラッキング画像（1x1透明画像）を削除
     # width="1" height="1" のimgタグを削除
@@ -482,12 +583,95 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
             html_parts.append("<hr>")
         
         elif block_type == "table_of_contents":
-            # 目次はスキップ
+            # 目次はスキップ（フロントエンドで自動生成）
             pass
         
-        # 子ブロックを再帰的に処理
+        elif block_type == "quote":
+            rich_text = block_data.get("rich_text", [])
+            text = rich_text_to_html(rich_text)
+            if text.strip():
+                html_parts.append(f"<blockquote><p>{text}</p></blockquote>")
+        
+        elif block_type == "to_do":
+            rich_text = block_data.get("rich_text", [])
+            text = rich_text_to_html(rich_text)
+            checked = block_data.get("checked", False)
+            checked_attr = 'checked' if checked else ''
+            if text.strip():
+                html_parts.append(f"<p><input type='checkbox' {checked_attr} disabled> {text}</p>")
+        
+        elif block_type == "toggle":
+            rich_text = block_data.get("rich_text", [])
+            text = rich_text_to_html(rich_text)
+            if text.strip():
+                # トグルの子ブロックを取得
+                has_children = block.get("has_children", False)
+                child_html = ""
+                if has_children:
+                    child_block_id = block.get("id", "")
+                    child_blocks = fetch_page_blocks(child_block_id, token)
+                    child_html = blocks_to_html(child_blocks, token)
+                
+                html_parts.append(f"<details><summary>{text}</summary>{child_html}</details>")
+                continue  # 子ブロックは既に処理済み
+        
+        elif block_type == "table":
+            # テーブルブロックの処理
+            has_children = block.get("has_children", False)
+            if has_children:
+                child_block_id = block.get("id", "")
+                child_blocks = fetch_page_blocks(child_block_id, token)
+                # テーブル行を処理
+                table_rows = []
+                for row_block in child_blocks:
+                    if row_block.get("type") == "table_row":
+                        row_data = row_block.get("table_row", {})
+                        cells = row_data.get("cells", [])
+                        cell_htmls = []
+                        for cell in cells:
+                            cell_text = rich_text_to_html(cell)
+                            cell_htmls.append(f"<td>{cell_text}</td>")
+                        if cell_htmls:
+                            table_rows.append(f"<tr>{''.join(cell_htmls)}</tr>")
+                if table_rows:
+                    html_parts.append(f"<table><tbody>{''.join(table_rows)}</tbody></table>")
+                continue  # 子ブロックは既に処理済み
+        
+        elif block_type == "column_list":
+            # カラムリストの処理（ネストされたカラムを含む）
+            has_children = block.get("has_children", False)
+            if has_children:
+                child_block_id = block.get("id", "")
+                child_blocks = fetch_page_blocks(child_block_id, token)
+                columns_html = []
+                for col_block in child_blocks:
+                    if col_block.get("type") == "column":
+                        col_has_children = col_block.get("has_children", False)
+                        col_content = ""
+                        if col_has_children:
+                            col_child_id = col_block.get("id", "")
+                            col_child_blocks = fetch_page_blocks(col_child_id, token)
+                            col_content = blocks_to_html(col_child_blocks, token)
+                        columns_html.append(f"<div class='column'>{col_content}</div>")
+                if columns_html:
+                    html_parts.append(f"<div class='columns'>{''.join(columns_html)}</div>")
+                continue  # 子ブロックは既に処理済み
+        
+        elif block_type == "bookmark":
+            url = block_data.get("url", "")
+            caption = block_data.get("caption", [])
+            caption_text = rich_text_to_html(caption)
+            if url:
+                html_parts.append(f'<p><a href="{url}" target="_blank" rel="nofollow noopener">{caption_text or url}</a></p>')
+        
+        elif block_type == "link_preview" or block_type == "embed":
+            url = block_data.get("url", "")
+            if url:
+                html_parts.append(f'<p><a href="{url}" target="_blank" rel="nofollow noopener">{url}</a></p>')
+        
+        # 子ブロックを再帰的に処理（toggle、table、column_list以外）
         has_children = block.get("has_children", False)
-        if has_children:
+        if has_children and block_type not in ["toggle", "table", "column_list"]:
             child_block_id = block.get("id", "")
             child_blocks = fetch_page_blocks(child_block_id, token)
             child_html = blocks_to_html(child_blocks, token)
@@ -574,13 +758,7 @@ def build_property_payload(title: str, data: Dict) -> Dict:
     if product_count is not None:
         payload["Product Count"] = {"number": product_count}
 
-    # Content
-    content = data.get("content", "")
-    if content:
-        # Remove HTML tags for plain text (Notion rich_text doesn't support HTML)
-        import re
-        plain_content = re.sub(r"<[^>]+>", "", content)
-        payload["Content"] = {"rich_text": [{"text": {"content": plain_content}}]}
+    # 記事内容はページ本文（ブロック）に保存されるため、Contentプロパティへの書き込みは不要
 
     # Status
     status = data.get("status", "Published")
@@ -641,45 +819,16 @@ def pull_from_notion(database_id: str, token: str, output_path: Path):
             read_time = extract_number(properties.get("Read Time", {}))
             product_count = extract_number(properties.get("Product Count", {}))
             
-            # 記事内容の取得優先順位：
-            # 1. Commentプロパティ（HTMLコンテンツ対応）
-            # 2. Contentプロパティ
-            # 3. ページの本文（ブロック）
+            # 記事内容はページの本文（ブロック）から取得
             content = None
             
-            # まずCommentプロパティを確認
-            comment_content = extract_rich_text(properties.get("Comment", {}))
-            if comment_content and comment_content.strip():
-                content = comment_content
-                print(f"[INFO] Commentプロパティから記事内容を取得しました: {title[:50]}...", file=sys.stderr)
-            
-            # Commentプロパティが空の場合は、Contentプロパティを確認
-            if not content or not content.strip():
-                content = extract_rich_text(properties.get("Content", {}))
-            
-            # Contentプロパティも空の場合は、ページの本文（ブロック）から取得
-            if not content or not content.strip():
-                try:
-                    page_blocks = fetch_page_blocks(page["id"], token)
-                    content = blocks_to_html(page_blocks, token)
-                    if content:
-                        print(f"[INFO] ページ本文から記事内容を取得しました: {title[:50]}...", file=sys.stderr)
-                        # 取得した記事内容をCommentプロパティに保存（HTML版）
-                        try:
-                            # HTMLをそのまま保存するために、Commentプロパティに書き込む
-                            # ただし、Notionのrich_textはHTMLを直接保存できないため、
-                            # プレーンテキスト版を保存
-                            import re
-                            plain_text_content = re.sub(r"<[^>]+>", "", content)
-                            plain_text_content = plain_text_content.strip()[:2000]
-                            if plain_text_content:
-                                # Commentプロパティにプレーンテキスト版を保存
-                                update_comment_property(page["id"], plain_text_content, token)
-                                print(f"[INFO] Commentプロパティにプレーンテキスト版を保存しました: {title[:50]}...", file=sys.stderr)
-                        except Exception as e:
-                            print(f"[WARNING] Commentプロパティへの保存に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
-                except Exception as e:
-                    print(f"[WARNING] ページ本文の取得に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
+            try:
+                page_blocks = fetch_page_blocks(page["id"], token)
+                content = blocks_to_html(page_blocks, token)
+                if content:
+                    print(f"[INFO] ページ本文から記事内容を取得しました: {title[:50]}... (長さ: {len(content)}文字)", file=sys.stderr)
+            except Exception as e:
+                print(f"[WARNING] ページ本文の取得に失敗しました（記事: {title[:50]}...）: {e}", file=sys.stderr)
             
             # HTMLコンテンツから不要なトラッキング画像を削除し、最適化
             if content:

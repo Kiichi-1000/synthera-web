@@ -144,8 +144,14 @@ def ensure_dataset_status(token: str, config: DatasetConfig) -> Dict:
 
 def perform_pull(token: str, configs: Iterable[DatasetConfig]) -> None:
     for config in configs:
-        module = config.module
-        module.export_notion_to_json(token, module.DEFAULT_EXPORT_PATH)
+        try:
+            module = config.module
+            result = module.export_notion_to_json(token, module.DEFAULT_EXPORT_PATH)
+            print(f"[PULL] {config.label}: {result.get('notion_count', 0)}件をエクスポートしました -> {result.get('file', '')}")
+        except Exception as e:
+            print(f"[ERROR] {config.label} の同期に失敗しました: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
 
 
 def perform_push(token: str, configs: Iterable[DatasetConfig], reset: bool) -> None:
@@ -404,6 +410,12 @@ def run_server():
     with HTTPServer((HOST, PORT), AdminHandler) as httpd:
         print(f"[ADMIN] ブラウザで http://{HOST}:{PORT}/ を開いてください。Ctrl+C で終了します。")
         httpd.serve_forever()
+
+
+if __name__ == "__main__":
+    run_server()
+
+
 
 
 if __name__ == "__main__":

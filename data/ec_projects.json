@@ -8,16 +8,21 @@
     "project_image": [
       {
         "name": "Etsy_logo.svg.png",
-        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/8f668f75-4f1c-474d-aa22-b8b39e040cc9/Etsy_logo.svg.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4666PN27LJF%2F20251204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251204T233849Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDm6qXk4YxCMQ9NgFKZHlCKigdpM6dpdw7nWKYC9Gj%2FrQIhAPGM8WCdjrH116wvVLdVNm7ME7%2BeSMGkksfftGrc5s%2B%2FKv8DCE8QABoMNjM3NDIzMTgzODA1Igx%2BlVoUbKvqgy2gm7oq3AMQxWroqWj3RmTh5WpoRTHeO%2F9OQzr3B6Wrf%2BTspL4K6C8VVo5xMKfxy8IPN92Q44DHDwd0EO%2FF%2Fjkrbd17190IPxkmdG9swNiVJYBXdUCNqU2HHr71DeLy0CGQRzLUzL%2BKRHs1VcaRpfm9%2B9qqluDletgR0v6yj%2FlsDE7x%2BhvQmY1EnsZpg740HcYsB30c6Cv6mynNvdE9Up7GrpbaEKM5PFBIfY0S2cFqQbfN3Wm1lIynm1SsAdN2Wdt6ZGNgG6pyRLosXAs4wEg1aaqpgzZQSgbpObAuMVcHx2BuHOi1z3cS3DwiWV6lXPYfyWnEpDYQ3emJa4TyjUL9JIEW5V8%2BLwQx2I7ZB5vQa6gSKr3jYv0yZfzCF%2FvY4MCc4kXVKQdRiRh%2FE9QFWfHDpYddDOS0QCxgoDwceCBFXGQlNmDxdkvMylO5aA8CFjosZoJeHJdoUTvJ7s%2FQ8FVnG9VJQfGHh0PRgbt982stsjcjDpzzqILNGIhI6a3sKPlbN46bADlLTvBNdCzU6Ruz%2F1rVO5PRiw92aricUBE7%2Fh7vjnBeXYvIpAo%2FDuf4RzpJPhN1S0IzZ6DfTMob4I1tIAUJ5DJe4LZjDWZUo7tIQij%2F%2BmWJN2vF0Tm2%2BP7QY8DWeDC8jcjJBjqkAbcs%2BSbxTkwng%2BdhC16JK3btn5Ty6wfoPKQGEfLEGApSOKD191IllvH74hOdvy%2B9ZXn7VVUUDwRoSMFA2F68pohpku8%2BUQW%2FSYp5%2FWrqK4zHgD5EnNaUDJeVoYUsItAhrnVH9PVpeeTGGM4pLYB5QzXWdjUo9mO42m3ttNBfXgy5PSO%2BJZwwlpkibRIquvSu4GFpwDWrIjIJ43d0DP8GFM8t5sv8&X-Amz-Signature=8e35b30072295ee15a9f7e06bc6f2cf89bc51ff19e814fdc6d85932ae522ec69&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/55139768-0451-8119-993e-00039d7c0209/8f668f75-4f1c-474d-aa22-b8b39e040cc9/Etsy_logo.svg.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665OGVTF5M%2F20251213%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251213T065533Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE0aCXVzLXdlc3QtMiJHMEUCIQCUKVxGvsOzAsop0BkldvAMU1Vo1IwuD7CZLVLY0cUFUwIgWwP67uBz1ANjPbOOaro5JDv%2BoS%2BQntAVPIRvGc1p1IEq%2FwMIFhAAGgw2Mzc0MjMxODM4MDUiDFX%2BWOg6u85A396zqircA1MCp%2FEyO7fh58Y2oEBf60nGtg%2FYda1%2BKj%2FDddSNNxP%2Bti7LSu%2F8c1jVoYw2rqdtCReHZtz7Omy7R1i0znndNchEMqXJTFrLDgUfEbJ0ho5v4MW8ak49sgX5%2FOhfGhZ6Z%2FJm1ex%2BVXkwLMjK%2F5nFjd4xzCk8kUXFSXGpXE2RfMjZVTXGavnof6qTSo%2B0TrJkdLFkLeIkl3E1JBwCAklx3mBCd3feQP%2F3QoH2vBIl1WY%2F2HrBpEVMZ4M8R7hCuclsbVOrogg73HTZLDIrk2k%2FO4Fv3T5ktbKfVpw0CCG4Z1oOxsptUaX5h5MlRo%2F4hQSNJmvWfFjXdgAJXqIUo2k3xUCPsjrEq05sAIcLZPJhXdBdgXSzF77HTz%2Fndh%2BiMGz6EBZ%2Fxt95uqjdluH9HPl4BstQe8xeJ757N6hH4B8eo2ETN4h8QuZH5XRHHhJpIeQLWXQM72f%2BFbU%2B7Hl8yUurtu0H8Cr2nkVIULfQ%2Fx%2FkRCnZ%2F59sp5Jzr9u8TFOv7g2Ha6Gw91dEBZV3kG7%2Bho9ebnVy3aBZ5dgJFVMw8r1OICi5FY0qVoHmZ9mIGfaTLxeywmN%2FOItlTHKirahE8I2cLrwG3HnBqEHQC9%2BEsJ0ZxGKh4YXgQxN58rByPyIJMKTr88kGOqUBmLlDjgwx86JvjPLRI%2FJwDs4%2B4ApRiDh2E6o7ersMG1iY73aeO72aqdex%2BsDddQ6uyWmktzpJcTMx2iYZDwpvpsMj1W07cTlUNaPkJmoqGKUSD4DtAHPTw7Joxsp9wviEwD53LojsRhMXxUAax6xv1Hiv98AZjH3MTdiFEAaGXGlIOv6qr8%2BwljfQI9GK5yjpJ2UwduJIe%2F0K%2B4%2FJXW72LyeN7ooK&X-Amz-Signature=6ecd3adf7ef9840540f7d810c0b2029e3a432eec3e0b5aded797979f29bd7d62&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
       }
     ]
   },
   {
     "project_name": "アパレルブランド",
     "description": "オリジナルブランドの構築に取り組んでいます。プロトタイプ開発と市場検証を進行中です。",
-    "cta_label": "",
-    "cta_link": "",
+    "cta_label": "ショップを見る",
+    "cta_link": "https://shop.synthera.jp",
     "status": "Published",
-    "project_image": []
+    "project_image": [
+      {
+        "name": "synthera.brand.png",
+        "url": "image/synthera.brand.png"
+      }
+    ]
   }
 ]

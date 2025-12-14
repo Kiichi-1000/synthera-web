@@ -7,6 +7,10 @@ import urllib.request
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+# Cloudflare Images統合
+sys.path.insert(0, str(Path(__file__).parent))
+from utils.cloudflare_images import upload_image_from_url
+
 
 NOTION_API_BASE = "https://api.notion.com/v1"
 NOTION_VERSION = "2022-06-28"
@@ -282,10 +286,25 @@ def notion_page_to_dict(page: Dict) -> Dict[str, Optional[str]]:
         files = props.get(prop_name, {}).get("files", [])
         normalized = []
         for file_obj in files:
+            original_url = None
+            file_name = file_obj.get("name", "")
+            
             if file_obj.get("type") == "external":
-                normalized.append({"name": file_obj.get("name", ""), "url": file_obj.get("external", {}).get("url", "")})
+                original_url = file_obj.get("external", {}).get("url", "")
             elif file_obj.get("type") == "file":
-                normalized.append({"name": file_obj.get("name", ""), "url": file_obj.get("file", {}).get("url", "")})
+                original_url = file_obj.get("file", {}).get("url", "")
+            
+            if original_url:
+                # Cloudflare Imagesにアップロード（一時URLの場合は永続URLに変換）
+                try:
+                    page_id = page.get("id", "").replace("-", "")[:16]
+                    permanent_url = upload_image_from_url(original_url, image_id=f"grid-{page_id}-{file_name}")
+                    normalized.append({"name": file_name, "url": permanent_url if permanent_url else original_url})
+                except Exception as e:
+                    # アップロードに失敗した場合は元のURLを使用
+                    print(f"[WARNING] グリッド画像のアップロードに失敗しました（{file_name}）: {e}", file=sys.stderr)
+                    normalized.append({"name": file_name, "url": original_url})
+        
         return normalized
 
     return {

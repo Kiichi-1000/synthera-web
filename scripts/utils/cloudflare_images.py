@@ -38,8 +38,12 @@ def is_permanent_url(url: str) -> bool:
     if url.startswith("http://") or url.startswith("https://"):
         # NotionのS3 URLパターンをチェック
         if "prod-files-secure.s3" in url or "notion-static.com" in url:
-            # 署名付きURLの可能性がある
-            if "X-Amz-" in url:
+            # クエリパラメータがある場合（?が含まれる）は一時URLの可能性が高い
+            if "?" in url:
+                # X-Amz-パラメータがある場合は確実に一時URL
+                if "X-Amz-" in url:
+                    return False
+                # クエリパラメータがある場合も一時URLとみなす（安全のため）
                 return False
     return True
 

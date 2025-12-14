@@ -299,8 +299,13 @@ def extract_comment_content(comment_prop: Dict) -> str:
     return "\n".join(html_parts) if html_parts else html_content
 
 
-def optimize_article_content(html_content: str) -> str:
-    """記事コンテンツを最適化する（不要な要素の削除、HTMLの整理など）"""
+def optimize_article_content(html_content: str, page_id: Optional[str] = None) -> str:
+    """記事コンテンツを最適化する（不要な要素の削除、HTMLの整理など）
+    
+    Args:
+        html_content: 最適化するHTMLコンテンツ
+        page_id: ページID（画像ID生成用、オプション）
+    """
     import re
     
     if not html_content:
@@ -348,7 +353,40 @@ def optimize_article_content(html_content: str) -> str:
     # 3. 連続する空行を1つにまとめる
     html_content = re.sub(r'\n\s*\n\s*\n+', '\n\n', html_content)
     
-    # 4. コードブロックを一時的に保護
+    # 4. HTMLコンテンツ内のすべての画像URLをCloudflare Imagesにアップロード
+    def replace_image_url(match):
+        img_tag = match.group(0)
+        # src属性からURLを抽出
+        src_match = re.search(r'src=["\']([^"\']+)["\']', img_tag)
+        if not src_match:
+            return img_tag
+        
+        original_url = src_match.group(1)
+        
+        # 既にCloudflare ImagesのURLの場合はそのまま
+        if 'imagedelivery.net' in original_url or 'cloudflare.com' in original_url:
+            return img_tag
+        
+        # Notionの一時URLをCloudflare Imagesにアップロード
+        try:
+            # 画像IDを生成
+            image_id_suffix = "html-img"
+            if page_id:
+                image_id_suffix = f"page-{page_id[:16]}-img"
+            
+            permanent_url = upload_image_from_url(original_url, image_id=f"affiling-{image_id_suffix}")
+            if permanent_url and permanent_url != original_url:
+                # URLを置き換え
+                new_img_tag = img_tag.replace(original_url, permanent_url)
+                return new_img_tag
+        except Exception as e:
+            print(f"[WARNING] HTML内の画像URLアップロードに失敗しました: {e}", file=sys.stderr)
+        
+        return img_tag
+    
+    html_content = re.sub(r'<img[^>]+>', replace_image_url, html_content, flags=re.IGNORECASE)
+    
+    # 5. コードブロックを一時的に保護
     code_blocks = []
     def replace_code(match):
         code_blocks.append(match.group(0))
@@ -361,11 +399,11 @@ def optimize_article_content(html_content: str) -> str:
         flags=re.DOTALL
     )
     
-    # 5. <p>タグ内の不要な空白を削除
+    # 6. <p>タグ内の不要な空白を削除
     html_content = re.sub(r'<p>\s+', '<p>', html_content)
     html_content = re.sub(r'\s+</p>', '</p>', html_content)
     
-    # 6. 画像に遅延読み込み属性を追加（既にない場合）
+    # 7. 画像に遅延読み込み属性を追加（既にない場合）
     def add_loading_attr(match):
         img_tag = match.group(0)
         if 'loading=' not in img_tag.lower():
@@ -528,6 +566,16 @@ def blocks_to_html(blocks: List[Dict], token: str) -> str:
                 caption = block_data.get("caption", [])
                 caption_text = "".join(item.get("plain_text", "") for item in caption)
                 if url:
+                    # Cloudflare Imagesにアップロードして永続URLに変換
+                    try:
+                        block_id = block.get("id", "").replace("-", "")[:16]
+                        permanent_url = upload_image_from_url(url, image_id=f"affiling-block-{block_id}")
+                        if permanent_url:
+                            url = permanent_url
+                    except Exception as e:
+                        # アップロードに失敗した場合は元のURLを使用
+                        block_id_str = block.get("id", "unknown")[:16]
+                        print(f"[WARNING] 画像ブロックのアップロードに失敗しました（ブロックID: {block_id_str}）: {e}", file=sys.stderr)
                     html_parts.append(f'<img src="{url}" alt="{caption_text}">')
         
         elif block_type == "code":
@@ -832,7 +880,7 @@ def pull_from_notion(database_id: str, token: str, output_path: Path):
             
             # HTMLコンテンツから不要なトラッキング画像を削除し、最適化
             if content:
-                content = optimize_article_content(content)
+                content = optimize_article_content(content, page_id=page_id)
             
             tags = extract_multi_select(properties.get("Tags", {}))
 

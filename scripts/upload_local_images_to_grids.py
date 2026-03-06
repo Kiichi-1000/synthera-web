@@ -11,8 +11,8 @@ from utils.cloudflare_images import upload_to_cloudflare_images
 # ファイル名からグリッド名へのマッピング
 FILENAME_TO_GRID = {
     "affiling.jpg": "Affiling",
-    "AI小人.jpeg": "AI小人",
-    "era.cast.jpg": "EraCast",
+    "AI小人.jpeg": "Cityboys[Podcast]",
+    "era.cast.jpg": "BrandSNS",
     "Etsy_logo.svg.png": "This is Japanese Quality",  # 推測
     "Jpan.GIF": "This is Japanese Quality",
 }

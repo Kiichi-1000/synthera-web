@@ -44,8 +44,12 @@ function initNavigation() {
   
   // Function to toggle mobile menu
   function toggleMobileMenu() {
+    const isOpening = !navMenu.classList.contains('active');
     navMenu.classList.toggle('active');
     navToggle.classList.toggle('active');
+    if (navToggle.getAttribute('aria-expanded') !== null) {
+      navToggle.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
+    }
     
     // Prevent body scroll when menu is open
     if (navMenu.classList.contains('active')) {
@@ -64,6 +68,9 @@ function initNavigation() {
   function closeMobileMenu() {
     navMenu.classList.remove('active');
     navToggle.classList.remove('active');
+    if (navToggle.getAttribute('aria-expanded') !== null) {
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
     animateHamburgerBars();
@@ -126,10 +133,10 @@ function initNavigation() {
   
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (navMenu.classList.contains('active') && 
-        !navMenu.contains(e.target) && 
+    if (navMenu && navMenu.classList.contains('active') &&
+        !navMenu.contains(e.target) &&
         !navToggle.contains(e.target) &&
-        !navMenuClose.contains(e.target)) {
+        !(navMenuClose && navMenuClose.contains(e.target))) {
       closeMobileMenu();
     }
   });
@@ -270,14 +277,6 @@ function throttle(func, limit) {
   return function() {
     const args = arguments;
     const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
-}
-
     if (!inThrottle) {
       func.apply(context, args);
       inThrottle = true;

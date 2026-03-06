@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -52,11 +52,11 @@
                 </ul>
             </div>
             
-            <div class="nav-toggle" id="nav-toggle">
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -193,30 +193,33 @@
                     
                     <div class="brand-item">
                         <div class="brand-visual">
-                            <div class="color-palette">
-                                <div class="color-item" style="background: #00d4ff;"></div>
-                                <div class="color-item" style="background: #ffd700;"></div>
-                                <div class="color-item" style="background: #1a1a1a;"></div>
+                            <div class="designer-visual">
+                                <div class="designer-avatar"></div>
+                                <div class="designer-workspace">
+                                    <div class="designer-window large"></div>
+                                    <div class="designer-window small"></div>
+                                    <div class="designer-window small"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="brand-info">
-                            <h3 class="brand-title">カラーパレット</h3>
+                            <h3 class="brand-title">デザイナー</h3>
                             <p class="brand-description">
-                                エレクトリックブルーとゴールドの組み合わせで高級感を演出
+                                ブランド全体の世界観やビジュアルコンセプトを設計し、統一感のある体験をデザインしています。
                             </p>
                         </div>
                     </div>
                     
                     <div class="brand-item">
                         <div class="brand-visual">
-                            <div class="typography-sample">
-                                <span class="font-sample">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+                            <div class="story-visual">
+                                <span class="story-label">Story</span>
                             </div>
                         </div>
                         <div class="brand-info">
-                            <h3 class="brand-title">タイポグラフィ</h3>
+                            <h3 class="brand-title">Story</h3>
                             <p class="brand-description">
-                                Interフォントを使用し、読みやすさと現代性を両立
+                                憧れを世界へ。
                             </p>
                         </div>
                     </div>

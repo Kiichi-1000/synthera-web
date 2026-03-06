@@ -25,18 +25,18 @@ SNS_GRID_DATA: List[Dict[str, str]] = [
         "status": "Published",
     },
     {
-        "grid_name": "EraCast",
-        "project": "EraCast",
+        "grid_name": "BrandSNS",
+        "project": "BrandSNS",
         "platform": "YouTube",
-        "detail_text": "世界のトレンド（Fortnite、MBTI など）を分析し、現実や未来を読み解く動画コンテンツを制作・投稿しています。",
-        "cta_link": "https://synthera.jp/eracast",
+        "detail_text": "世界で戦えるブランドを作るために。わたしたちにしか出せない価値を創出し、その価値を皆様に共有するために。",
+        "cta_link": "",
         "status": "Published",
     },
     {
-        "grid_name": "AI小人",
-        "project": "AI小人",
+        "grid_name": "Cityboys[Podcast]",
+        "project": "Cityboys[Podcast]",
         "platform": "YouTube",
-        "detail_text": "AI 動画生成技術を活用し、小人が人間の生活空間で様々な活動（パルクール、鬼ごっこ、ドッヂボールなど）をする様子を動画化しています。",
+        "detail_text": "幼馴染二人で始めたPodcastチャンネルです。日本一のPodcastチャンネルに致します。",
         "cta_link": "",
         "status": "Published",
     },
@@ -127,8 +127,8 @@ def ensure_database(token: str) -> Tuple[str, bool]:
                 "select": {
                     "options": [
                         {"name": "Affiling", "color": "pink"},
-                        {"name": "EraCast", "color": "blue"},
-                        {"name": "AI小人", "color": "orange"},
+                        {"name": "BrandSNS", "color": "blue"},
+                        {"name": "Cityboys[Podcast]", "color": "orange"},
                         {"name": "NovaTV", "color": "green"},
                         {"name": "Other", "color": "gray"},
                     ]

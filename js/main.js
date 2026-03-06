@@ -64,8 +64,8 @@ function initCustomCursor() {
   
   hoverElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(1.5)';
-      cursorTrail.style.transform = 'scale(1.2)';
+      cursor.style.transform = 'scale(1.3)';
+      cursorTrail.style.transform = 'scale(1.1)';
     });
     
     element.addEventListener('mouseleave', () => {

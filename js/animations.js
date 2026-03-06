@@ -78,10 +78,10 @@ function initCardAnimations() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = (y - centerY) / 10;
-      const rotateY = (centerX - x) / 10;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
       
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(4px)`;
     });
     
     card.addEventListener('mouseleave', () => {
@@ -176,7 +176,7 @@ function initHoverEffects() {
   
   glowElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
-      element.style.boxShadow = '0 0 30px rgba(0, 212, 255, 0.3)';
+      element.style.boxShadow = '0 0 18px rgba(0, 212, 255, 0.18)';
     });
     
     element.addEventListener('mouseleave', () => {
@@ -189,7 +189,7 @@ function initHoverEffects() {
   
   icons.forEach(icon => {
     icon.addEventListener('mouseenter', () => {
-      icon.style.transform = 'scale(1.1) rotate(5deg)';
+      icon.style.transform = 'scale(1.05) rotate(3deg)';
     });
     
     icon.addEventListener('mouseleave', () => {

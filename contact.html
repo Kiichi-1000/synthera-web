@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - Synthera</title>
+    <meta name="description" content="Syntheraへのお問い合わせページです。ご質問やご相談がございましたら、お気軽にご連絡ください。">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursor-trail"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">SYNTHERA</span>
+                </a>
+            </div>
+
+            <div class="nav-menu" id="nav-menu">
+                <div class="nav-menu-close" id="nav-menu-close">
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="projects.html" class="nav-link">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="note.html" class="nav-link">Note</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="affiling.html" class="nav-link">Affiling</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link active">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="page-title">
+                        <span class="title-accent">Contact</span>
+                        お問い合わせ
+                    </h1>
+                    <p class="page-subtitle">
+                        ご質問やご相談がございましたら、お気軽にご連絡ください。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <div class="container">
+                <div class="form-wrapper">
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                お名前 <span class="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-input"
+                                required
+                                autocomplete="name"
+                                placeholder="山田 太郎"
+                            >
+                            <span class="error-message" id="name-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                メールアドレス <span class="required">*</span>
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                required
+                                autocomplete="email"
+                                placeholder="example@email.com"
+                            >
+                            <span class="error-message" id="email-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                お問い合わせ内容 <span class="required">*</span>
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                class="form-textarea"
+                                required
+                                rows="8"
+                                placeholder="お問い合わせ内容をご記入ください"
+                            ></textarea>
+                            <span class="error-message" id="message-error"></span>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input
+                                    type="checkbox"
+                                    id="privacy-agree"
+                                    name="privacy-agree"
+                                    required
+                                    class="checkbox-input"
+                                >
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">
+                                    <a href="#privacy-policy" class="privacy-link">プライバシーポリシー</a>に同意します <span class="required">*</span>
+                                </span>
+                            </label>
+                            <span class="error-message" id="privacy-error"></span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="submit-button" id="submit-button">
+                                <span class="button-text">送信する</span>
+                                <div class="button-bg"></div>
+                                <div class="button-loader"></div>
+                            </button>
+                        </div>
+
+                        <div class="form-message" id="form-message"></div>
+                    </form>
+
+                    <div class="contact-info">
+                        <h3 class="info-title">お問い合わせについて</h3>
+                        <p class="info-text">
+                            お問い合わせいただいた内容は、synthera.2025@gmail.com に送信されます。
+                            通常、2-3営業日以内にご返信いたします。
+                        </p>
+                        <div class="info-notes">
+                            <h4 class="notes-title">ご注意</h4>
+                            <ul class="notes-list">
+                                <li>送信前に入力内容をご確認ください</li>
+                                <li>メールアドレスに誤りがあると返信できません</li>
+                                <li>迷惑メールフォルダもご確認ください</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Section -->
+        <section class="privacy-policy-section" id="privacy-policy">
+            <div class="container">
+                <div class="privacy-content">
+                    <h2 class="section-title">プライバシーポリシー</h2>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">1. 個人情報の収集について</h3>
+                        <p class="policy-text">
+                            当サイトでは、お問い合わせフォームを通じて以下の個人情報を収集します:
+                        </p>
+                        <ul class="policy-list">
+                            <li>お名前</li>
+                            <li>メールアドレス</li>
+                            <li>お問い合わせ内容</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">2. 個人情報の利用目的</h3>
+                        <p class="policy-text">
+                            収集した個人情報は、以下の目的でのみ利用します:
+                        </p>
+                        <ul class="policy-list">
+                            <li>お問い合わせへの回答</li>
+                            <li>必要に応じた連絡</li>
+                            <li>サービス向上のための分析</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">3. 個人情報の第三者提供</h3>
+                        <p class="policy-text">
+                            当サイトは、以下の場合を除き、個人情報を第三者に提供することはありません:
+                        </p>
+                        <ul class="policy-list">
+                            <li>ご本人の同意がある場合</li>
+                            <li>法令に基づく場合</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">4. 個人情報の管理</h3>
+                        <p class="policy-text">
+                            当サイトは、個人情報の紛失、破壊、改ざん、漏洩などを防止するため、適切なセキュリティ対策を実施します。
+                        </p>
+                    </div>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">5. データの保存</h3>
+                        <p class="policy-text">
+                            お問い合わせ内容は、適切な対応と記録のため、当サイトのデータベースに保存されます。
+                            不要になった個人情報は、速やかに削除いたします。
+                        </p>
+                    </div>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">6. Cookie について</h3>
+                        <p class="policy-text">
+                            当サイトでは、ユーザー体験の向上のためCookieを使用する場合があります。
+                            ブラウザの設定により、Cookieの受け取りを拒否することができます。
+                        </p>
+                    </div>
+
+                    <div class="policy-block">
+                        <h3 class="policy-subtitle">7. お問い合わせ</h3>
+                        <p class="policy-text">
+                            個人情報の取り扱いに関するお問い合わせは、synthera.2025@gmail.com までご連絡ください。
+                        </p>
+                    </div>
+
+                    <div class="policy-updated">
+                        <p>最終更新日: 2024年12月</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">SYNTHERA</h3>
+                    <p class="footer-description">
+                        革新的なコンテンツで未来を創造するクリエイティブスタジオ
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-title">Pages</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html" class="footer-link">Home</a></li>
+                            <li><a href="about.html" class="footer-link">About</a></li>
+                            <li><a href="projects.html" class="footer-link">Projects</a></li>
+                            <li><a href="note.html" class="footer-link">Note</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4 class="footer-title">Business</h4>
+                        <ul class="footer-list">
+                            <li><a href="#" class="footer-link">SNS</a></li>
+                            <li><a href="#" class="footer-link">Brand</a></li>
+                            <li><a href="#" class="footer-link">Development</a></li>
+                            <li><a href="#" class="footer-link">Writing</a></li>
+                            <li><a href="#" class="footer-link">Affiliate</a></li>
+                            <li><a href="japanese-quality.html" class="footer-link">Japanese Quality</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 Synthera. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>

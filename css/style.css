@@ -200,7 +200,6 @@ a:hover {
   border-bottom: 1px solid transparent;
   transition: all var(--transition-normal);
   padding: var(--spacing-2) 0;
-  animation: navbarSlideDown 0.8s ease-out;
 }
 
 .navbar::before {

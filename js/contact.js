@@ -54,24 +54,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw error;
             }
 
-            const emailResponse = await fetch(`${SUPABASE_URL}/functions/v1/send-contact-email`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                },
-                body: JSON.stringify(formData),
-            });
+            const emailSubject = encodeURIComponent(`【お問い合わせ】${formData.name}様より`);
+            const emailBody = encodeURIComponent(
+                `お名前: ${formData.name}\n` +
+                `メールアドレス: ${formData.email}\n\n` +
+                `お問い合わせ内容:\n${formData.message}\n\n` +
+                `---\n` +
+                `このメールは synthera ポートフォリオサイトのお問い合わせフォームから送信されました。\n` +
+                `送信日時: ${new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}`
+            );
 
-            if (!emailResponse.ok) {
-                const errorData = await emailResponse.json();
-                console.warn('Email sending failed:', errorData);
-            }
+            const mailtoLink = `mailto:synthera.2025@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+
+            window.location.href = mailtoLink;
 
             formMessage.className = 'form-message success';
-            formMessage.textContent = 'お問い合わせを送信しました。ご連絡ありがとうございます。';
+            formMessage.textContent = 'お問い合わせ内容を保存しました。メールアプリが開きますので、そちらから送信してください。';
 
-            form.reset();
+            setTimeout(() => {
+                form.reset();
+            }, 1000);
 
         } catch (error) {
             console.error('Error submitting form:', error);

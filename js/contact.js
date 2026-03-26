@@ -1,17 +1,11 @@
 const SUPABASE_URL = 'https://aencdwwzwfbvjwduyiws.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbmNkd3d6d2Zidmp3ZHV5aXdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjgzODcsImV4cCI6MjA5MDA0NDM4N30.o6TSqxKKtg2n0rRoguqdBdgBzmZQaIGLfSyoVnBtl9k';
 
-let supabase;
-
-async function initSupabase() {
-    const { createClient } = supabase;
-    return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-}
+let supabaseClient;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const supabaseModule = window.supabase;
-    if (supabaseModule && supabaseModule.createClient) {
-        supabase = supabaseModule.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     } else {
         console.error('Supabase module not loaded');
     }
@@ -39,11 +33,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         formMessage.textContent = '';
 
         try {
-            if (!supabase) {
+            if (!supabaseClient) {
                 throw new Error('Supabase client not initialized');
             }
 
-            const { data, error } = await supabase
+            const { data, error } = await supabaseClient
                 .from('contact_submissions')
                 .insert([
                     {

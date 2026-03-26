@@ -315,13 +315,14 @@ a:hover {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: var(--spacing-2);
+  gap: var(--spacing-1);
   background: rgba(36, 48, 68, 0.6);
   padding: var(--spacing-2);
   border-radius: var(--radius-full);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   position: relative;
+  flex-wrap: nowrap;
 }
 
 .nav-list::before {
@@ -353,13 +354,14 @@ a:hover {
   color: var(--color-text-secondary);
   transition: all var(--transition-normal);
   position: relative;
-  padding: var(--spacing-3) var(--spacing-5);
+  padding: var(--spacing-3) var(--spacing-4);
   border-radius: var(--radius-full);
   text-decoration: none;
   display: block;
   font-size: var(--font-size-sm);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .nav-link::before {

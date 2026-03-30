@@ -150,7 +150,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 215, 0, 0.1));
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.08), rgba(139, 115, 85, 0.06));
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
@@ -244,8 +244,8 @@
 
 .contact-email:hover {
   color: var(--color-primary);
-  background: rgba(0, 212, 255, 0.1);
-  border-color: rgba(0, 212, 255, 0.2);
+  background: rgba(184, 134, 11, 0.06);
+  border-color: rgba(184, 134, 11, 0.18);
   transform: translateY(-2px);
 }
 

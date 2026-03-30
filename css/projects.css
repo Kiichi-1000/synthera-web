@@ -141,7 +141,7 @@
   background: var(--color-background-secondary);
   border-radius: var(--radius-2xl);
   overflow: hidden;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(184, 134, 11, 0.18);
   transition: all var(--transition-normal);
   position: relative;
 }
@@ -149,7 +149,7 @@
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.12);
 }
 
 .card-image {
@@ -356,7 +356,7 @@
   border-radius: 50%;
   background: radial-gradient(circle at 30% 20%, var(--color-secondary), var(--color-primary));
   position: relative;
-  box-shadow: 0 0 24px rgba(0, 212, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(184, 134, 11, 0.20);
 }
 
 .designer-avatar::before {
@@ -379,8 +379,8 @@
   width: 50px;
   height: 30px;
   border-radius: 18px;
-  background: rgba(4, 12, 24, 0.9);
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(13, 13, 13, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   transform: translateX(-50%);
 }
 
@@ -394,19 +394,19 @@
 .designer-window {
   border-radius: var(--radius-lg);
   background: var(--color-background-tertiary);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(184, 134, 11, 0.18);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .designer-window.large {
   grid-column: 1 / 3;
   height: 56px;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(255, 215, 0, 0.08));
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.08), rgba(139, 115, 85, 0.05));
 }
 
 .designer-window.small {
   height: 42px;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(26, 26, 26, 0.9));
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.06), rgba(244, 241, 236, 0.9));
 }
 
 .story-visual {
@@ -490,13 +490,13 @@
 }
 
 .dev-card {
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(184, 134, 11, 0.18);
 }
 
 .dev-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.12);
 }
 
 .dev-icon {
@@ -660,13 +660,13 @@
 }
 
 .writing-card {
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(184, 134, 11, 0.18);
 }
 
 .writing-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.12);
 }
 
 .card-meta {
@@ -778,13 +778,13 @@
 }
 
 .category-card {
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(184, 134, 11, 0.18);
 }
 
 .category-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.12);
 }
 
 .category-icon {
@@ -842,7 +842,7 @@
   background: var(--color-primary);
   color: var(--color-background);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(184, 134, 11, 0.18);
 }
 
 .category-link-button svg {

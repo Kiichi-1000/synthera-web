@@ -87,6 +87,11 @@
             <div class="container">
                 <div class="form-wrapper">
                     <form id="contact-form" class="contact-form" novalidate>
+                        <!-- Honeypot: hidden from humans, bots fill this -->
+                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+                            <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+                        </div>
+
                         <div class="form-group">
                             <label for="name" class="form-label">
                                 お名前 <span class="required">*</span>
@@ -117,6 +122,18 @@
                                 placeholder="example@email.com"
                             >
                             <span class="error-message" id="email-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">件名</label>
+                            <input
+                                type="text"
+                                id="subject"
+                                name="subject"
+                                class="form-input"
+                                autocomplete="off"
+                                placeholder="ご相談・お仕事依頼など"
+                            >
                         </div>
 
                         <div class="form-group">
@@ -165,16 +182,15 @@
                     <div class="contact-info">
                         <h3 class="info-title">お問い合わせについて</h3>
                         <p class="info-text">
-                            フォームを送信すると、お使いのメールアプリが開きます。
-                            メールアプリから synthera.2025@gmail.com 宛に送信してください。
-                            お問い合わせ内容はデータベースにも保存されます。
+                            フォームを送信すると、synthera.2025@gmail.com 宛に直接メールが届きます。
+                            返信はそのアドレスからお送りします。
                         </p>
                         <div class="info-notes">
                             <h4 class="notes-title">ご注意</h4>
                             <ul class="notes-list">
                                 <li>送信前に入力内容をご確認ください</li>
-                                <li>メールアプリが開かない場合は、直接 synthera.2025@gmail.com にご連絡ください</li>
-                                <li>通常、2-3営業日以内にご返信いたします</li>
+                                <li>直接連絡を希望の場合は synthera.2025@gmail.com へ</li>
+                                <li>通常、2〜3営業日以内にご返信いたします</li>
                             </ul>
                         </div>
                     </div>
@@ -316,7 +332,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/contact.js"></script>

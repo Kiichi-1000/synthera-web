@@ -1,15 +1,4 @@
-const SUPABASE_URL = 'https://aencdwwzwfbvjwduyiws.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbmNkd3d6d2Zidmp3ZHV5aXdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjgzODcsImV4cCI6MjA5MDA0NDM4N30.o6TSqxKKtg2n0rRoguqdBdgBzmZQaIGLfSyoVnBtl9k';
-
-let supabaseClient;
-
-document.addEventListener('DOMContentLoaded', async () => {
-    if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    } else {
-        console.error('Supabase module not loaded');
-    }
-
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
     const submitButton = document.getElementById('submit-button');
     const formMessage = document.getElementById('form-message');
@@ -17,14 +6,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        if (!validateForm()) {
-            return;
-        }
+        if (!validateForm()) return;
 
         const formData = {
             name: document.getElementById('name').value.trim(),
             email: document.getElementById('email').value.trim(),
+            subject: document.getElementById('subject')?.value.trim() || 'お問い合わせ',
             message: document.getElementById('message').value.trim(),
+            honeypot: document.getElementById('honeypot')?.value || '',
         };
 
         submitButton.disabled = true;
@@ -33,52 +22,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         formMessage.textContent = '';
 
         try {
-            if (!supabaseClient) {
-                throw new Error('Supabase client not initialized');
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(result.error || 'エラーが発生しました');
             }
-
-            const { data, error } = await supabaseClient
-                .from('contact_submissions')
-                .insert([
-                    {
-                        name: formData.name,
-                        email: formData.email,
-                        message: formData.message,
-                        ip_address: null,
-                        user_agent: navigator.userAgent,
-                    }
-                ])
-                .select();
-
-            if (error) {
-                throw error;
-            }
-
-            const emailSubject = encodeURIComponent(`【お問い合わせ】${formData.name}様より`);
-            const emailBody = encodeURIComponent(
-                `お名前: ${formData.name}\n` +
-                `メールアドレス: ${formData.email}\n\n` +
-                `お問い合わせ内容:\n${formData.message}\n\n` +
-                `---\n` +
-                `このメールは synthera ポートフォリオサイトのお問い合わせフォームから送信されました。\n` +
-                `送信日時: ${new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}`
-            );
-
-            const mailtoLink = `mailto:synthera.2025@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-
-            window.location.href = mailtoLink;
 
             formMessage.className = 'form-message success';
-            formMessage.textContent = 'お問い合わせ内容を保存しました。メールアプリが開きますので、そちらから送信してください。';
+            formMessage.textContent = 'お問い合わせを送信しました。2〜3営業日以内にご返信いたします。';
+            form.reset();
 
-            setTimeout(() => {
-                form.reset();
-            }, 1000);
-
-        } catch (error) {
-            console.error('Error submitting form:', error);
+        } catch (err) {
+            console.error('Error:', err);
             formMessage.className = 'form-message error';
-            formMessage.textContent = 'お問い合わせの送信中にエラーが発生しました。しばらく経ってから再度お試しください。';
+            formMessage.textContent = err.message || 'お問い合わせの送信中にエラーが発生しました。しばらく経ってから再度お試しください。';
         } finally {
             submitButton.disabled = false;
             submitButton.classList.remove('loading');
@@ -87,31 +50,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
-        input.addEventListener('blur', () => {
-            validateField(input);
-        });
-
+        input.addEventListener('blur', () => validateField(input));
         input.addEventListener('input', () => {
-            if (input.classList.contains('error')) {
-                validateField(input);
-            }
+            if (input.classList.contains('error')) validateField(input);
         });
     });
 });
 
 function validateForm() {
-    let isValid = true;
-
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const message = document.getElementById('message');
     const privacyAgree = document.getElementById('privacy-agree');
 
+    let isValid = true;
     if (!validateField(name)) isValid = false;
     if (!validateField(email)) isValid = false;
     if (!validateField(message)) isValid = false;
     if (!validateField(privacyAgree)) isValid = false;
-
     return isValid;
 }
 
@@ -155,13 +111,7 @@ function validateField(field) {
         }
     }
 
-    if (errorElement) {
-        errorElement.textContent = errorMessage;
-    }
-
-    if (!isValid) {
-        field.classList.add('error');
-    }
-
+    if (errorElement) errorElement.textContent = errorMessage;
+    if (!isValid) field.classList.add('error');
     return isValid;
 }

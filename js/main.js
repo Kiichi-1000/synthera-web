@@ -246,6 +246,8 @@ function initScrollProgress() {
 function initHeaderEffects() {
   const navbar = document.getElementById('navbar');
   const navLinks = document.querySelectorAll('.nav-link');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const disableNavbarParallax = currentPage === 'contact.html' || currentPage === 'projects.html';
   
   // Add floating animation to nav links
   navLinks.forEach((link, index) => {
@@ -259,14 +261,20 @@ function initHeaderEffects() {
   });
   
   // Add parallax effect to navbar background
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * 0.1;
-    
+  if (disableNavbarParallax) {
     if (navbar) {
-      navbar.style.transform = `translateY(${rate}px)`;
+      navbar.style.transform = 'translateY(0)';
     }
-  });
+  } else {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * 0.1;
+
+      if (navbar) {
+        navbar.style.transform = `translateY(${rate}px)`;
+      }
+    });
+  }
   
   // Add glow effect on scroll
   window.addEventListener('scroll', () => {

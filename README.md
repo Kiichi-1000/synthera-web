@@ -1,209 +1,52 @@
-# Synthera - Creative Digital Studio
+# Synthera
 
-未来を創造するクリエイティブデジタルスタジオの公式ウェブサイトです。
+**Synthera（シンセラ）は、AI を活用して人の仕事と暮らしを豊かにする SaaS を生み出し続ける開発企業です。**
 
-## 🚀 概要
+> 企業コンセプト：**ともにつくる、愛される未来。**
+> 自らが泥臭く価値を創出し、世の中に愛される未来を切り開く。関わるすべての人とともにプロダクトをつくり、現場にもデスクにも愛されるものを届けます。
 
-Syntheraは個人経営のクリエイティブデジタルスタジオとして、以下の4つの事業領域で活動しています：
+※ 旧コンセプト（個人クリエイティブスタジオ／コンテンツ制作）は現在の事業ではありません。Synthera は SaaS 開発企業です。
 
-- **YouTubeチャンネル運営**: クリエイティブな動画コンテンツの制作・配信
-- **ブランド運営**: 独自のブランドアイデンティティの構築・展開
-- **アプリ開発**: 革新的なアプリケーションの設計・開発
-- **個人ライティング**: 価値あるコンテンツの執筆・発信
+## 事業 — SUMI
 
-## 🎨 デザインコンセプト
+SUMI は Synthera の SaaS 事業。一つのエンジンから、人の暮らしと働き方を豊かにするプロダクトを次々と生み出していく器です。自社プロダクトに加え、AI 導入支援・DX 支援のコンサルティングにも領域を広げています。
 
-- **カラーパレット**: ダークトーンをベースに、エレクトリックブルーとゴールドをアクセントカラーとして使用
-- **タイポグラフィ**: Interフォントを使用したモダンで洗練されたデザイン
-- **アニメーション**: スムーズなトランジションとインタラクティブな要素
-- **レスポンシブ**: モバイルファーストの設計
+### プロダクト
 
-## 📁 プロジェクト構成
+| プロダクト | 概要 | 対象 |
+|---|---|---|
+| **TOMORI** | オペレーション業務の属人性リスクを排除し、業務再現性を最大化させる現場 AI SaaS（音声・ハンズフリー） | B2B / 現場 |
+| **ToSche** | 目標・タスク・予定を一つにし、AI エージェントが計画まで立てる日本語ネイティブの個人タスク管理（配信中） | B2C / 個人 |
+| **ToSche for Biz** | 組織の OKR を AI が個人タスクへ自動配分する組織向け SaaS | B2B / 組織 |
+
+## ウェブサイト構成
+
+静的サイト（HTML / CSS / Vanilla JS、ビルドツールなし）。Vercel で配信。
 
 ```
-synthera.website/
-├── index.html              # ホームページ
-├── about.html              # 会社概要ページ
-├── projects.html           # プロジェクト一覧ページ
-├── note.html               # 記事一覧ページ（Notion連携）
-├── css/                    # スタイルシート
-│   ├── style.css          # グローバルスタイル
-│   ├── home.css           # ホームページ専用スタイル
-│   ├── about.css          # アバウトページ専用スタイル
-│   ├── projects.css       # プロジェクトページ専用スタイル
-│   └── note.css           # ノートページ専用スタイル
-├── js/                     # JavaScriptファイル
-│   ├── main.js            # メイン機能
-│   ├── navigation.js      # ナビゲーション機能
-│   ├── animations.js      # アニメーション機能
-│   └── note-data.js       # Noteページ用データ読み込み
-├── scripts/                # 補助スクリプト
-│   ├── sync_notion_grids.py   # Notion同期ユーティリティ（push/pull）
-│   ├── sync_app_development.py # アプリ開発データ同期ユーティリティ
-│   └── notion_grid_admin.py   # 管理者UI用ローカルサーバー
-├── data/
-│   └── sns_grids.json         # NotionからエクスポートしたSNSグリッドデータ
-│   └── dev_projects.json      # Notionからエクスポートしたアプリ開発データ
-├── assets/                 # アセットファイル
-│   ├── images/            # 画像ファイル
-│   └── icons/             # アイコンファイル
-├── .unity-mcp/            # MCP設定ファイル
-│   └── config.json        # Notion MCP設定
-├── .gitignore             # Git除外設定
-└── README.md              # プロジェクト説明書
+index.html        … Home（ブランド／コンセプト／プロダクト概要）
+sumi.html         … SUMI 事業ハブ
+tosche.html       … ToSche（個人版）
+tosche-biz.html   … ToSche for Biz（組織版）
+tomori.html       … TOMORI（現場 AI）
+about.html        … 会社・ビジョン・バリュー
+founder.html      … 代表・配信・個人ブランディング
+contact.html      … お問い合わせ
 ```
 
-## 🛠️ 技術スタック
+- 共通スタイル：`css/style.css`（デザインシステム）, `css/home.css`（スプラッシュ/nav/hero/footer）, `css/site.css`（コンポーネント）, `css/contact.css`
+- スクリプト：`js/main.js`（スプラッシュ/メニュー/Heroスライド）, `js/animations.js`（スクロール演出）, `js/contact.js`（フォーム）
+- お問い合わせ送信：`api/contact.js`（Vercel Functions + Resend）
 
-- **HTML5**: セマンティックなマークアップ
-- **CSS3**: カスタムプロパティ、Flexbox、Grid、アニメーション
-- **JavaScript (ES6+)**: モダンなJavaScript機能
-- **Notion API**: コンテンツ管理システムとしてNotionを活用
-- **MCP (Model Context Protocol)**: Notionとの連携
+## 会社概要
 
-## 🚀 セットアップ
-
-### 1. リポジトリのクローン
-
-```bash
-git clone https://github.com/your-username/synthera.website.git
-cd synthera.website
-```
-
-### 2. Notion API設定
-
-1. [Notion Developers](https://developers.notion.com/)でインテグレーションを作成し、シークレット（トークン）を取得してください。
-2. `NOTION_API_TOKEN` をシェルでエクスポートするか、`.env` などから読み込ませてください。
-3. インテグレーションを対象ワークスペースに招待し、`synthera database` ページ（もしくは該当データベース）へ編集権限で共有してください。
-
-### 3. Notion同期ユーティリティ
-
-```bash
-# 例: 環境変数を設定してから実行
-export NOTION_API_TOKEN="your_notion_token"
-
-# Noteページ: Notion ←→ JSON
-python3 scripts/sync_note_articles.py pull
-python3 scripts/sync_note_articles.py push
-python3 scripts/sync_note_articles.py push --reset
-
-# pull コマンドは `--output` オプションで任意パスへ出力可能
-python3 scripts/sync_app_development.py pull --output tmp/dev.json
-python3 scripts/sync_writing_articles.py pull --output tmp/writing.json
-python3 scripts/sync_note_articles.py pull --output tmp/note.json
-python3 scripts/sync_ec_projects.py pull --output tmp/ec.json
-```
-
-### 4. 管理者UI（ローカル管理ページ）
-
-```bash
-export NOTION_API_TOKEN="your_notion_token"
-python3 scripts/notion_grid_admin.py
-```
-
-ブラウザで `http://127.0.0.1:8765/` を開くと、以下が利用できます。
-
-- SNS / Note / 個人ライティング / アプリ開発 / EC の各データセット件数確認
-- データセットごとに `pull`（Notion → JSON）・`push`（静的データ → Notion、リセット付き）をボタン操作
-- 全データセットの `pull` / `push` を一括実行
-
-### 5. ローカルサーバーの起動
-
-```bash
-# Python 3の場合
-python -m http.server 8000
-
-# Node.jsの場合
-npx serve .
-
-# PHPの場合
-php -S localhost:8000
-```
-
-ブラウザで`http://localhost:8000`にアクセスしてサイトを確認できます。
-
-## 📝 機能
-
-### ホームページ
-- 印象的なヒーローセクション
-- 会社紹介と統計情報
-- 事業領域のプレビュー
-- CTAセクション
-
-### アバウトページ
-- ビジョン・ミッション
-- 代表者プロフィール
-- 価値観の紹介
-- 会社の歩み
-
-### プロジェクトページ
-- 4つの事業領域の詳細
-- タブ切り替えインターフェース
-- プロジェクトカードの3Dホバー効果
-- SNS / Development / Writing / EC タブは `projects.html` に静的記述で管理
-- SNSタブは「Podcast / YouTubeチャンネル運用 / 会社関連SNS」に区分けして表示
-
-### ノートページ
-- Notionデータベースからの記事取得（`data/note_articles.json`）
-- カテゴリ別フィルタリング
-- 検索機能
-- 無限スクロール（ページネーション）
-
-## 🎨 カスタマイズ
-
-### カラーパレットの変更
-
-`css/style.css`のCSS変数を編集：
-
-```css
-:root {
-  --color-primary: #00d4ff;      /* メインカラー */
-  --color-secondary: #ffd700;    /* セカンダリカラー */
-  --color-accent: #ff6b6b;       /* アクセントカラー */
-  --color-background: #0a0a0a;   /* 背景色 */
-  /* ... */
-}
-```
-
-### フォントの変更
-
-`index.html`のGoogle Fontsリンクを変更：
-
-```html
-<link href="https://fonts.googleapis.com/css2?family=YourFont:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-```
-
-## 📱 レスポンシブ対応
-
-- **モバイル**: ~768px
-- **タブレット**: 769px~1024px
-- **デスクトップ**: 1025px~
-
-## 🔧 開発
-
-### CSS構造
-- CSS変数を使用した統一されたデザインシステム
-- BEM記法に準拠したクラス命名
-- モジュラーなCSS構造
-
-### JavaScript構造
-- モジュラーなJavaScript構造
-- イベント駆動のアーキテクチャ
-- パフォーマンスを考慮した実装
-
-## 📄 ライセンス
-
-このプロジェクトはMITライセンスの下で公開されています。
-
-## 🤝 コントリビューション
-
-プルリクエストやイシューの報告を歓迎します。
-
-## 📞 お問い合わせ
-
-- Website: [https://synthera.website](https://synthera.website)
-- Email: contact@synthera.website
+- 会社名：Synthera（シンセラ）
+- 設立：2025 年 5 月
+- 所在：Tokyo, Japan
+- 代表：筑井 貴一 / Kiichi Tsukui
+- 事業：SaaS 開発（SUMI）／ AI 導入・DX 支援
+- サイト：https://synthera.jp
 
 ---
 
-© 2024 Synthera. All rights reserved.
+関連アプリ「MTPA（仮面診断）」は別ドメイン（https://masktype.synthera.jp/ ）で稼働しています。

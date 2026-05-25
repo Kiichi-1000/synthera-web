@@ -4,5 +4,9 @@
   "outputDirectory": ".",
   "buildCommand": null,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/aibo", "destination": "/tomori", "permanent": true },
+    { "source": "/aibo.html", "destination": "/tomori", "permanent": true }
+  ]
 }

@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yourdomain.com/</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/sumi.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/sumi</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/tosche.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/tosche</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/tosche-biz.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/tosche-biz</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/tomori.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/tomori</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/about.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/about</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/founder.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/founder</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/contact.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <loc>https://www.synthera.jp/contact</loc>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

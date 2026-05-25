@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToSche for Biz — 組織の目標を、AIがタスクに変える。| Synthera SUMI</title>
+    <meta name="description" content="ToSche for Biz は、企業の OKR を AI が個人のタスクへ自動配分する組織向け SaaS。戦略と現場をつなぎ、Aibo（現場AI）との連携で「現場AI × 組織OKR」を実現します。">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ToSche for Biz — 組織の目標を、AIがタスクに変える。">
+    <meta property="og:description" content="OKR × AIタスク配分。戦略と現場をつなぐ、組織のためのSaaS。Aibo連携で現場AIとOKRが一つに。">
+    <meta property="og:image" content="image/figma/operation-dx.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/site.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+</head>
+<body class="splash-done" style="--accent:#A8842C;">
+
+    <header class="dnav" id="dnav">
+        <a href="index.html" class="dnav__brand">SYNTHERA</a>
+        <div class="dnav__right">
+            <span class="dnav__counter">SUMI · 02</span>
+            <button type="button" class="dnav__menu-btn" id="menu-btn">Menu</button>
+        </div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <ul class="menu__list">
+            <li class="menu__item"><a href="index.html">Home <em>— 00</em></a></li>
+            <li class="menu__item"><a href="sumi.html">SUMI <em>— 01</em></a></li>
+            <li class="menu__item"><a href="about.html">About <em>— 02</em></a></li>
+            <li class="menu__item"><a href="founder.html">Founder <em>— 03</em></a></li>
+            <li class="menu__item"><a href="contact.html">Contact <em>— 04</em></a></li>
+        </ul>
+        <div class="menu__bottom">
+            <span>© 2026 Synthera</span>
+            <!-- TODO: Twitch URL -->
+            <a href="#" data-placeholder="twitch">Twitch</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ===== Product hero ===== -->
+        <section class="prod-hero" data-theme="dark">
+            <div class="prod-hero__inner">
+                <div class="prod-hero__copy">
+                    <span class="prod-hero__eyebrow">SUMI · Product / 組織版</span>
+                    <h1 class="prod-hero__title">ToSche<br>for <em>Biz</em></h1>
+                    <p class="prod-hero__tagline">組織の目標を、AIがタスクに変える。</p>
+                    <p class="prod-hero__sub">
+                        OKR × AIタスク配分。立てた目標を、AIが現場一人ひとりの「今日やること」に落とし込み、進捗を可視化します。
+                    </p>
+                    <div class="prod-hero__actions btn-row">
+                        <a href="contact.html" class="btn">導入を相談する</a>
+                        <span class="store-badge" data-placeholder="status">開発中 · Coming 2026</span>
+                    </div>
+                </div>
+                <div class="prod-hero__visual">
+                    <img src="image/figma/operation-dx.png" alt="ToSche for Biz — OKR and AI task distribution">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Problem ===== -->
+        <section class="prod-block" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Problem — 01</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">目標は立てる。<br>でも、現場に落ちない。</h2>
+                    <p class="prod-block__text fade-up">
+                        立派な OKR を掲げても、現場の日々のタスクには変わらない。<strong>戦略と業務が分断している</strong>。誰が、いつ、何をやれば目標に近づくのか——その変換を、人の手と勘でやり続けるのは限界があります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Solution / features ===== -->
+        <section class="prod-block prod-block--soft" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Solution — 02</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">OKR から、タスクへ。<br>AIが、つなぐ。</h2>
+                    <div class="feature-list">
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">01</span>
+                            <div>
+                                <h3 class="feature-list__name">OKR を設定する</h3>
+                                <p class="feature-list__desc">組織・チーム・個人の目標を、シンプルな OKR として置きます。</p>
+                            </div>
+                        </div>
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">02</span>
+                            <div>
+                                <h3 class="feature-list__name">AIが個人タスクへ自動配分</h3>
+                                <p class="feature-list__desc">目標を達成するために必要なタスクを、AIがメンバー一人ひとりの「今日やること」へ自動で配分します。</p>
+                            </div>
+                        </div>
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">03</span>
+                            <div>
+                                <h3 class="feature-list__name">進捗を可視化する</h3>
+                                <p class="feature-list__desc">タスクの積み上げが、そのまま OKR の進捗に。戦略が「今、どこまで進んでいるか」が一目でわかります。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Differentiation ===== -->
+        <section class="prod-block" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Why us — 03</span>
+                <div>
+                    <div class="highlight fade-up">
+                        <div class="highlight__kicker">Aibo 連携</div>
+                        <h2 class="highlight__title">現場AI（Aibo）と、組織OKR×AIタスク配分が、<em>一つになる。</em></h2>
+                        <p class="highlight__text">
+                            「現場AIロボット × 組織OKR」という組み合わせは、世界でもまだ空白です。Aibo が現場の知恵を支え、ToSche for Biz が組織の目標を現場のタスクに変える。SUMI だからこそ実現できる、垂直統合の強みです。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Audience ===== -->
+        <section class="prod-block prod-block--soft" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">For — 04</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">多店舗・組織のために。</h2>
+                    <p class="prod-block__text fade-up">目標が現場に落ちにくい、店舗・拠点が分かれた組織にこそ効きます。</p>
+                    <div class="tags">
+                        <span class="fade-up">整骨院チェーン</span>
+                        <span class="fade-up">学習塾チェーン</span>
+                        <span class="fade-up">多店舗飲食</span>
+                        <span class="fade-up">サービス業の本部 × 店舗</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Pricing (to be confirmed → contact) ===== -->
+        <section class="prod-block" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Pricing — 05</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">料金は、規模に合わせて。</h2>
+                    <p class="prod-block__text fade-up">
+                        B2B 向けに、組織の規模と店舗数に合わせたプランをご提案します。月額のイメージや導入の流れは、お気軽にお問い合わせください。
+                    </p>
+                    <p class="band__cta fade-up" style="margin-top:28px;"><a href="contact.html" class="cta-link">料金を問い合わせる</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Closing ===== -->
+        <section class="closing" data-theme="dark">
+            <div class="closing__inner">
+                <span class="closing__label">Get in touch</span>
+                <div>
+                    <h2 class="closing__title">Goals, <em>aligned.</em></h2>
+                    <div class="closing__actions">
+                        <a href="contact.html">導入を相談する</a>
+                        <a href="aibo.html">Aibo を見る</a>
+                        <a href="sumi.html">Back to SUMI</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" data-theme="dark">
+        <div class="footer__inner">
+            <p class="footer__statement fade-up">
+                We build SaaS that enriches life.<br>
+                One engine — SUMI — many products, from Tokyo.
+            </p>
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <h4>Site</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sumi.html">SUMI</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="founder.html">Founder</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="tosche.html">ToSche</a></li>
+                        <li><a href="tosche-biz.html">ToSche for Biz</a></li>
+                        <li><a href="aibo.html">Aibo</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Social</h4>
+                    <ul>
+                        <!-- TODO: Twitch URL -->
+                        <li><a href="#" data-placeholder="twitch" rel="noopener">Twitch</a></li>
+                        <!-- TODO: X (Twitter) URL -->
+                        <li><a href="#" data-placeholder="x" rel="noopener">X (Twitter)</a></li>
+                        <!-- TODO: YouTube URL -->
+                        <li><a href="#" data-placeholder="youtube" rel="noopener">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__brand">SYNTHERA</div>
+            <div class="footer__bottom">
+                <span>© <span id="footer-year">2026</span> Synthera</span>
+                <span>Stay Grounded, Build the Future.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

@@ -1,368 +1,228 @@
-// ===== Main JavaScript File =====
+/* ==========================================================================
+   SYNTHERA — Main script
+   - HELLO splash sequencer
+   - Cinematic hero slideshow with caption + tick + counter sync
+   - Full-screen menu toggle
+   - Year auto-fill
+   ========================================================================== */
 
-// DOM Content Loaded
-document.addEventListener('DOMContentLoaded', function() {
-  initializeApp();
-});
+(function () {
+  'use strict';
 
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initializeApp();
-  }
-});
-
-// Initialize Application
-function initializeApp() {
-  initCustomCursor();
-  initScrollAnimations();
-  initParallaxEffects();
-  initParticles();
-  initTypingAnimation();
-  initCounterAnimation();
-  initScrollProgress();
-  initHeaderEffects();
-}
-
-// ===== Custom Cursor =====
-function initCustomCursor() {
-  const cursor = document.getElementById('cursor');
-  const cursorTrail = document.getElementById('cursor-trail');
-  
-  if (!cursor || !cursorTrail) return;
-  
-  let mouseX = 0, mouseY = 0;
-  let trailX = 0, trailY = 0;
-  
-  // Mouse move event
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-  
-  // Animate cursor
-  function animateCursor() {
-    // Main cursor
-    cursor.style.left = mouseX - 10 + 'px';
-    cursor.style.top = mouseY - 10 + 'px';
-    
-    // Trail cursor
-    trailX += (mouseX - trailX) * 0.1;
-    trailY += (mouseY - trailY) * 0.1;
-    
-    cursorTrail.style.left = trailX - 4 + 'px';
-    cursorTrail.style.top = trailY - 4 + 'px';
-    
-    requestAnimationFrame(animateCursor);
-  }
-  
-  animateCursor();
-  
-  // Cursor hover effects
-  const hoverElements = document.querySelectorAll('a, button, .area-card, .project-card, .article-card');
-  
-  hoverElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(1.3)';
-      cursorTrail.style.transform = 'scale(1.1)';
-    });
-    
-    element.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'scale(1)';
-      cursorTrail.style.transform = 'scale(1)';
-    });
-  });
-}
-
-// ===== Scroll Animations =====
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-        
-        // Trigger specific animations
-        if (entry.target.classList.contains('stat-number')) {
-          animateCounter(entry.target);
-        }
-        
-        if (entry.target.classList.contains('skill-progress')) {
-          animateSkillBar(entry.target);
-        }
-      }
-    });
-  }, observerOptions);
-  
-  // Observe elements
-  const animateElements = document.querySelectorAll(
-    '.company-intro, .business-areas, .vm-item, .profile-content, .value-card, .timeline-item, .project-card, .article-card'
-  );
-  
-  animateElements.forEach(element => {
-    observer.observe(element);
-  });
-}
-
-// ===== Parallax Effects =====
-function initParallaxEffects() {
-  const parallaxElements = document.querySelectorAll('.gradient-mesh, .particles');
-  
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-    
-    parallaxElements.forEach(element => {
-      element.style.transform = `translateY(${rate}px)`;
-    });
-  });
-}
-
-// ===== Particles =====
-function initParticles() {
-  const particlesContainer = document.getElementById('particles');
-  if (!particlesContainer) return;
-  
-  const particleCount = 50;
-  
-  for (let i = 0; i < particleCount; i++) {
-    createParticle(particlesContainer);
-  }
-}
-
-function createParticle(container) {
-  const particle = document.createElement('div');
-  particle.className = 'particle';
-  
-  // Random position
-  particle.style.left = Math.random() * 100 + '%';
-  particle.style.top = Math.random() * 100 + '%';
-  
-  // Random size
-  const size = Math.random() * 4 + 2;
-  particle.style.width = size + 'px';
-  particle.style.height = size + 'px';
-  
-  // Random animation delay
-  particle.style.animationDelay = Math.random() * 6 + 's';
-  particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-  
-  container.appendChild(particle);
-}
-
-// ===== Typing Animation =====
-function initTypingAnimation() {
-  const typingElements = document.querySelectorAll('.title-word[data-word]');
-  
-  typingElements.forEach((element, index) => {
-    const text = element.dataset.word;
-    element.textContent = '';
-    
-    setTimeout(() => {
-      typeText(element, text, 100);
-    }, index * 200);
-  });
-}
-
-function typeText(element, text, speed) {
-  let i = 0;
-  const timer = setInterval(() => {
-    element.textContent += text.charAt(i);
-    i++;
-    
-    if (i > text.length) {
-      clearInterval(timer);
-    }
-  }, speed);
-}
-
-// ===== Counter Animation =====
-function initCounterAnimation() {
-  const counters = document.querySelectorAll('.stat-number[data-target]');
-  
-  counters.forEach(counter => {
-    const target = parseInt(counter.dataset.target);
-    const duration = 2000;
-    const increment = target / (duration / 16);
-    let current = 0;
-    
-    const timer = setInterval(() => {
-      current += increment;
-      
-      if (current >= target) {
-        counter.textContent = target + '+';
-        clearInterval(timer);
-      } else {
-        counter.textContent = Math.floor(current);
-      }
-    }, 16);
-  });
-}
-
-function animateCounter(element) {
-  const target = parseInt(element.dataset.target);
-  const duration = 2000;
-  const increment = target / (duration / 16);
-  let current = 0;
-  
-  const timer = setInterval(() => {
-    current += increment;
-    
-    if (current >= target) {
-      element.textContent = target + '+';
-      clearInterval(timer);
-    } else {
-      element.textContent = Math.floor(current);
-    }
-  }, 16);
-}
-
-// ===== Skill Bar Animation =====
-function animateSkillBar(element) {
-  const width = element.dataset.width;
-  element.style.width = width;
-}
-
-// ===== Scroll Progress =====
-function initScrollProgress() {
-  const progressBar = document.getElementById('scroll-progress');
-  if (!progressBar) return;
-  
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.body.offsetHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    
-    progressBar.style.width = scrollPercent + '%';
-  });
-}
-
-// ===== Header Effects =====
-function initHeaderEffects() {
-  const navbar = document.getElementById('navbar');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const disableNavbarParallax = currentPage === 'contact.html' || currentPage === 'projects.html';
-  
-  // Add floating animation to nav links
-  navLinks.forEach((link, index) => {
-    link.addEventListener('mouseenter', () => {
-      link.style.transform = 'translateY(-2px) scale(1.05)';
-    });
-    
-    link.addEventListener('mouseleave', () => {
-      link.style.transform = 'translateY(0) scale(1)';
-    });
-  });
-  
-  // Add parallax effect to navbar background
-  if (disableNavbarParallax) {
-    if (navbar) {
-      navbar.style.transform = 'translateY(0)';
-    }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * 0.1;
+    init();
+  }
 
-      if (navbar) {
-        navbar.style.transform = `translateY(${rate}px)`;
+  function init() {
+    splash();
+    menu();
+    heroSlideshow();
+    caseSlideshows();
+    fillYear();
+    legacyNav();
+  }
+
+  /* ---------- Mini slideshows inside each .case__media ---------- */
+  function caseSlideshows() {
+    const medias = document.querySelectorAll('.case__media');
+    if (!medias.length) return;
+    const INTERVAL = 5200;
+
+    medias.forEach((media) => {
+      const photos = media.querySelectorAll('.case__photo');
+      const dots   = media.querySelectorAll('.case__dot');
+      if (photos.length < 2) return;
+
+      let idx = 0;
+
+      function show(n) {
+        idx = (n + photos.length) % photos.length;
+        photos.forEach((p, pi) => p.classList.toggle('is-active', pi === idx));
+        dots.forEach((d, di)   => d.classList.toggle('is-active', di === idx));
+      }
+
+      show(0);
+
+      let timer = setInterval(() => show(idx + 1), INTERVAL);
+
+      dots.forEach((d) => {
+        d.addEventListener('click', () => {
+          const target = Number(d.dataset.go);
+          if (Number.isNaN(target) || target === idx) return;
+          show(target);
+          clearInterval(timer);
+          timer = setInterval(() => show(idx + 1), INTERVAL);
+        });
+      });
+
+      // Pause on hover
+      media.addEventListener('mouseenter', () => clearInterval(timer));
+      media.addEventListener('mouseleave', () => {
+        clearInterval(timer);
+        timer = setInterval(() => show(idx + 1), INTERVAL);
+      });
+    });
+  }
+
+  /* ---------- HELLO Splash sequencer ---------- */
+  function splash() {
+    const sp = document.getElementById('splash');
+    const hero = document.getElementById('hero');
+    if (!sp) {
+      document.body.classList.add('splash-done');
+      if (hero) hero.classList.add('is-loaded');
+      return;
+    }
+
+    requestAnimationFrame(() => sp.classList.add('is-in'));
+
+    setTimeout(() => { if (hero) hero.classList.add('is-loaded'); }, 850);
+    setTimeout(() => sp.classList.add('is-out'), 1050);
+    setTimeout(() => {
+      sp.classList.add('is-gone');
+      document.body.classList.add('splash-done');
+    }, 2350);
+  }
+
+  /* ---------- Full-screen menu toggle ---------- */
+  function menu() {
+    const btn = document.getElementById('menu-btn');
+    const menuEl = document.getElementById('menu');
+    if (!btn || !menuEl) return;
+
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('menu-open');
+      btn.textContent = document.body.classList.contains('menu-open') ? 'Close' : 'Menu';
+    });
+
+    menuEl.querySelectorAll('.menu__item a').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.body.classList.remove('menu-open');
+        btn.textContent = 'Menu';
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+        document.body.classList.remove('menu-open');
+        btn.textContent = 'Menu';
       }
     });
   }
-  
-  // Add glow effect on scroll
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const glowIntensity = Math.min(scrolled / 100, 1);
-    
-    if (navbar && navbar.classList.contains('scrolled')) {
-      navbar.style.boxShadow = `
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05),
-        0 0 ${20 + glowIntensity * 30}px rgba(0, 212, 255, ${0.1 + glowIntensity * 0.2})
-      `;
+
+  /* ---------- Hero slideshow ---------- */
+  function heroSlideshow() {
+    const hero = document.getElementById('hero');
+    const slides = hero ? hero.querySelectorAll('.hero__slide') : [];
+    if (!hero || slides.length < 2) return;
+
+    const dnavCurrent = document.getElementById('dnav-current');
+    const dnavTotal   = document.getElementById('dnav-total');
+    const capLabel    = document.getElementById('hero-cap-label');
+    const capTitle    = document.getElementById('hero-cap-title');
+    const capMeta     = document.getElementById('hero-cap-meta');
+    const ticks       = Array.from(document.querySelectorAll('.hero__tick'));
+
+    if (dnavTotal) dnavTotal.textContent = String(slides.length).padStart(2, '0');
+
+    let index = 0;
+    const INTERVAL = 5800;
+    const TRANSITION = 1400;
+    let timer = null;
+
+    function applyCaption(slide) {
+      if (capLabel) capLabel.textContent = slide.dataset.label || 'Featured';
+      if (capTitle) capTitle.innerHTML  = slide.dataset.title || '';
+      if (capMeta)  capMeta.textContent  = slide.dataset.meta  || '';
+
+      document.querySelectorAll('.hero__cap-fade').forEach((el) => {
+        el.classList.remove('is-shown');
+        void el.offsetWidth;
+        el.classList.add('is-shown');
+      });
+
+      if (dnavCurrent) dnavCurrent.textContent = String(index + 1).padStart(2, '0');
+      ticks.forEach((t, ti) => t.classList.toggle('is-active', ti === index));
     }
-  });
-}
 
-// ===== Utility Functions =====
+    function setSlide(nextIndex) {
+      const from = slides[index];
+      const to = slides[(nextIndex + slides.length) % slides.length];
+      if (from === to) return;
 
-// Debounce function
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
+      slides.forEach((s) => {
+        if (s !== from && s !== to) s.classList.remove('is-entering', 'is-exiting');
+      });
 
-// Throttle function
-function throttle(func, limit) {
-  let inThrottle;
-  return function() {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      to.classList.add('is-entering');
+      to.classList.add('is-active');
+      void to.offsetWidth;
+      from.classList.add('is-exiting');
+
+      index = Array.prototype.indexOf.call(slides, to);
+      applyCaption(to);
+
+      setTimeout(() => {
+        from.classList.remove('is-active', 'is-exiting');
+        to.classList.remove('is-entering');
+      }, TRANSITION);
     }
-  };
-}
 
-// Smooth scroll to element
-function smoothScrollTo(element) {
-  element.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
-}
+    // Set initial caption text without triggering the animation immediately
+    if (capLabel) capLabel.textContent = slides[0].dataset.label || 'Featured';
+    if (capTitle) capTitle.innerHTML  = slides[0].dataset.title || '';
+    if (capMeta)  capMeta.textContent  = slides[0].dataset.meta  || '';
+    if (dnavCurrent) dnavCurrent.textContent = '01';
+    ticks.forEach((t, ti) => t.classList.toggle('is-active', ti === 0));
 
-// Check if element is in viewport
-function isInViewport(element) {
-  const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
+    function startTimer() {
+      stopTimer();
+      timer = setInterval(() => setSlide(index + 1), INTERVAL);
+    }
+    function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
 
-// Format date
-function formatDate(date) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(date).toLocaleDateString('ja-JP', options);
-}
+    const splashEl = document.getElementById('splash');
+    const splashDelay = splashEl ? 2500 : 800;
 
-// Truncate text
-function truncateText(text, maxLength) {
-  if (text.length <= maxLength) return text;
-  return text.substr(0, maxLength) + '...';
-}
+    // Trigger first caption fade just before the curtains finish opening
+    setTimeout(() => {
+      document.querySelectorAll('.hero__cap-fade').forEach((el) => el.classList.add('is-shown'));
+    }, splashDelay - 800);
 
-// Generate random ID
-function generateId() {
-  return Math.random().toString(36).substr(2, 9);
-}
+    setTimeout(startTimer, splashDelay);
 
-// Export functions for use in other modules
-window.SyntheraUtils = {
-  debounce,
-  throttle,
-  smoothScrollTo,
-  isInViewport,
-  formatDate,
-  truncateText,
-  generateId
-};
+    ticks.forEach((t) => {
+      t.addEventListener('click', () => {
+        const target = Number(t.dataset.go);
+        if (Number.isNaN(target) || target === index) return;
+        setSlide(target);
+        startTimer();
+      });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopTimer();
+      else startTimer();
+    });
+  }
+
+  /* ---------- Year ---------- */
+  function fillYear() {
+    const el = document.getElementById('footer-year');
+    if (el) el.textContent = String(new Date().getFullYear());
+  }
+
+  /* ---------- Compatibility shim for any old .nav (#nav) on subpages ---------- */
+  function legacyNav() {
+    const navEl = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    if (navEl && toggle) {
+      toggle.addEventListener('click', () => navEl.classList.toggle('is-open'));
+      navEl.querySelectorAll('.nav__link').forEach((link) => {
+        link.addEventListener('click', () => navEl.classList.remove('is-open'));
+      });
+    }
+  }
+})();

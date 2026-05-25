@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToSche — Today is yours. | Synthera SUMI</title>
+    <meta name="description" content="ToSche（トシェ）は、目標・タスク・予定を一つにまとめ、AIエージェントが計画まで立てる日本語ネイティブの個人タスク管理アプリ。月¥1,200以下から。">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ToSche — Today is yours.">
+    <meta property="og:description" content="日本語ネイティブ × AI × 個人タスク管理。Motion・Sunsamaの3〜4割の価格で、今日をきみのものに。">
+    <meta property="og:image" content="image/figma/tosche.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/site.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+</head>
+<body class="splash-done" style="--accent:#E8B23A;">
+
+    <header class="dnav" id="dnav">
+        <a href="index.html" class="dnav__brand">SYNTHERA</a>
+        <div class="dnav__right">
+            <span class="dnav__counter">SUMI · 01</span>
+            <button type="button" class="dnav__menu-btn" id="menu-btn">Menu</button>
+        </div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <ul class="menu__list">
+            <li class="menu__item"><a href="index.html">Home <em>— 00</em></a></li>
+            <li class="menu__item"><a href="sumi.html">SUMI <em>— 01</em></a></li>
+            <li class="menu__item"><a href="about.html">About <em>— 02</em></a></li>
+            <li class="menu__item"><a href="founder.html">Founder <em>— 03</em></a></li>
+            <li class="menu__item"><a href="contact.html">Contact <em>— 04</em></a></li>
+        </ul>
+        <div class="menu__bottom">
+            <span>© 2026 Synthera</span>
+            <!-- TODO: Twitch URL -->
+            <a href="#" data-placeholder="twitch">Twitch</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ===== Product hero ===== -->
+        <section class="prod-hero" data-theme="dark">
+            <div class="prod-hero__inner">
+                <div class="prod-hero__copy">
+                    <span class="prod-hero__eyebrow">SUMI · Product / 個人版</span>
+                    <h1 class="prod-hero__title">ToSche</h1>
+                    <p class="prod-hero__tagline">Today is yours. — <em>今日は、きみのものだ。</em></p>
+                    <p class="prod-hero__sub">
+                        目標・タスク・予定を一つにまとめ、AIエージェントが計画まで立てる。日本語ネイティブの、個人のための新しいタスク管理。
+                    </p>
+                    <div class="prod-hero__actions btn-row">
+                        <!-- TODO: App Store URL -->
+                        <a href="#" data-placeholder="appstore" class="btn">App Store でダウンロード</a>
+                        <!-- TODO: Google Play URL -->
+                        <span class="store-badge" data-placeholder="googleplay">Google Play · Coming Soon</span>
+                    </div>
+                </div>
+                <div class="prod-hero__visual">
+                    <img src="image/figma/tosche.png" alt="ToSche app interface">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Problem ===== -->
+        <section class="prod-block" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Problem — 01</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">やることは多いのに、<br>続かない。</h2>
+                    <p class="prod-block__text fade-up">
+                        ToDo アプリは続かない。カレンダーは予定だけ。目標はいつの間にか忘れる。そして——<strong>日本語で、AIに任せられる個人タスク管理</strong>が、これまで存在しなかった。海外製の高機能ツールは月 $19〜$20。日本人の感覚には、高すぎる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Solution / features ===== -->
+        <section class="prod-block prod-block--soft" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Solution — 02</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">AIが、計画を立ててくれる。</h2>
+                    <div class="feature-list">
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">01</span>
+                            <div>
+                                <h3 class="feature-list__name">目標・タスク・予定を一つに</h3>
+                                <p class="feature-list__desc">バラバラだった「やりたいこと」と「やること」と「予定」を、ひとつの流れにまとめます。</p>
+                            </div>
+                        </div>
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">02</span>
+                            <div>
+                                <h3 class="feature-list__name">AIエージェントが計画を立てる</h3>
+                                <p class="feature-list__desc">「いつ・何を・どれだけ」をAIが提案。あなたは決めるだけ。続けられる現実的な計画に落とし込みます。</p>
+                            </div>
+                        </div>
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">03</span>
+                            <div>
+                                <h3 class="feature-list__name">日本語ネイティブ</h3>
+                                <p class="feature-list__desc">翻訳された海外ツールではなく、日本語で考え、日本語で話しかけられる。最初から日本人のために。</p>
+                            </div>
+                        </div>
+                        <div class="feature-list__row fade-up">
+                            <span class="feature-list__no">04</span>
+                            <div>
+                                <h3 class="feature-list__name">圧倒的に手頃な価格</h3>
+                                <p class="feature-list__desc">海外の競合の3〜4割の価格。続けられる金額だから、習慣になる。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Pricing ===== -->
+        <section class="prod-block" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Pricing — 03</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">続けられる、価格で。</h2>
+                    <div class="pricing">
+                        <div class="price-card fade-up">
+                            <span class="price-card__tier">Basic</span>
+                            <span class="price-card__price">¥300<small>/ 月</small></span>
+                            <p class="price-card__note">タスク・目標・予定の管理を、まずはシンプルに。</p>
+                        </div>
+                        <div class="price-card price-card--featured fade-up">
+                            <span class="price-card__tier">AI Standard</span>
+                            <span class="price-card__price">¥1,200<small>/ 月</small></span>
+                            <p class="price-card__note">AIエージェントが計画を立てる、いちばん人気のプラン。</p>
+                        </div>
+                        <div class="price-card fade-up">
+                            <span class="price-card__tier">AI Pro</span>
+                            <span class="price-card__price">¥2,000<small>/ 月</small></span>
+                            <p class="price-card__note">AIをフルに使い倒したい人へ。すべての機能を上限なく。</p>
+                        </div>
+                    </div>
+                    <p class="prod-block__text fade-up">
+                        Motion・Sunsama（$19〜$20）の <strong>3〜4割の価格</strong>。日本人のサブスク許容感に、完璧に整合します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Positioning ===== -->
+        <section class="prod-block prod-block--soft" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Positioning — 04</span>
+                <div>
+                    <div class="highlight fade-up">
+                        <div class="highlight__kicker">The empty seat</div>
+                        <h2 class="highlight__title">「日本語ネイティブ × AI × 個人タスク管理 × 月¥1,200以下」は、<em>これまで完全な空席だった。</em></h2>
+                        <p class="highlight__text">ToSche は、その空席に座る最初のプロダクトです。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Gallery ===== -->
+        <section class="prod-block" data-theme="light">
+            <div class="prod-block__inner">
+                <span class="prod-block__label">Gallery — 05</span>
+                <div>
+                    <h2 class="prod-block__title fade-up">触って、惚れる。</h2>
+                    <div class="gallery">
+                        <figure class="fade-up"><img src="image/figma/tosche-detail.jpg" alt="ToSche detail screen" loading="lazy"></figure>
+                        <figure class="fade-up"><img src="image/figma/tosche-product.jpg" alt="ToSche product screen" loading="lazy"></figure>
+                        <figure class="fade-up"><img src="image/hero/03-tosche-today.jpg" alt="ToSche today view" loading="lazy"></figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Closing ===== -->
+        <section class="closing" data-theme="dark">
+            <div class="closing__inner">
+                <span class="closing__label">Get ToSche</span>
+                <div>
+                    <h2 class="closing__title">Today is <em>yours.</em></h2>
+                    <div class="closing__actions">
+                        <!-- TODO: App Store URL -->
+                        <a href="#" data-placeholder="appstore">App Store でダウンロード</a>
+                        <!-- TODO: Google Play URL -->
+                        <a href="#" data-placeholder="googleplay">Google Play (Coming Soon)</a>
+                        <a href="sumi.html">Back to SUMI</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" data-theme="dark">
+        <div class="footer__inner">
+            <p class="footer__statement fade-up">
+                We build SaaS that enriches life.<br>
+                One engine — SUMI — many products, from Tokyo.
+            </p>
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <h4>Site</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sumi.html">SUMI</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="founder.html">Founder</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="tosche.html">ToSche</a></li>
+                        <li><a href="tosche-biz.html">ToSche for Biz</a></li>
+                        <li><a href="aibo.html">Aibo</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Social</h4>
+                    <ul>
+                        <!-- TODO: Twitch URL -->
+                        <li><a href="#" data-placeholder="twitch" rel="noopener">Twitch</a></li>
+                        <!-- TODO: X (Twitter) URL -->
+                        <li><a href="#" data-placeholder="x" rel="noopener">X (Twitter)</a></li>
+                        <!-- TODO: YouTube URL -->
+                        <li><a href="#" data-placeholder="youtube" rel="noopener">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__brand">SYNTHERA</div>
+            <div class="footer__bottom">
+                <span>© <span id="footer-year">2026</span> Synthera</span>
+                <span>Stay Grounded, Build the Future.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

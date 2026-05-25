@@ -36,8 +36,7 @@ synthera.website/
 │   ├── main.js            # メイン機能
 │   ├── navigation.js      # ナビゲーション機能
 │   ├── animations.js      # アニメーション機能
-│   ├── projects-data.js   # SNSタブ用グリッドデータ読み込み
-│   └── development-data.js # アプリ開発タブ用データ読み込み
+│   └── note-data.js       # Noteページ用データ読み込み
 ├── scripts/                # 補助スクリプト
 │   ├── sync_notion_grids.py   # Notion同期ユーティリティ（push/pull）
 │   ├── sync_app_development.py # アプリ開発データ同期ユーティリティ
@@ -83,30 +82,10 @@ cd synthera.website
 # 例: 環境変数を設定してから実行
 export NOTION_API_TOKEN="your_notion_token"
 
-# SNSタブ: Notion ←→ JSON
-python3 scripts/sync_notion_grids.py pull         # Notion → data/sns_grids.json
-python3 scripts/sync_notion_grids.py push         # 静的データ → Notion
-python3 scripts/sync_notion_grids.py push --reset # 既存レコードをアーカイブしてから同期
-
 # Noteページ: Notion ←→ JSON
 python3 scripts/sync_note_articles.py pull
 python3 scripts/sync_note_articles.py push
 python3 scripts/sync_note_articles.py push --reset
-
-# 個人ライティングタブ: Notion ←→ JSON
-python3 scripts/sync_writing_articles.py pull
-python3 scripts/sync_writing_articles.py push
-python3 scripts/sync_writing_articles.py push --reset
-
-# ECタブ: Notion ←→ JSON
-python3 scripts/sync_ec_projects.py pull
-python3 scripts/sync_ec_projects.py push
-python3 scripts/sync_ec_projects.py push --reset
-
-# アプリ開発タブ: Notion ←→ JSON
-python3 scripts/sync_app_development.py pull
-python3 scripts/sync_app_development.py push
-python3 scripts/sync_app_development.py push --reset
 
 # pull コマンドは `--output` オプションで任意パスへ出力可能
 python3 scripts/sync_app_development.py pull --output tmp/dev.json
@@ -161,12 +140,8 @@ php -S localhost:8000
 - 4つの事業領域の詳細
 - タブ切り替えインターフェース
 - プロジェクトカードの3Dホバー効果
-- SNSタブは `data/sns_grids.json` を読み込み、Notionの内容を反映
-- Noteページは `data/note_articles.json` を読み込み、Notionの内容を反映
-- 個人ライティングタブは `data/writing_articles.json` を読み込み、Notionの内容を反映
-- ECタブは `data/ec_projects.json` を読み込み、Notionの内容を反映
-- アプリ開発タブは `data/dev_projects.json` を読み込み、Notionの内容を反映
-- EC タブの画像は Notion の `Project Image` プロパティにアップロード／外部URLを指定すると反映されます。
+- SNS / Development / Writing / EC タブは `projects.html` に静的記述で管理
+- SNSタブは「Podcast / YouTubeチャンネル運用 / 会社関連SNS」に区分けして表示
 
 ### ノートページ
 - Notionデータベースからの記事取得（`data/note_articles.json`）

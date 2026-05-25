@@ -1,440 +1,141 @@
-// ===== Animations JavaScript =====
+/* ==========================================================================
+   SYNTHERA — Scroll-triggered reveal animations
+   - Resilient: works with IntersectionObserver, scroll fallback, and a
+     final "reveal anything in viewport" timer so animations never get stuck.
+   ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', function() {
-  initAnimations();
-});
+(function () {
+  'use strict';
 
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initAnimations();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
-});
 
-function initAnimations() {
-  initTextAnimations();
-  initCardAnimations();
-  initButtonAnimations();
-  initTabAnimations();
-  initFilterAnimations();
-  initHoverEffects();
-}
+  function init() {
+    setupReveals();
+    heroRevealOnLoad();
+  }
 
-// ===== Text Animations =====
-function initTextAnimations() {
-  // Split text into characters for animation
-  const textElements = document.querySelectorAll('.title-word[data-word]');
-  
-  textElements.forEach(element => {
-    const text = element.dataset.word;
-    element.innerHTML = '';
-    
-    for (let i = 0; i < text.length; i++) {
-      const span = document.createElement('span');
-      span.textContent = text[i];
-      span.style.opacity = '0';
-      span.style.transform = 'translateY(100px)';
-      span.style.display = 'inline-block';
-      element.appendChild(span);
+  function isInViewport(el, margin) {
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (vh === 0) return true; // headless / hidden viewports — assume visible
+    const top = r.top;
+    const bottom = r.bottom;
+    return bottom > 0 && top < vh - (margin || 0);
+  }
+
+  function revealEl(el, delay) {
+    setTimeout(() => {
+      el.classList.add('is-revealed');
+      // Cascade reveal masks inside (each with own stagger)
+      el.querySelectorAll('.mask').forEach((m, mi) => {
+        setTimeout(() => m.classList.add('is-revealed'), mi * 90);
+      });
+    }, delay || 0);
+  }
+
+  function setupReveals() {
+    const fadeTargets = Array.from(document.querySelectorAll('.fade-up, .curtain, .case__photo'));
+    const maskGroups = new Map();
+
+    document.querySelectorAll('.mask').forEach((m) => {
+      const group = m.closest('h1, h2, h3, .works__title, .hero__title, .cta__title, .about-hero__title, .projects-hero__title, .contact-hero__title') || m.parentElement;
+      if (!group) return;
+      if (!maskGroups.has(group)) maskGroups.set(group, []);
+      maskGroups.get(group).push(m);
+    });
+
+    // Stagger index
+    const counts = new Map();
+    fadeTargets.forEach((el) => {
+      const p = el.parentElement; if (!p) return;
+      const i = counts.get(p) || 0;
+      counts.set(p, i + 1);
+      el.dataset.staggerIndex = String(i);
+    });
+
+    function revealMaskGroup(group) {
+      const masks = maskGroups.get(group) || [];
+      masks.forEach((m, mi) => setTimeout(() => m.classList.add('is-revealed'), mi * 90));
     }
-    
-    // Animate characters
-    const spans = element.querySelectorAll('span');
-    spans.forEach((span, index) => {
+
+    // Try IntersectionObserver
+    let usedObserver = false;
+    if ('IntersectionObserver' in window) {
+      try {
+        const opts = { rootMargin: '0px 0px -6% 0px', threshold: 0.01 };
+        const fadeObs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const idx = Number(e.target.dataset.staggerIndex || 0);
+            revealEl(e.target, Math.min(idx * 70, 350));
+            fadeObs.unobserve(e.target);
+          });
+        }, opts);
+        fadeTargets.forEach((el) => fadeObs.observe(el));
+
+        const maskObs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            revealMaskGroup(e.target);
+            maskObs.unobserve(e.target);
+          });
+        }, opts);
+        maskGroups.forEach((_, g) => maskObs.observe(g));
+        usedObserver = true;
+      } catch (_) { /* fall through */ }
+    }
+
+    // Scroll fallback — reveal anything that becomes visible
+    function scanReveal() {
+      fadeTargets.forEach((el) => {
+        if (el.classList.contains('is-revealed')) return;
+        if (isInViewport(el, 40)) {
+          const idx = Number(el.dataset.staggerIndex || 0);
+          revealEl(el, Math.min(idx * 70, 350));
+        }
+      });
+      maskGroups.forEach((masks, group) => {
+        if (masks.every((m) => m.classList.contains('is-revealed'))) return;
+        if (isInViewport(group, 40)) revealMaskGroup(group);
+      });
+    }
+
+    scanReveal();
+    window.addEventListener('scroll', scanReveal, { passive: true });
+    window.addEventListener('resize', scanReveal);
+
+    // Final safety: after 1.2s, force-reveal anything still hidden in viewport.
+    // After 4s, reveal everything regardless (prevents "stuck invisible" content
+    // in headless / preview environments where IntersectionObserver may not fire).
+    setTimeout(scanReveal, 600);
+    setTimeout(() => {
+      fadeTargets.forEach((el) => el.classList.add('is-revealed'));
+      maskGroups.forEach((masks) => masks.forEach((m) => m.classList.add('is-revealed')));
+    }, 4000);
+  }
+
+  /* ---------- Hero masks reveal on load ---------- */
+  function heroRevealOnLoad() {
+    const hero = document.querySelector('.hero, .about-hero');
+    if (!hero) return;
+    // If the homepage hero is doing its full intro animation, wait until the
+    // photo clip-in finishes (~700ms in) before kicking off the text reveals.
+    const intro = hero.classList.contains('is-intro');
+    const start = intro ? 700 : 200;
+
+    requestAnimationFrame(() => {
       setTimeout(() => {
-        span.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        span.style.opacity = '1';
-        span.style.transform = 'translateY(0)';
-      }, index * 50);
-    });
-  });
-}
-
-// ===== Card Animations =====
-function initCardAnimations() {
-  // Area cards hover effect
-  const areaCards = document.querySelectorAll('.area-card');
-  
-  areaCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-8px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0) scale(1)';
-    });
-  });
-  
-  // Project cards 3D effect
-  const projectCards = document.querySelectorAll('.project-card, .article-card');
-  
-  projectCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-      
-      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(4px)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-    });
-  });
-}
-
-// ===== Button Animations =====
-function initButtonAnimations() {
-  const buttons = document.querySelectorAll('.cta-button, .load-more-button, .tab-button, .filter-button');
-  
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-      button.style.transform = 'translateY(-2px)';
-    });
-    
-    button.addEventListener('mouseleave', () => {
-      button.style.transform = 'translateY(0)';
-    });
-    
-    button.addEventListener('mousedown', () => {
-      button.style.transform = 'translateY(0) scale(0.98)';
-    });
-    
-    button.addEventListener('mouseup', () => {
-      button.style.transform = 'translateY(-2px) scale(1)';
-    });
-  });
-}
-
-// ===== Tab Animations =====
-function initTabAnimations() {
-  const tabButtons = document.querySelectorAll('.tab-button');
-  const tabContents = document.querySelectorAll('.tab-content');
-  
-  tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const targetTab = button.dataset.tab;
-      
-      // Remove active class from all buttons and contents
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-      tabContents.forEach(content => content.classList.remove('active'));
-      
-      // Add active class to clicked button
-      button.classList.add('active');
-      
-      // Show target content with animation
-      const targetContent = document.getElementById(targetTab + '-content');
-      if (targetContent) {
-        targetContent.classList.add('active');
-        
-        // Animate content appearance
-        targetContent.style.opacity = '0';
-        targetContent.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-          targetContent.style.transition = 'all 0.6s ease';
-          targetContent.style.opacity = '1';
-          targetContent.style.transform = 'translateY(0)';
-        }, 50);
-      }
-    });
-  });
-}
-
-// ===== Filter Animations =====
-function initFilterAnimations() {
-  const filterButtons = document.querySelectorAll('.filter-button');
-  
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Remove active class from all buttons
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      
-      // Add active class to clicked button
-      button.classList.add('active');
-      
-      // Animate button click
-      button.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        button.style.transform = 'scale(1)';
-      }, 150);
-    });
-  });
-}
-
-// ===== Hover Effects =====
-function initHoverEffects() {
-  // Glow effect for interactive elements
-  const glowElements = document.querySelectorAll('.area-card, .project-card, .article-card, .value-card');
-  
-  glowElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-      element.style.boxShadow = '0 0 18px rgba(0, 212, 255, 0.18)';
-    });
-    
-    element.addEventListener('mouseleave', () => {
-      element.style.boxShadow = '';
-    });
-  });
-  
-  // Icon animations
-  const icons = document.querySelectorAll('.card-icon svg, .tab-icon svg');
-  
-  icons.forEach(icon => {
-    icon.addEventListener('mouseenter', () => {
-      icon.style.transform = 'scale(1.05) rotate(3deg)';
-    });
-    
-    icon.addEventListener('mouseleave', () => {
-      icon.style.transform = 'scale(1) rotate(0deg)';
-    });
-  });
-}
-
-// ===== Scroll-triggered Animations =====
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        
-        // Stagger animation for child elements
-        const children = entry.target.querySelectorAll('.area-card, .vm-item, .value-card, .timeline-item');
-        children.forEach((child, index) => {
-          setTimeout(() => {
-            child.classList.add('animate-in');
-          }, index * 100);
+        hero.querySelectorAll('.mask').forEach((m, i) => {
+          setTimeout(() => m.classList.add('is-revealed'), i * 130);
         });
-      }
+        hero.querySelectorAll('.fade-up').forEach((m, i) => {
+          setTimeout(() => m.classList.add('is-revealed'), 380 + i * 100);
+        });
+      }, start);
     });
-  }, observerOptions);
-  
-  // Observe sections
-  const sections = document.querySelectorAll('section');
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-}
-
-// ===== Loading Animations =====
-function showLoadingAnimation(element) {
-  element.classList.add('loading');
-  
-  // Add skeleton loading effect
-  const skeletonElements = element.querySelectorAll('.skeleton');
-  skeletonElements.forEach(skeleton => {
-    skeleton.style.animation = 'loading 1.5s infinite';
-  });
-}
-
-function hideLoadingAnimation(element) {
-  element.classList.remove('loading');
-  
-  // Remove skeleton loading effect
-  const skeletonElements = element.querySelectorAll('.skeleton');
-  skeletonElements.forEach(skeleton => {
-    skeleton.style.animation = '';
-  });
-}
-
-// ===== Page Transition Animations =====
-function initPageTransitions() {
-  // Fade in animation when page loads
-  document.body.style.opacity = '0';
-  document.body.style.transform = 'translateY(20px)';
-  
-  setTimeout(() => {
-    document.body.style.transition = 'all 0.6s ease';
-    document.body.style.opacity = '1';
-    document.body.style.transform = 'translateY(0)';
-  }, 100);
-  
-  // Link click animations
-  const links = document.querySelectorAll('a[href$=".html"]');
-  
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      // Fade out animation
-      document.body.style.transition = 'all 0.3s ease';
-      document.body.style.opacity = '0';
-      document.body.style.transform = 'translateY(-20px)';
-      
-      // Navigate after animation
-      setTimeout(() => {
-        window.location.href = link.href;
-      }, 300);
-    });
-  });
-}
-
-// ===== Utility Functions =====
-function addAnimationClass(element, className, duration = 1000) {
-  element.classList.add(className);
-  
-  setTimeout(() => {
-    element.classList.remove(className);
-  }, duration);
-}
-
-function animateElement(element, animation, duration = 1000) {
-  element.style.animation = `${animation} ${duration}ms ease`;
-  
-  setTimeout(() => {
-    element.style.animation = '';
-  }, duration);
-}
-
-// Initialize all animations when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  initScrollAnimations();
-  initPageTransitions();
-});
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
   }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
-
-// Handle browser back/forward button (restore from cache)
-window.addEventListener('pageshow', function(event) {
-  // If page was restored from cache, reinitialize
-  if (event.persisted) {
-    initScrollAnimations();
-    initPageTransitions();
-  }
-});
-
-// Export animation functions
-window.SyntheraAnimations = {
-  showLoadingAnimation,
-  hideLoadingAnimation,
-  addAnimationClass,
-  animateElement
-};
+})();

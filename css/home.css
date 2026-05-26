@@ -320,7 +320,7 @@ body.menu-open { overflow: hidden; }
 .hero__caption {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  padding: 0 32px 56px;
+  padding: 130px 32px 56px;
   color: #fff;
   z-index: 5;
   display: grid;
@@ -328,7 +328,10 @@ body.menu-open { overflow: hidden; }
   align-items: flex-end;
   gap: 32px;
   pointer-events: none;
+  /* どの画像の上でも文字が読めるよう、下部に控えめなスクリムを敷く */
+  background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 45%, rgba(0,0,0,0) 100%);
 }
+.hero__cap-label, .hero__cap-title { text-shadow: 0 2px 16px rgba(0,0,0,0.45); }
 
 .hero__cap-left {
   display: flex;

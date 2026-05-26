@@ -132,10 +132,17 @@
     const TRANSITION = 1400;
     let timer = null;
 
+    // スマホ幅では data-*-sp（あれば）を優先し、画像に合わせた文言を出し分ける
+    const mqSP = window.matchMedia('(max-width: 900px)');
+    function capPick(slide, key) {
+      // スマホ幅で data-*-sp が「存在すれば」（空文字＝キャプション非表示も許容）優先
+      return (mqSP.matches && (key + 'Sp') in slide.dataset) ? slide.dataset[key + 'Sp'] : slide.dataset[key];
+    }
+
     function applyCaption(slide) {
-      if (capLabel) capLabel.textContent = slide.dataset.label || 'Featured';
-      if (capTitle) capTitle.innerHTML  = slide.dataset.title || '';
-      if (capMeta)  capMeta.textContent  = slide.dataset.meta  || '';
+      if (capLabel) capLabel.textContent = capPick(slide, 'label') || 'Featured';
+      if (capTitle) capTitle.innerHTML  = capPick(slide, 'title') || '';
+      if (capMeta)  capMeta.textContent  = capPick(slide, 'meta')  || '';
 
       document.querySelectorAll('.hero__cap-fade').forEach((el) => {
         el.classList.remove('is-shown');
@@ -171,9 +178,9 @@
     }
 
     // Set initial caption text without triggering the animation immediately
-    if (capLabel) capLabel.textContent = slides[0].dataset.label || 'Featured';
-    if (capTitle) capTitle.innerHTML  = slides[0].dataset.title || '';
-    if (capMeta)  capMeta.textContent  = slides[0].dataset.meta  || '';
+    if (capLabel) capLabel.textContent = capPick(slides[0], 'label') || 'Featured';
+    if (capTitle) capTitle.innerHTML  = capPick(slides[0], 'title') || '';
+    if (capMeta)  capMeta.textContent  = capPick(slides[0], 'meta')  || '';
     if (dnavCurrent) dnavCurrent.textContent = '01';
     ticks.forEach((t, ti) => t.classList.toggle('is-active', ti === 0));
 
@@ -206,6 +213,9 @@
       if (document.hidden) stopTimer();
       else startTimer();
     });
+
+    // 画面幅がPC/スマホの境界を跨いだら、現在スライドのキャプションを出し分け直す
+    mqSP.addEventListener('change', () => applyCaption(slides[index]));
   }
 
   /* ---------- Year ---------- */

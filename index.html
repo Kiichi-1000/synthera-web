@@ -67,7 +67,9 @@
         <section class="hero hero--image" id="hero" data-theme="dark">
             <div class="hero__slides" id="hero-slides">
 
-                <article class="hero__slide is-active" data-slide="0">
+                <article class="hero__slide is-active" data-slide="0"
+                         data-label="Synthera" data-title="ともにつくる、<em>愛される未来。</em>"
+                         data-label-sp="Synthera" data-title-sp="ともにつくる、<em>愛される未来。</em>">
                     <div class="hero__media" style="--bg-pc:url('image/hero/pc-hero1.jpg');--bg-sp:url('image/hero/phone-hero1.jpg')">
                         <picture>
                             <source media="(max-width: 900px)" srcset="image/hero/phone-hero1.jpg">
@@ -76,7 +78,9 @@
                     </div>
                 </article>
 
-                <article class="hero__slide" data-slide="1">
+                <article class="hero__slide" data-slide="1"
+                         data-label="Product · TOMORI" data-title="全ての経験を、<em>無駄にしない。</em>"
+                         data-label-sp="" data-title-sp="">
                     <div class="hero__media" style="--bg-pc:url('image/hero/pc-hero2.jpg');--bg-sp:url('image/hero/phone-hero2.jpg')">
                         <picture>
                             <source media="(max-width: 900px)" srcset="image/hero/phone-hero2.jpg">
@@ -85,7 +89,9 @@
                     </div>
                 </article>
 
-                <article class="hero__slide" data-slide="2">
+                <article class="hero__slide" data-slide="2"
+                         data-label="SUMI" data-title="一つのエンジンから、<em>多くのプロダクトを。</em>"
+                         data-label-sp="" data-title-sp="">
                     <div class="hero__media" style="--bg-pc:url('image/hero/pc-hero3.jpg');--bg-sp:url('image/hero/phone-hero3.jpg')">
                         <picture>
                             <source media="(max-width: 900px)" srcset="image/hero/phone-hero3.jpg">
@@ -94,7 +100,9 @@
                     </div>
                 </article>
 
-                <article class="hero__slide" data-slide="3">
+                <article class="hero__slide" data-slide="3"
+                         data-label="SUMI · Tokyo" data-title="東京から、<em>世界水準のSaaSを。</em>"
+                         data-label-sp="" data-title-sp="">
                     <div class="hero__media" style="--bg-pc:url('image/hero/pc-hero4.jpg');--bg-sp:url('image/hero/phone-hero4.jpg')">
                         <picture>
                             <source media="(max-width: 900px)" srcset="image/hero/phone-hero4.jpg">
@@ -103,7 +111,9 @@
                     </div>
                 </article>
 
-                <article class="hero__slide" data-slide="4">
+                <article class="hero__slide" data-slide="4"
+                         data-label="MTPA · 仮面診断" data-title="仮面で、<em>自分を知る。</em>"
+                         data-label-sp="SUMI · Tokyo" data-title-sp="東京から、<em>世界水準のSaaSを。</em>">
                     <div class="hero__media" style="--bg-pc:url('image/hero/pc-hero5.jpg');--bg-sp:url('image/hero/phone-hero5.jpg')">
                         <picture>
                             <source media="(max-width: 900px)" srcset="image/hero/phone-hero5.jpg">
@@ -112,7 +122,9 @@
                     </div>
                 </article>
 
-                <article class="hero__slide" data-slide="5">
+                <article class="hero__slide" data-slide="5"
+                         data-label="Synthera" data-title="Stay Grounded,<br><em>Build the Future.</em>"
+                         data-label-sp="Philosophy" data-title-sp="Stay Grounded,<br><em>Build the Future.</em>">
                     <div class="hero__media" style="--bg-pc:url('image/hero/pc-hero6.jpg');--bg-sp:url('image/hero/phone-hero6.jpg')">
                         <picture>
                             <source media="(max-width: 900px)" srcset="image/hero/phone-hero6.jpg">
@@ -130,6 +142,13 @@
                 <button type="button" class="hero__tick" data-go="3" aria-label="Slide 4"></button>
                 <button type="button" class="hero__tick" data-go="4" aria-label="Slide 5"></button>
                 <button type="button" class="hero__tick" data-go="5" aria-label="Slide 6"></button>
+            </div>
+
+            <div class="hero__caption">
+                <div class="hero__cap-left">
+                    <span class="hero__cap-label hero__cap-fade" id="hero-cap-label"></span>
+                    <h2 class="hero__cap-title hero__cap-fade" id="hero-cap-title"></h2>
+                </div>
             </div>
         </section>
 

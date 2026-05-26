@@ -245,27 +245,36 @@ body.menu-open { overflow: hidden; }
 
 .hero__slides { position: absolute; inset: 0; }
 
+/* 1スライド＝1画像。切替はクロスディゾルブ（黒い余白なし・ワイプ無し）。
+   出ていく画像は新しい画像が完全に不透明になるまで背面で全画面を覆い続けるため、
+   どの瞬間も必ず画面全体が1枚の画像で埋まる（黒い空白が出ない）。 */
 .hero__slide {
   position: absolute; inset: 0;
   opacity: 0; visibility: hidden;
-  transition: opacity 1.2s var(--ease-quart), visibility 0s linear 1.2s;
 }
 
 .hero__slide.is-active {
   opacity: 1; visibility: visible;
-  transition: opacity 1.2s var(--ease-quart), visibility 0s;
   z-index: 2;
+}
+
+/* 退場中の画像は完全不透明のまま背面に残す（黒抜け防止） */
+.hero__slide.is-exiting {
+  opacity: 1; visibility: visible;
+  z-index: 1;
+}
+
+/* 入場中の画像だけを前面でフェードイン */
+.hero__slide.is-entering {
+  visibility: visible;
+  z-index: 3;
+  animation: hero-fade-in 1.2s var(--ease-quart) forwards;
 }
 
 .hero__media {
   position: absolute; inset: 0;
   overflow: hidden;
-  clip-path: inset(0 0 0 0);
 }
-
-/* hero セクション全体に画像を表示（cover）。
-   PC=pc-hero / スマホ=phone-hero のレスポンシブ画像でアスペクト比に適応。
-   ぼかし背景などの重複表示は無し（1スライド＝1画像）。 */
 .hero__media picture {
   display: block; width: 100%; height: 100%;
 }
@@ -274,39 +283,14 @@ body.menu-open { overflow: hidden; }
   object-fit: cover;
 }
 
-.hero.is-loaded .hero__slide.is-active .hero__media {
-  animation: hero-clip-in 1.4s var(--ease-expo) forwards;
-}
+/* 初回表示のみ、最初の画像をふわっとフェードイン */
 .hero.is-loaded .hero__slide.is-active .hero__media img {
-  animation: hero-image-in 1.6s var(--ease-expo) forwards;
+  animation: hero-fade-in 1.4s var(--ease-quart) forwards;
 }
 
-@keyframes hero-clip-in {
-  0%   { clip-path: inset(0 0 0 100%); }
-  100% { clip-path: inset(0 0 0 0); }
-}
-@keyframes hero-image-in {
+@keyframes hero-fade-in {
   0%   { opacity: 0; }
   100% { opacity: 1; }
-}
-
-.hero__slide.is-entering {
-  opacity: 1; visibility: visible;
-  z-index: 3;
-}
-.hero__slide.is-entering .hero__media {
-  animation: hero-clip-in 1.3s var(--ease-expo) forwards;
-}
-.hero__slide.is-entering .hero__media img {
-  animation: hero-image-in 1.5s var(--ease-expo) forwards;
-}
-
-.hero__slide.is-exiting .hero__media {
-  animation: hero-clip-out 1.3s var(--ease-expo) forwards;
-}
-@keyframes hero-clip-out {
-  0%   { clip-path: inset(0 0 0 0); }
-  100% { clip-path: inset(0 100% 0 0); }
 }
 
 .hero__cover {
@@ -355,9 +339,9 @@ body.menu-open { overflow: hidden; }
 .hero__cap-title {
   font-family: var(--font-serif), var(--font-jp);
   font-weight: 600;
-  font-size: clamp(34px, 6.4vw, 96px);
-  line-height: 1.02;
-  letter-spacing: -0.018em;
+  font-size: clamp(28px, 4.2vw, 56px);
+  line-height: 1.16;
+  letter-spacing: -0.012em;
   color: #fff;
 }
 .hero__cap-title em { font-style: italic; }

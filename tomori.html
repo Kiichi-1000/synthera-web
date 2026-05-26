@@ -21,6 +21,16 @@
     <link rel="stylesheet" href="css/site.css">
 
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+    <style>
+      /* スマホ版: TOMORI の LP 画像をヒーローとして全幅表示（PCは通常レイアウト） */
+      .lp-mobile { display: none; }
+      .lp-mobile img { width: 100%; display: block; }
+      @media (max-width: 900px) {
+        .prod-hero { display: none; }
+        .lp-mobile { display: block; }
+      }
+    </style>
 </head>
 <body class="splash-done" style="--accent:#1F6F8B;">
 
@@ -48,6 +58,11 @@
     </nav>
 
     <main>
+        <!-- ===== Mobile LP hero (smartphone only) ===== -->
+        <a class="lp-mobile" href="contact.html" aria-label="TOMORI — 導入を相談する">
+            <img src="image/TOMORI-lp.jpg" alt="TOMORI — 現場オペレーション特化のAI。属人性リスクを排除し、業務再現性を最大化させるAIオペレーション業務向けAIツール。" fetchpriority="high">
+        </a>
+
         <!-- ===== Product hero ===== -->
         <section class="prod-hero" data-theme="dark">
             <div class="prod-hero__inner">

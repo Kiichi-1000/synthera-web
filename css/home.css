@@ -263,9 +263,29 @@ body.menu-open { overflow: hidden; }
   clip-path: inset(0 0 0 0);
 }
 
+/* フルスクリーン表示: 背景は同じ画像をぼかして画面いっぱいに敷き、
+   前面は等比で画像全体を表示（拡大・トリミングしない） */
+.hero__media::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--bg-pc);
+  background-size: cover;
+  background-position: center;
+  filter: blur(34px) brightness(0.5);
+  transform: scale(1.15);
+  z-index: 0;
+}
+.hero__media picture {
+  position: relative; z-index: 1;
+  display: block; width: 100%; height: 100%;
+}
 .hero__media img {
+  position: relative; z-index: 1;
   width: 100%; height: 100%;
-  object-fit: contain;        /* 画像全体を等比で表示（拡大・トリミングしない） */
+  object-fit: contain;
+}
+@media (max-width: 900px) {
+  .hero__media::before { background-image: var(--bg-sp); }
 }
 
 .hero.is-loaded .hero__slide.is-active .hero__media {

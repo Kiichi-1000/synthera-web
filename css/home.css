@@ -943,9 +943,8 @@ body.menu-open { overflow: hidden; }
   /* Use small-viewport height so mobile browser chrome doesn't crop the hero */
   .hero { height: 100svh; }
 
-  /* Keep the focal area visible and avoid over-zoom on tall screens */
-  .hero__media img { transform: scale(1.06); object-position: center 32%; }
-  .hero__slide.is-active .hero__media img { transform: scale(1.1); }
+  /* 余計な拡大はせず、cover で全画面表示（中央基準） */
+  .hero__media img { transform: none; object-position: center; }
 
   /* Stronger bottom scrim so the caption is always legible over photos */
   .hero__cover {

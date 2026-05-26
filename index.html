@@ -63,56 +63,66 @@
 
     <main>
 
-        <!-- ===== Hero Slideshow ===== -->
-        <section class="hero" id="hero" data-theme="dark">
+        <!-- ===== Hero Slideshow (画像主体: PC=pc-heroN / スマホ=phone-heroN・キャプション無し) ===== -->
+        <section class="hero hero--image" id="hero" data-theme="dark">
             <div class="hero__slides" id="hero-slides">
 
-                <article class="hero__slide is-active" data-slide="0"
-                         data-label="Synthera"
-                         data-title="ともにつくる、<br><em>愛される未来。</em>"
-                         data-meta="Synthera / SaaS Company / Tokyo">
-                    <div class="hero__media"><img src="image/hero/phone-hero-synthera.jpg" alt="Synthera — innovative SaaS company"></div>
-                    <div class="hero__cover"></div>
+                <article class="hero__slide is-active" data-slide="0">
+                    <div class="hero__media">
+                        <picture>
+                            <source media="(max-width: 900px)" srcset="image/hero/phone-hero1.jpg">
+                            <img src="image/hero/pc-hero1.jpg" alt="Synthera — ともにつくる、愛される未来" fetchpriority="high">
+                        </picture>
+                    </div>
                 </article>
 
-                <article class="hero__slide" data-slide="1"
-                         data-label="Product · TOMORI"
-                         data-title="TOMORI —<br><em>the wisdom that stays.</em>"
-                         data-meta="SUMI · 現場AI / B2B">
-                    <div class="hero__media"><img src="image/hero/nightcity-phone-hero.jpg" alt="TOMORI — オペレーションAI"></div>
-                    <div class="hero__cover"></div>
+                <article class="hero__slide" data-slide="1">
+                    <div class="hero__media">
+                        <picture>
+                            <source media="(max-width: 900px)" srcset="image/hero/phone-hero2.jpg">
+                            <img src="image/hero/pc-hero2.jpg" alt="TOMORI — オペレーションAI">
+                        </picture>
+                    </div>
                 </article>
 
-                <article class="hero__slide" data-slide="2"
-                         data-label="Product · ToSche"
-                         data-title="ToSche —<br><em>Today is yours.</em>"
-                         data-meta="SUMI · iOS / 個人版">
-                    <div class="hero__media"><img src="image/hero/hero-tosche.jpg" alt="ToSche — personal task management app"></div>
-                    <div class="hero__cover"></div>
+                <article class="hero__slide" data-slide="2">
+                    <div class="hero__media">
+                        <picture>
+                            <source media="(max-width: 900px)" srcset="image/hero/phone-hero3.jpg">
+                            <img src="image/hero/pc-hero3.jpg" alt="ToSche">
+                        </picture>
+                    </div>
                 </article>
 
-                <article class="hero__slide" data-slide="3"
-                         data-label="Product · ToSche for Biz"
-                         data-title="Goals, <em>aligned.</em><br>Tasks, by AI."
-                         data-meta="SUMI · OKR × AI / B2B">
-                    <div class="hero__media"><img src="image/figma/operation-dx.png" alt="ToSche for Biz — OKR and AI task distribution"></div>
-                    <div class="hero__cover"></div>
+                <article class="hero__slide" data-slide="3">
+                    <div class="hero__media"><img src="image/figma/operation-dx.png" alt="ToSche for Biz — OKR × AIタスク配分"></div>
                 </article>
 
-                <article class="hero__slide" data-slide="4"
-                         data-label="SUMI"
-                         data-title="One engine,<br><em>many products.</em>"
-                         data-meta="SUMI / SaaS Business">
-                    <div class="hero__media"><img src="image/hero/nightcity.jpg" alt="SUMI — Synthera's SaaS engine"></div>
-                    <div class="hero__cover"></div>
+                <article class="hero__slide" data-slide="4">
+                    <div class="hero__media">
+                        <picture>
+                            <source media="(max-width: 900px)" srcset="image/hero/phone-hero4.jpg">
+                            <img src="image/hero/pc-hero4.jpg" alt="SUMI / Tokyo">
+                        </picture>
+                    </div>
                 </article>
 
-                <article class="hero__slide" data-slide="5"
-                         data-label="Philosophy"
-                         data-title="Stay Grounded,<br><em>Build the Future.</em>"
-                         data-meta="Synthera Manifesto">
-                    <div class="hero__media"><img src="image/hero/phone-hero.jpg" alt="Synthera manifesto"></div>
-                    <div class="hero__cover"></div>
+                <article class="hero__slide" data-slide="5">
+                    <div class="hero__media">
+                        <picture>
+                            <source media="(max-width: 900px)" srcset="image/hero/phone-hero5.jpg">
+                            <img src="image/hero/pc-hero5.jpg" alt="Synthera">
+                        </picture>
+                    </div>
+                </article>
+
+                <article class="hero__slide" data-slide="6">
+                    <div class="hero__media">
+                        <picture>
+                            <source media="(max-width: 900px)" srcset="image/hero/phone-hero6.jpg">
+                            <img src="image/hero/pc-hero6.jpg" alt="Synthera — Stay Grounded, Build the Future">
+                        </picture>
+                    </div>
                 </article>
 
             </div>
@@ -124,16 +134,7 @@
                 <button type="button" class="hero__tick" data-go="3" aria-label="Slide 4"></button>
                 <button type="button" class="hero__tick" data-go="4" aria-label="Slide 5"></button>
                 <button type="button" class="hero__tick" data-go="5" aria-label="Slide 6"></button>
-            </div>
-
-            <div class="hero__caption">
-                <div class="hero__cap-left">
-                    <span class="hero__cap-label hero__cap-fade" id="hero-cap-label">Synthera</span>
-                    <h2 class="hero__cap-title hero__cap-fade" id="hero-cap-title">ともにつくる、<br><em>愛される未来。</em></h2>
-                </div>
-                <div class="hero__cap-right">
-                    <span class="hero__cap-meta hero__cap-fade" id="hero-cap-meta">Synthera / SaaS Company / Tokyo</span>
-                </div>
+                <button type="button" class="hero__tick" data-go="6" aria-label="Slide 7"></button>
             </div>
         </section>
 

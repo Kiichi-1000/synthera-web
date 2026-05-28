@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /founder
+Disallow: /founder.html
 
 # Sitemap
 Sitemap: https://www.synthera.jp/sitemap.xml

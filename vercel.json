@@ -7,6 +7,8 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/aibo", "destination": "/tomori", "permanent": true },
-    { "source": "/aibo.html", "destination": "/tomori", "permanent": true }
+    { "source": "/aibo.html", "destination": "/tomori", "permanent": true },
+    { "source": "/founder", "destination": "/", "permanent": false },
+    { "source": "/founder.html", "destination": "/", "permanent": false }
   ]
 }

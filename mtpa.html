@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTPA — Mask Type Personalize App | Synthera</title>
+    <meta name="description" content="MTPA（仮面診断）は、学校・職場など「人前での自分」を4軸×16タイプで分類する外面性格診断。全40問・約5分・無料。Syntheraが運営する性格診断ウェブアプリケーション。">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mtpa.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo">SYNTHERA</a>
+            <ul class="nav__list">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="projects.html" class="nav__link is-active">Projects</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+            </ul>
+            <button type="button" class="nav__toggle" id="nav-toggle" aria-label="Menu">
+                <span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ===== Hero ===== -->
+        <section class="mtpa-hero" data-theme="light">
+            <span class="eyebrow mtpa-hero__eyebrow fade-up">Project · Web Application</span>
+            <h1 class="mtpa-hero__title">
+                <span class="mask"><span class="mask__inner">MTPA</span></span>
+            </h1>
+            <p class="mtpa-hero__sub fade-up">仮面診断 / Mask Type Personalize App</p>
+            <p class="mtpa-hero__lead fade-up">
+                内面（本来の自分）ではなく、学校・職場・初対面など「人前での自分（仮面）」のふるまいを<strong>4つの軸×16タイプ</strong>で分類する外面性格診断ツール。全40問・約5分で、あなたの「外面の性格」が4文字コードで分かります。
+            </p>
+
+            <dl class="mtpa-hero__meta fade-up">
+                <div><dt>Type</dt><dd>Web Application</dd></div>
+                <div><dt>Axes × Types</dt><dd>4 × 16</dd></div>
+                <div><dt>Questions</dt><dd>40 (5問×8ページ)</dd></div>
+                <div><dt>Time</dt><dd>約 5分</dd></div>
+            </dl>
+
+            <div class="mtpa-hero__cta fade-up">
+                <a href="https://masktype.synthera.jp/" target="_blank" rel="noopener" class="link-underline">Launch MTPA</a>
+                <a href="projects.html" class="link-underline">Back to projects</a>
+            </div>
+        </section>
+
+        <!-- ===== Character strip (4 lion masks) ===== -->
+        <section class="mtpa-strip" data-theme="light">
+            <div class="mtpa-strip__inner">
+                <article class="mtpa-card fade-up">
+                    <div class="mtpa-card__img curtain">
+                        <div class="curtain__inner">
+                            <img src="image/mtpa/01-suited-blue.png" alt="MTPA blue suited lion" onerror="this.src='image/figma/mtpa.png'">
+                        </div>
+                    </div>
+                    <span class="mtpa-card__label">Mask 01</span>
+                    <span class="mtpa-card__code">SFGP</span>
+                    <span class="mtpa-card__name">プロフェッショナル仮面<br><small style="color:var(--color-muted);">礼儀正しく真面目な表現者</small></span>
+                </article>
+
+                <article class="mtpa-card fade-up">
+                    <div class="mtpa-card__img curtain">
+                        <div class="curtain__inner">
+                            <img src="image/mtpa/02-casual-blazer.png" alt="MTPA casual blazer lion" onerror="this.src='image/figma/mtpa.png'">
+                        </div>
+                    </div>
+                    <span class="mtpa-card__label">Mask 02</span>
+                    <span class="mtpa-card__code">SFCQ</span>
+                    <span class="mtpa-card__name">フレンドリー実行者仮面<br><small style="color:var(--color-muted);">段取り上手な推進者</small></span>
+                </article>
+
+                <article class="mtpa-card fade-up">
+                    <div class="mtpa-card__img curtain">
+                        <div class="curtain__inner">
+                            <img src="image/mtpa/03-baroque.png" alt="MTPA baroque lion" onerror="this.src='image/figma/mtpa.png'">
+                        </div>
+                    </div>
+                    <span class="mtpa-card__label">Mask 03</span>
+                    <span class="mtpa-card__code">MFGP</span>
+                    <span class="mtpa-card__name">知的リーダー仮面<br><small style="color:var(--color-muted);">冷静で真摯な責任者</small></span>
+                </article>
+
+                <article class="mtpa-card fade-up">
+                    <div class="mtpa-card__img curtain">
+                        <div class="curtain__inner">
+                            <img src="image/mtpa/04-blue-suit-red-mask.png" alt="MTPA blue suit red mask lion" onerror="this.src='image/figma/mtpa.png'">
+                        </div>
+                    </div>
+                    <span class="mtpa-card__label">Mask 04</span>
+                    <span class="mtpa-card__code">SFCP</span>
+                    <span class="mtpa-card__name">明るいリーダー仮面<br><small style="color:var(--color-muted);">頼れる太陽リーダー</small></span>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== Requirements ===== -->
+        <section class="mtpa-block" id="requirements" data-theme="light">
+            <div class="mtpa-block__inner">
+                <div class="mtpa-block__label fade-up">
+                    <span class="eyebrow">01 · Requirements</span>
+                    <h2 class="mtpa-block__title">要件</h2>
+                </div>
+                <div class="mtpa-block__body">
+                    <p class="mtpa-block__intro fade-up">
+                        既存の性格診断（MBTI 等）は「内面」を測ることに重点を置いているが、職場・学校・初対面などの場面では「人前で出す自分（仮面）」と本来の自分にギャップがあることが多い。MTPA は、この「外面性格」のみを切り出して可視化することで、コミュニケーション改善・チームビルディング・自己理解を実用レベルで支援することを要件とする。
+                    </p>
+
+                    <div class="mtpa-items">
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">REQ-01</span>
+                            <h3 class="mtpa-item__head">対象は「外面の自分」のみ</h3>
+                            <p class="mtpa-item__body">家族・親友の前ではなく、学校・職場・初対面の場での振る舞いに限定して質問を設計。心理学＋統計学に基づき外面行動を構造化する。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">REQ-02</span>
+                            <h3 class="mtpa-item__head">5分以内で完結する負荷</h3>
+                            <p class="mtpa-item__body">40問（5問×8ページ）の6段階リッカート回答。直感的に答えても精度が出るよう、軸が明確に分離した質問群を採用。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">REQ-03</span>
+                            <h3 class="mtpa-item__head">完全無料・登録不要</h3>
+                            <p class="mtpa-item__body">会員登録、個人情報の入力を一切要求しない。「診断を始める」のクリック=利用規約への同意として運用。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">REQ-04</span>
+                            <h3 class="mtpa-item__head">医療・臨床診断ではない明示</h3>
+                            <p class="mtpa-item__body">自己理解の参考情報を提供するエンタメ・自己分析サービスとして位置づけ、医学的・臨床的評価ではないことを免責表示。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">REQ-05</span>
+                            <h3 class="mtpa-item__head">匿名統計の蓄積と改善</h3>
+                            <p class="mtpa-item__body">回答内容・結果・フィードバックは匿名でDB保存し、サービス改善と統計分析に利用。IP・氏名・メール等の特定情報は保存しない。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">REQ-06</span>
+                            <h3 class="mtpa-item__head">SEO・OGP最適化</h3>
+                            <p class="mtpa-item__body">「16タイプ」「外面性格診断」「仮面診断」「ヴェール診断」等の検索流入を想定。OGP/JSON-LD（ItemList, FAQPage）でリッチリザルト対応。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Features ===== -->
+        <section class="mtpa-block is-dark" id="features" data-theme="dark">
+            <div class="mtpa-block__inner">
+                <div class="mtpa-block__label fade-up">
+                    <span class="eyebrow">02 · Features</span>
+                    <h2 class="mtpa-block__title">機能の説明</h2>
+                </div>
+                <div class="mtpa-block__body">
+                    <p class="mtpa-block__intro fade-up">
+                        4つの独立した観察軸を設定し、それぞれの軸で2つのポール（特性）に分類する。4軸を組み合わせることで <strong>2<sup>4</sup>＝16タイプ</strong> の「仮面」が生成される。各タイプはMBTI風の4文字コード（例: SFCP, MFGQ）で表現され、強み・弱み・職場での傾向・コミュニケーションスタイル・相性などの詳細を提示する。
+                    </p>
+
+                    <h3 class="mtpa-item__head fade-up" style="font-size:18px;margin-top:8px;">4つの軸</h3>
+                    <div class="mtpa-axes fade-up">
+                        <div class="mtpa-axis">
+                            <div class="mtpa-axis__num">Axis 01</div>
+                            <div class="mtpa-axis__name">テンション<br>Tension</div>
+                            <div class="mtpa-axis__pair">
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">S</div>
+                                    <div class="mtpa-axis__poleLabel">Sunny</div>
+                                    <div class="mtpa-axis__poleBody">明るくエネルギーで場を立ち上げるタイプ。</div>
+                                </div>
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">M</div>
+                                    <div class="mtpa-axis__poleLabel">Moon</div>
+                                    <div class="mtpa-axis__poleBody">落ち着いた雰囲気で場を安定させるタイプ。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mtpa-axis">
+                            <div class="mtpa-axis__num">Axis 02</div>
+                            <div class="mtpa-axis__name">ポジション<br>Position</div>
+                            <div class="mtpa-axis__pair">
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">F</div>
+                                    <div class="mtpa-axis__poleLabel">Front</div>
+                                    <div class="mtpa-axis__poleBody">自然に前に出て仕切る。リーダーシップ型。</div>
+                                </div>
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">B</div>
+                                    <div class="mtpa-axis__poleLabel">Back</div>
+                                    <div class="mtpa-axis__poleBody">後ろで支える。サポート役で力を発揮。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mtpa-axis">
+                            <div class="mtpa-axis__num">Axis 03</div>
+                            <div class="mtpa-axis__name">距離感<br>Distance</div>
+                            <div class="mtpa-axis__pair">
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">C</div>
+                                    <div class="mtpa-axis__poleLabel">Close</div>
+                                    <div class="mtpa-axis__poleBody">フランクに話しかけやすく距離を縮める。</div>
+                                </div>
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">G</div>
+                                    <div class="mtpa-axis__poleLabel">Guard</div>
+                                    <div class="mtpa-axis__poleBody">適度な距離感で礼儀正しく接する。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mtpa-axis">
+                            <div class="mtpa-axis__num">Axis 04</div>
+                            <div class="mtpa-axis__name">ワーク<br>Work Style</div>
+                            <div class="mtpa-axis__pair">
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">P</div>
+                                    <div class="mtpa-axis__poleLabel">Persistent</div>
+                                    <div class="mtpa-axis__poleBody">量と質を重視し、最後まで粘り強くやり切る。</div>
+                                </div>
+                                <div class="mtpa-axis__pole">
+                                    <div class="mtpa-axis__letter">Q</div>
+                                    <div class="mtpa-axis__poleLabel">Quick</div>
+                                    <div class="mtpa-axis__poleBody">必要なところを押さえて効率的に進める。</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="mtpa-item__head fade-up" style="font-size:18px;margin-top:32px;">主な機能</h3>
+                    <div class="mtpa-items">
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">F-01</span>
+                            <h3 class="mtpa-item__head">40問の診断フロー</h3>
+                            <p class="mtpa-item__body">5問×8ページのステッパー形式。6段階リッカートで回答負荷を抑え、戻る/進む両対応。途中保存なし＝5分で完了するUX前提。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">F-02</span>
+                            <h3 class="mtpa-item__head">タイプ自動算出</h3>
+                            <p class="mtpa-item__body">4軸それぞれをスコア化し、しきい値で2極化。S/M, F/B, C/G, P/Q の4文字コードを生成し、対応する仮面タイプを返す。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">F-03</span>
+                            <h3 class="mtpa-item__head">結果ページ・タイプ詳細</h3>
+                            <p class="mtpa-item__body">4文字コード + 「○○仮面」の名前 + 一言要約（shortLabel）+ 強み・弱み・仕事傾向・コミュニケーション特性を構造化して提示。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">F-04</span>
+                            <h3 class="mtpa-item__head">16タイプ一覧 / Type List</h3>
+                            <p class="mtpa-item__body">全16タイプの比較閲覧。各タイプにアイコン画像・短評・軸サマリ（tension/position/distance/work）を表示。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">F-05</span>
+                            <h3 class="mtpa-item__head">SNSシェア・OGP動的画像</h3>
+                            <p class="mtpa-item__body">結果ページにシェアボタンを配置。OGP画像は SVG ベースで生成し、各タイプごとに表示が変わる仕組み。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">F-06</span>
+                            <h3 class="mtpa-item__head">Note（コンテンツ記事）</h3>
+                            <p class="mtpa-item__body">/note 配下に「タイプ別の活かし方」「コミュニケーション改善Tips」等のコンテンツ。検索流入とリピート訪問を両立。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 16 Types ===== -->
+        <section class="mtpa-block" data-theme="light">
+            <div class="mtpa-block__inner">
+                <div class="mtpa-block__label fade-up">
+                    <span class="eyebrow">03 · Types</span>
+                    <h2 class="mtpa-block__title">16タイプ</h2>
+                </div>
+                <div class="mtpa-block__body">
+                    <p class="mtpa-block__intro fade-up">
+                        4軸の組み合わせから生まれる 16 個の「仮面タイプ」。各タイプには 4 文字コード、和名、そして一言で表す shortLabel が付与される。
+                    </p>
+
+                    <div class="mtpa-types fade-up">
+                        <div class="mtpa-type"><span class="mtpa-type__code">SFCP</span><span class="mtpa-type__name">明るいリーダー仮面</span><span class="mtpa-type__short">頼れる太陽リーダー</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">SFCQ</span><span class="mtpa-type__name">フレンドリー実行者仮面</span><span class="mtpa-type__short">段取り上手な推進者</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">SFGP</span><span class="mtpa-type__name">プロフェッショナル仮面</span><span class="mtpa-type__short">礼儀正しく真面目な表現者</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">SFGQ</span><span class="mtpa-type__name">スマート実践者仮面</span><span class="mtpa-type__short">洗練された効率派</span></div>
+
+                        <div class="mtpa-type"><span class="mtpa-type__code">SBCP</span><span class="mtpa-type__name">温かいサポーター仮面</span><span class="mtpa-type__short">裏方から支える太陽</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">SBCQ</span><span class="mtpa-type__name">気さくな調整役仮面</span><span class="mtpa-type__short">柔軟なムードメーカー</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">SBGP</span><span class="mtpa-type__name">誠実な職人仮面</span><span class="mtpa-type__short">静かに品質を追求する</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">SBGQ</span><span class="mtpa-type__name">スマートサポーター仮面</span><span class="mtpa-type__short">効率的な裏方の太陽</span></div>
+
+                        <div class="mtpa-type"><span class="mtpa-type__code">MFCP</span><span class="mtpa-type__name">穏やかな指導者仮面</span><span class="mtpa-type__short">落ち着いた信頼の象徴</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">MFCQ</span><span class="mtpa-type__name">冷静な実行者仮面</span><span class="mtpa-type__short">効率的な前線指揮官</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">MFGP</span><span class="mtpa-type__name">知的リーダー仮面</span><span class="mtpa-type__short">冷静で真摯な責任者</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">MFGQ</span><span class="mtpa-type__name">戦略的実践者仮面</span><span class="mtpa-type__short">論理的な成果主義者</span></div>
+
+                        <div class="mtpa-type"><span class="mtpa-type__code">MBCP</span><span class="mtpa-type__name">優しい支援者仮面</span><span class="mtpa-type__short">静かに寄り添う月</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">MBCQ</span><span class="mtpa-type__name">柔軟な協力者仮面</span><span class="mtpa-type__short">臨機応変な調整役</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">MBGP</span><span class="mtpa-type__name">職人気質仮面</span><span class="mtpa-type__short">静かに完璧を目指す</span></div>
+                        <div class="mtpa-type"><span class="mtpa-type__code">MBGQ</span><span class="mtpa-type__name">効率的専門家仮面</span><span class="mtpa-type__short">静かに成果を出す</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Production ===== -->
+        <section class="mtpa-block is-dark" id="production" data-theme="dark">
+            <div class="mtpa-block__inner">
+                <div class="mtpa-block__label fade-up">
+                    <span class="eyebrow">04 · Production</span>
+                    <h2 class="mtpa-block__title">プロダクション説明</h2>
+                </div>
+                <div class="mtpa-block__body">
+                    <p class="mtpa-block__intro fade-up">
+                        本番運用中の公開ウェブアプリケーション。Syntheraのサブドメイン <strong>masktype.synthera.jp</strong> でホスティングし、Cloudflare の前段で配信。React + Viteベースの SPA で、コード分割によりページ単位で JS を遅延ロードしている。
+                    </p>
+
+                    <div class="mtpa-items">
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">P-01</span>
+                            <h3 class="mtpa-item__head">公開URL</h3>
+                            <p class="mtpa-item__body">
+                                <a href="https://masktype.synthera.jp/" target="_blank" rel="noopener" style="text-decoration:underline;">masktype.synthera.jp</a>
+                                <br>Synthera ブランドのサブドメインで運用。
+                            </p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">P-02</span>
+                            <h3 class="mtpa-item__head">技術スタック</h3>
+                            <p class="mtpa-item__body">React 18 + Vite + React Router。Tailwind ベースのスタイリング。アクセシビリティ・SEO（OGP / JSON-LD ItemList / FAQPage）対応。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">P-03</span>
+                            <h3 class="mtpa-item__head">配信・CDN</h3>
+                            <p class="mtpa-item__body">Cloudflare 経由で配信。Cloudflare Insights による匿名アクセス計測。静的アセットはチャンク分割し各ページ単位で遅延ロード。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">P-04</span>
+                            <h3 class="mtpa-item__head">アナリティクス</h3>
+                            <p class="mtpa-item__body">Google Analytics 4（G-EHC6XC46PM）をロード後に遅延注入。LCPに影響を与えない非同期ロード方式。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">P-05</span>
+                            <h3 class="mtpa-item__head">サイト構成</h3>
+                            <p class="mtpa-item__body">Top / Diagnose / Result / Type List / Type Detail / Note / FAQ / About / Privacy / Terms / Disclaimer の11ページ構成。</p>
+                        </div>
+                        <div class="mtpa-item fade-up">
+                            <span class="mtpa-item__num">P-06</span>
+                            <h3 class="mtpa-item__head">運営方針</h3>
+                            <p class="mtpa-item__body">
+                                個人情報非収集の完全匿名・無料運用。MBTI等の既存診断とは無関係であることを明示。医療診断ではないことを Disclaimer で明示し、エンタメ・自己理解の補助ツールとして提供。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="mtpa-cta" data-theme="light">
+            <span class="eyebrow fade-up" style="display:inline-block;margin-bottom:28px;">Try it now</span>
+            <h2 class="mtpa-cta__title fade-up">
+                あなたの<br>仮面を診断する。
+            </h2>
+            <p class="mtpa-cta__body fade-up">
+                全40問・約5分。会員登録も個人情報の入力も不要です。<br>あなたの「外面の自分」を、4文字のコードで知ろう。
+            </p>
+            <div class="fade-up">
+                <a href="https://masktype.synthera.jp/" target="_blank" rel="noopener" class="mtpa-cta__btn">
+                    Launch MTPA
+                    <span class="link-arrow__icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" data-theme="dark">
+        <div class="footer__inner">
+            <p class="footer__statement fade-up">
+                AIとテクノロジーを駆使し、世界の効率化を図る。<br>
+                そして誰よりも泥臭く、ひたむきに歩み続けるクリエイティブハブ。
+            </p>
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <h4>Site</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Projects</h4>
+                    <ul>
+                        <li><a href="projects.html#tosche">ToSche</a></li>
+                        <li><a href="mtpa.html">MTPA</a></li>
+                        <li><a href="projects.html#operation-dx">Operation DX</a></li>
+                        <li><a href="projects.html#city-boys">City Boys</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Social</h4>
+                    <ul>
+                        <li><a href="https://masktype.synthera.jp/" target="_blank" rel="noopener">MTPA Live</a></li>
+                        <li><a href="#" rel="noopener">Instagram</a></li>
+                        <li><a href="#" rel="noopener">Twitter (X)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__brand">SYNTHERA</div>
+            <div class="footer__bottom">
+                <span>© <span id="footer-year">2026</span> Synthera Inc.</span>
+                <span>Stay Grounded, Build the Future.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

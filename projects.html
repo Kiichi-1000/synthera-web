@@ -3,415 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Synthera</title>
-    <meta name="description" content="Syntheraのプロジェクトをご紹介。YouTubeチャンネル運営、ブランド運営、アプリ開発、個人ライティングの4つの事業領域の詳細をご覧ください。">
-    
-    <!-- Fonts -->
+    <title>Projects — Synthera</title>
+    <meta name="description" content="Syntheraのプロジェクト一覧。ToSche / MTPA / Operation DX / City Boys —— Tech と Content の両軸でAI時代の効率化を進めるクリエイティブハブ。">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/projects.css">
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-trail" id="cursor-trail"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" class="logo-link">
-                    <span class="logo-text">SYNTHERA</span>
-                </a>
-            </div>
-            
-            <div class="nav-menu" id="nav-menu">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="projects.html" class="nav-link active">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="note.html" class="nav-link">Note</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="affiling.html" class="nav-link">Affiling</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <button type="button" class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo">SYNTHERA</a>
+            <ul class="nav__list">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="projects.html" class="nav__link is-active">Projects</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+            </ul>
+            <button type="button" class="nav__toggle" id="nav-toggle" aria-label="Menu">
+                <span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="container">
-                <div class="header-content">
-                    <h1 class="page-title">
-                        <span class="title-line">
-                            <span class="title-word" data-word="PROJECTS">PROJECTS</span>
-                        </span>
-                    </h1>
-                    <p class="page-subtitle">
-                        私たちの6つの事業領域
+        <section class="projects-hero" data-theme="light">
+            <span class="eyebrow projects-hero__eyebrow fade-up">Projects · 2024 — 2026</span>
+            <h1 class="projects-hero__title">
+                <span class="mask"><span class="mask__inner">Tech &amp;</span></span>
+                <span class="mask"><span class="mask__inner">Content.</span></span>
+            </h1>
+            <div class="projects-hero__meta">
+                <p class="projects-hero__lead fade-up">
+                    AIとテクノロジー、そしてポッドキャストやSNSなどのコンテンツ。ふたつの軸から、人々の生き方を少し効率的に、少し豊かにするプロダクトを生み出しています。
+                </p>
+                <span class="projects-hero__count fade-up">04 Projects</span>
+            </div>
+        </section>
+
+        <nav class="proj-filter" aria-label="Filter projects">
+            <div class="proj-filter__inner">
+                <button type="button" class="is-active" data-filter="all">All</button>
+                <button type="button" data-filter="tech">Tech</button>
+                <button type="button" data-filter="content">Content</button>
+            </div>
+        </nav>
+
+        <section class="proj-grid" data-theme="light">
+            <article class="proj" id="tosche" data-cat="tech">
+                <div class="proj__head">
+                    <span class="proj__cat fade-up">Tech · iOS Utility</span>
+                    <h2 class="proj__title fade-up">ToSche</h2>
+                    <p class="proj__sub fade-up">Task · Schedule · Goal — All in One</p>
+                    <p class="proj__desc fade-up">
+                        タスク管理、スケジュール管理、目標管理を複合化したiOSユーティリティアプリ。世の中の人がより目標を持ちやすく、生きやすくするためのサービス。
                     </p>
+                    <dl class="proj__meta fade-up">
+                        <div><dt>Platform</dt><dd>iOS Native</dd></div>
+                        <div><dt>Status</dt><dd>In Development</dd></div>
+                        <div><dt>Stack</dt><dd>Swift / SwiftUI</dd></div>
+                        <div><dt>Year</dt><dd>2025 — 2026</dd></div>
+                    </dl>
                 </div>
-            </div>
+                <div class="proj__visual curtain">
+                    <div class="curtain__inner">
+                        <img src="image/figma/tosche.png" alt="ToSche app preview">
+                    </div>
+                </div>
+            </article>
+
+            <a class="proj" id="mtpa" data-cat="tech" href="mtpa.html" style="text-decoration:none;color:inherit;">
+                <div class="proj__head">
+                    <span class="proj__cat fade-up">Tech · Web Application</span>
+                    <h2 class="proj__title fade-up">MTPA</h2>
+                    <p class="proj__sub fade-up">仮面診断 / Mask Type Personalize App</p>
+                    <p class="proj__desc fade-up">
+                        学校・職場など「人前での自分（仮面）」のふるまいを <strong>4軸×16タイプ</strong> に分類する外面性格診断ツール。全40問・約5分・無料。masktype.synthera.jp で本番稼働中。
+                    </p>
+                    <dl class="proj__meta fade-up">
+                        <div><dt>Platform</dt><dd>Web (React + Vite)</dd></div>
+                        <div><dt>Status</dt><dd>Live · 本番稼働中</dd></div>
+                        <div><dt>Axes × Types</dt><dd>4 × 16</dd></div>
+                        <div><dt>URL</dt><dd>masktype.synthera.jp</dd></div>
+                    </dl>
+                    <span class="link-arrow fade-up" style="margin-top:12px;">View detail<span class="link-arrow__icon"></span></span>
+                </div>
+                <div class="proj__visual curtain">
+                    <div class="curtain__inner">
+                        <img src="image/mtpa/01-suited-blue.png" alt="MTPA blue suited lion" onerror="this.src='image/figma/mtpa.png'">
+                    </div>
+                </div>
+            </a>
+
+            <article class="proj" id="operation-dx" data-cat="tech">
+                <div class="proj__head">
+                    <span class="proj__cat fade-up">Tech · B2B SaaS</span>
+                    <h2 class="proj__title fade-up">Operation DX</h2>
+                    <p class="proj__sub fade-up">AI-Powered Operations Support</p>
+                    <p class="proj__desc fade-up">
+                        AIの進展に伴い、世界の効率化を図るためのオペレーション事業向けDX支援SaaS。属人化した業務を、テクノロジーで再構築する。
+                    </p>
+                    <dl class="proj__meta fade-up">
+                        <div><dt>Platform</dt><dd>Web · API</dd></div>
+                        <div><dt>Status</dt><dd>R&amp;D</dd></div>
+                        <div><dt>Stack</dt><dd>AI · Cloud · Workflow</dd></div>
+                        <div><dt>Year</dt><dd>2026 —</dd></div>
+                    </dl>
+                </div>
+                <div class="proj__visual curtain">
+                    <div class="curtain__inner">
+                        <img src="image/figma/operation-dx.png" alt="Operation DX visual">
+                    </div>
+                </div>
+            </article>
+
+            <article class="proj" id="city-boys" data-cat="content">
+                <div class="proj__head">
+                    <span class="proj__cat fade-up">Content · Podcast</span>
+                    <h2 class="proj__title fade-up">City Boys</h2>
+                    <p class="proj__sub fade-up">A podcast on goals, growth, and the city.</p>
+                    <p class="proj__desc fade-up">
+                        目標を達成するまでの道筋を可視化し、発信していくポッドキャスト番組。挑戦している人の声と思考を、街に響かせる。
+                    </p>
+                    <dl class="proj__meta fade-up">
+                        <div><dt>Platform</dt><dd>Spotify / Apple Podcasts</dd></div>
+                        <div><dt>Status</dt><dd>Pilot</dd></div>
+                        <div><dt>Format</dt><dd>Audio · 30 min</dd></div>
+                        <div><dt>Year</dt><dd>2026</dd></div>
+                    </dl>
+                </div>
+                <div class="proj__visual curtain">
+                    <div class="curtain__inner">
+                        <img src="image/figma/podcast.png" alt="City Boys podcast">
+                    </div>
+                </div>
+            </article>
         </section>
 
-        <!-- Project Tabs -->
-        <section class="project-tabs" id="project-tabs">
-            <div class="container">
-                <div class="tabs-navigation">
-                    <button class="tab-button active" data-tab="sns">
-                        <span class="tab-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-                            </svg>
-                        </span>
-                        <span class="tab-text">SNS</span>
-                    </button>
-                    
-                    <button class="tab-button" data-tab="brand">
-                        <span class="tab-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        </span>
-                        <span class="tab-text">Brand</span>
-                    </button>
-                    
-                    <button class="tab-button" data-tab="development">
-                        <span class="tab-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                        </span>
-                        <span class="tab-text">Development</span>
-                    </button>
-                    
-                    <button class="tab-button" data-tab="writing">
-                        <span class="tab-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                            </svg>
-                        </span>
-                        <span class="tab-text">Writing</span>
-                    </button>
-                    
-                    <button class="tab-button" data-tab="affiliate">
-                        <span class="tab-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                            </svg>
-                        </span>
-                        <span class="tab-text">Affiliate</span>
-                    </button>
-                    
-                    <button class="tab-button" data-tab="ec">
-                        <span class="tab-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM1 2v2h2l3.6 7.59-1.35 2.45c-.15.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                            </svg>
-                        </span>
-                        <span class="tab-text">EC</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SNS Tab Content -->
-        <section class="tab-content active" id="sns-content">
-            <div class="container">
-                <div class="project-header">
-                    <h2 class="project-title">
-                        <span class="title-accent">SNS</span>
-                        SNS運用
+        <section class="approach" data-theme="dark">
+            <div class="approach__inner">
+                <div class="approach__head">
+                    <span class="eyebrow approach__eyebrow fade-up" style="color:rgba(255,255,255,0.6);">Get in touch</span>
+                    <h2 class="approach__title fade-up">
+                        プロジェクトの<br>ご相談はこちらから。
                     </h2>
-                    <p class="project-description">
-                        様々なチャンネルを通じて、価値あるコンテンツを制作・発信しています。
-                    </p>
                 </div>
-                
-                <div class="project-grid" id="sns-grid">
-                    <div class="project-card loading-card" id="sns-grid-loading">
-                        <div class="card-content">
-                            <h3 class="card-title">Loading...</h3>
-                            <p class="card-description">Notion からデータを取得しています。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Brand Tab Content -->
-        <section class="tab-content" id="brand-content">
-            <div class="container">
-                <div class="project-header">
-                    <h2 class="project-title">
-                        <span class="title-accent">Brand</span>
-                        ブランド運営
-                    </h2>
-                    <p class="project-description">
-                        独自のブランドアイデンティティを構築し、一貫したメッセージとビジュアルで価値を伝えています。
-                    </p>
-                </div>
-                
-                <div class="brand-showcase">
-                    <div class="brand-item">
-                        <div class="brand-visual">
-                            <div class="logo-preview">
-                                <span class="logo-text">SYNTHERA</span>
-                            </div>
-                        </div>
-                        <div class="brand-info">
-                            <h3 class="brand-title">ブランドロゴ</h3>
-                            <p class="brand-description">
-                                モダンで洗練されたデザインで、革新的なイメージを表現
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="brand-item">
-                        <div class="brand-visual">
-                            <div class="designer-visual">
-                                <div class="designer-avatar"></div>
-                                <div class="designer-workspace">
-                                    <div class="designer-window large"></div>
-                                    <div class="designer-window small"></div>
-                                    <div class="designer-window small"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="brand-info">
-                            <h3 class="brand-title">デザイナー</h3>
-                            <p class="brand-description">
-                                ブランド全体の世界観やビジュアルコンセプトを設計し、統一感のある体験をデザインしています。
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="brand-item">
-                        <div class="brand-visual">
-                            <div class="story-visual">
-                                <span class="story-label">Story</span>
-                            </div>
-                        </div>
-                        <div class="brand-info">
-                            <h3 class="brand-title">Story</h3>
-                            <p class="brand-description">
-                                憧れを世界へ。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Development Tab Content -->
-        <section class="tab-content" id="development-content">
-            <div class="container">
-                <div class="project-header">
-                    <h2 class="project-title">
-                        <span class="title-accent">Development</span>
-                        アプリ開発
-                    </h2>
-                    <p class="project-description">
-                        ユーザー体験を重視したアプリケーションを開発しています。現在4つのアプリ案があり、そのうち2つを開発中です。
-                    </p>
-                </div>
-                
-                <div class="development-grid" id="development-grid">
-                    <div class="dev-card empty-card" id="development-grid-loading">
-                        <div class="card-content">
-                            <h3 class="dev-title">Loading...</h3>
-                            <p class="dev-description">Notion からデータを取得しています。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Writing Tab Content -->
-        <section class="tab-content" id="writing-content">
-            <div class="container">
-                <div class="project-header">
-                    <h2 class="project-title">
-                        <span class="title-accent">Writing</span>
-                        個人ライティング
-                    </h2>
-                    <p class="project-description">
-                        EraCastの動画台本や、ビジネスを通じて学んだことを記事として発信しています。
-                    </p>
-                </div>
-                
-                <div class="writing-grid" id="writing-grid">
-                    <article class="writing-card empty-card" id="writing-grid-loading">
-                        <div class="card-content">
-                            <h3 class="card-title">Loading...</h3>
-                            <p class="card-excerpt">Notion からデータを取得しています。</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Affiliate Tab Content -->
-        <section class="tab-content" id="affiliate-content">
-            <div class="container">
-                <div class="project-header">
-                    <h2 class="project-title">
-                        <span class="title-accent">Affiliate</span>
-                        アフィリエイト
-                    </h2>
-                    <p class="project-description">
-                        品質の高い製品を厳選し、おすすめ情報を提供することで、皆様の生活に価値を届けています。
-                    </p>
-                </div>
-                
-                <div class="affiliate-showcase">
-                    <div class="affiliate-intro">
-                        <h3>誠実な推薦で価値を届ける</h3>
-                        <p>
-                            実際に使用した製品を誠実に紹介しています。読者の皆様にとって価値ある情報を提供することを大切にしています。
-                        </p>
-                    </div>
-                    
-                    <div class="affiliate-categories">
-                        <div class="category-card">
-                            <div class="category-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
-                            <h4 class="category-title">Affiling</h4>
-                            <p class="category-description">
-                                商品比較やランキングなどの記事を作成するWebサイト。実際に使用した製品を誠実に紹介しています。
-                            </p>
-                            <div class="category-link">
-                                <a href="affiling.html" class="category-link-button">
-                                    <span>記事を見る</span>
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="category-card">
-                            <div class="category-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                </svg>
-                            </div>
-                            <h4 class="category-title">This is Japanese Quality</h4>
-                            <p class="category-description">
-                                日本の優良製品を海外に紹介するWebサイト。日本のモノづくりの誇りと品質を世界に伝える活動です。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EC Tab Content -->
-        <section class="tab-content" id="ec-content">
-            <div class="container">
-                <div class="project-header">
-                    <h2 class="project-title">
-                        <span class="title-accent">EC</span>
-                        EC運営
-                    </h2>
-                    <p class="project-description">
-                        海外に向けて日本の製品を販売し、オリジナルブランドの構築に取り組んでいます。
-                    </p>
-                </div>
-                
-                <div class="project-grid" id="ec-grid">
-                    <div class="project-card empty-card" id="ec-grid-loading">
-                        <div class="card-content">
-                            <h3 class="card-title">Loading...</h3>
-                            <p class="card-description">Notion からデータを取得しています。</p>
-                        </div>
-                    </div>
+                <div class="fade-up" style="border-top:1px solid rgba(255,255,255,0.12); padding-top:48px; display:flex; gap:32px; flex-wrap:wrap;">
+                    <a href="contact.html" class="link-underline" style="color:#fff;">Start a project</a>
+                    <a href="about.html" class="link-underline" style="color:#fff;">About Synthera</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3 class="footer-logo">SYNTHERA</h3>
-                    <p class="footer-description">
-                        革新的なコンテンツで未来を創造するクリエイティブスタジオ
-                    </p>
+    <footer class="footer" data-theme="dark">
+        <div class="footer__inner">
+            <p class="footer__statement fade-up">
+                AIとテクノロジーを駆使し、世界の効率化を図る。<br>
+                そして誰よりも泥臭く、ひたむきに歩み続けるクリエイティブハブ。
+            </p>
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <h4>Site</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
                 </div>
-                
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4 class="footer-title">Pages</h4>
-                        <ul class="footer-list">
-                            <li><a href="index.html" class="footer-link">Home</a></li>
-                            <li><a href="about.html" class="footer-link">About</a></li>
-                            <li><a href="projects.html" class="footer-link">Projects</a></li>
-                            <li><a href="note.html" class="footer-link">Note</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4 class="footer-title">Business</h4>
-                        <ul class="footer-list">
-                            <li><a href="#" class="footer-link">SNS</a></li>
-                            <li><a href="#" class="footer-link">Brand</a></li>
-                            <li><a href="#" class="footer-link">Development</a></li>
-                            <li><a href="#" class="footer-link">Writing</a></li>
-                            <li><a href="#" class="footer-link">Affiliate</a></li>
-                            <li><a href="japanese-quality.html" class="footer-link">Japanese Quality</a></li>
-                        </ul>
-                    </div>
+                <div class="footer__col">
+                    <h4>Projects</h4>
+                    <ul>
+                        <li><a href="projects.html#tosche">ToSche</a></li>
+                        <li><a href="mtpa.html">MTPA</a></li>
+                        <li><a href="projects.html#operation-dx">Operation DX</a></li>
+                        <li><a href="projects.html#city-boys">City Boys</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Social</h4>
+                    <ul>
+                        <li><a href="#" rel="noopener">Instagram</a></li>
+                        <li><a href="#" rel="noopener">Twitter (X)</a></li>
+                        <li><a href="#" rel="noopener">Podcast</a></li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p class="footer-copyright">
-                    © 2024 Synthera. All rights reserved.
-                </p>
+            <div class="footer__brand">SYNTHERA</div>
+            <div class="footer__bottom">
+                <span>© <span id="footer-year">2026</span> Synthera Inc.</span>
+                <span>Stay Grounded, Build the Future.</span>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="js/projects-data.js"></script>
-    <script src="js/writing-data.js"></script>
-    <script src="js/development-data.js"></script>
-    <script src="js/ec-data.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/navigation.js"></script>
     <script src="js/animations.js"></script>
+    <script>
+      // Project filter
+      (function(){
+        const buttons = document.querySelectorAll('.proj-filter button');
+        const cards = document.querySelectorAll('.proj');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            const f = btn.dataset.filter;
+            cards.forEach(c => {
+              if (f === 'all' || c.dataset.cat === f) c.classList.remove('is-hidden');
+              else c.classList.add('is-hidden');
+            });
+          });
+        });
+      })();
+    </script>
 </body>
 </html>
